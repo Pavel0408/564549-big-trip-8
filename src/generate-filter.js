@@ -5,7 +5,6 @@ export const filterNames = [
 ];
 
 export const generateFilter = (filterName) => {
-  return `<form class="trip-filter">
-  <input type="radio" id="filter-${filterName}" name="filter" value="${filterName}">
+  return `<input type="radio" id="filter-${filterName}" name="filter" value="${filterName}">
   <label class="trip-filter__item" for="filter-${filterName}">${filterName}</label>`;
 };
