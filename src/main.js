@@ -3,8 +3,12 @@ import {
   generateFilter
 } from "./generate-filter";
 
+import {getRandomNumber} from "./utilities";
+
 import generateTripPoint from "./generate-trip-point";
 
+const maxNumberPoints = 5;
+const minNumberPoints = 10;
 const startNumberPoints = 7;
 
 const renderFilters = (filterNamesArr) => {
@@ -25,5 +29,14 @@ const renderTripPoints = (numberTripPoints) => {
   tripDayItems.innerHTML = fragment;
 };
 
+const filterClickHandler = (evt) => {
+  const filter = evt.target.closest(`.trip-filter__item`);
+  if(filter) {
+    renderTripPoints(getRandomNumber(maxNumberPoints, minNumberPoints));
+  }
+};
+
 renderFilters(filterNames);
 renderTripPoints(startNumberPoints);
+
+document.body.addEventListener(`click`, filterClickHandler);
