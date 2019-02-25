@@ -9,8 +9,8 @@ import {
 
 import generateTripPoint from "./generate-trip-point";
 
-const maxNumberPoints = 10;
-const minNumberPoints = 1;
+const MAX_NUMBER_POINTS = 10;
+const MIN_NUMBER_POINTS = 1;
 const startNumberPoints = 7;
 
 const renderFilters = (filterNamesArr) => {
@@ -34,7 +34,7 @@ const renderTripPoints = (numberTripPoints) => {
 const filterClickHandler = (evt) => {
   const filter = evt.target.closest(`.trip-filter__item`);
   if (filter) {
-    renderTripPoints(getRandomNumber(minNumberPoints, maxNumberPoints));
+    renderTripPoints(getRandomNumber(MIN_NUMBER_POINTS, MAX_NUMBER_POINTS));
   }
 };
 
