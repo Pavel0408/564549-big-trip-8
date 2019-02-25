@@ -11,7 +11,7 @@ import generateTripPoint from "./generate-trip-point";
 
 const MAX_NUMBER_POINTS = 10;
 const MIN_NUMBER_POINTS = 1;
-const startNumberPoints = 7;
+const START_NUMBER_POINTS = 7;
 
 const renderFilters = (filterNamesArr) => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -39,6 +39,6 @@ const filterClickHandler = (evt) => {
 };
 
 renderFilters(filterNames);
-renderTripPoints(startNumberPoints);
+renderTripPoints(START_NUMBER_POINTS );
 
 document.body.addEventListener(`click`, filterClickHandler);
