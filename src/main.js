@@ -1,7 +1,8 @@
+import generateFilter from "./generate-filter";
+
 import {
-  filterNames,
-  generateFilter
-} from "./generate-filter";
+  filterNames
+} from "./constants";
 
 import {
   getRandomNumber
@@ -39,6 +40,6 @@ const filterClickHandler = (evt) => {
 };
 
 renderFilters(filterNames);
-renderTripPoints(START_NUMBER_POINTS );
+renderTripPoints(START_NUMBER_POINTS);
 
 document.body.addEventListener(`click`, filterClickHandler);
