@@ -1,7 +1,7 @@
 export const filterNames = [
   `everything`,
-  `Future`,
-  `Past`
+  `future`,
+  `past`
 ];
 
 export const generateFilter = (filterName) => {
