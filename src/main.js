@@ -1,10 +1,6 @@
 import generateFilter from "./generate-filter";
 
 import {
-  filterNames
-} from "./constants";
-
-import {
   getRandomNumber
 } from "./utilities";
 
@@ -13,6 +9,12 @@ import generateTripPoint from "./generate-trip-point";
 import {
   generatePointsArr
 } from "./mock/generate-points-array";
+
+export const filterNames = [
+  `everything`,
+  `future`,
+  `past`
+];
 
 const MAX_NUMBER_POINTS = 10;
 const MIN_NUMBER_POINTS = 1;
@@ -48,6 +50,3 @@ renderFilters(filterNames);
 renderTripPoints(START_NUMBER_POINTS);
 
 document.body.addEventListener(`click`, filterClickHandler);
-
-
-console.log(generatePointsArr(7));

@@ -6,4 +6,4 @@ export const formatOffers = (offers) => {
   </li>`;
   });
   return offersStr;
-}
+};

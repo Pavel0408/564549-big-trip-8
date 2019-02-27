@@ -27,3 +27,7 @@ export const getFewValues = (arr, minNumberValues, maxNumberValues) => {
   }
   return returnArr;
 };
+
+export const firstZero = (number) => {
+  return (number < 10) ? `0` + number : `` + number;
+};

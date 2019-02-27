@@ -9,4 +9,4 @@ export const generatePointsArr = (pointsNumber) => {
     pointsArr.push(point);
   }
   return pointsArr;
-}
+};
