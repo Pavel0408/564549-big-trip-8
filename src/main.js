@@ -43,3 +43,8 @@ renderFilters(filterNames);
 renderTripPoints(START_NUMBER_POINTS);
 
 document.body.addEventListener(`click`, filterClickHandler);
+import {
+  MockPoint
+} from "./mock/generate-mock-point";
+
+console.log(new MockPoint());
