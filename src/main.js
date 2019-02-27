@@ -10,6 +10,10 @@ import {
 
 import generateTripPoint from "./generate-trip-point";
 
+import {
+  generatePointsArr
+} from "./mock/generate-points-array";
+
 const MAX_NUMBER_POINTS = 10;
 const MIN_NUMBER_POINTS = 1;
 const START_NUMBER_POINTS = 7;
@@ -25,9 +29,10 @@ const renderFilters = (filterNamesArr) => {
 
 const renderTripPoints = (numberTripPoints) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
+  const pointsArr = generatePointsArr(numberTripPoints);
   let fragment = ``;
   for (let i = 0; i < numberTripPoints; i++) {
-    fragment += generateTripPoint();
+    fragment += generateTripPoint(pointsArr[i]);
   }
   tripDayItems.innerHTML = fragment;
 };
@@ -43,8 +48,6 @@ renderFilters(filterNames);
 renderTripPoints(START_NUMBER_POINTS);
 
 document.body.addEventListener(`click`, filterClickHandler);
-import {
-  MockPoint
-} from "./mock/generate-mock-point";
 
-console.log(new MockPoint());
+
+console.log(generatePointsArr(7));
