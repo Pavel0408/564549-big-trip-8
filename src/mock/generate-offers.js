@@ -1,6 +1,6 @@
 import {
   offers as offersArray
-} from "./mock-arrays";
+} from "./mock-constants";
 
 import {
   getFewValues,

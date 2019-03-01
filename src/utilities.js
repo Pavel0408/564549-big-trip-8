@@ -20,14 +20,16 @@ export const getFewValues = (arr, minNumberValues, maxNumberValues) => {
   const localArr = arr.slice();
   const numberValues = getRandomNumber(minNumberValues, maxNumberValues);
   const returnArr = [];
+
   for (let i = 0; i < numberValues; i++) {
     const randInd = getRandomIndex(localArr);
     returnArr.push(localArr[randInd]);
     localArr.splice(randInd, 1);
   }
+
   return returnArr;
 };
 
-export const firstZero = (number) => {
+export const addLeadingZero = (number) => {
   return (number < 10) ? `0` + number : `` + number;
 };

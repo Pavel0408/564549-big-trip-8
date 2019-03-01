@@ -7,7 +7,7 @@ import {
   pointsTitles,
   typesOfPoints,
   descriptionArr
-} from "./mock-arrays";
+} from "./mock-constants";
 import {
   fenerateOffers
 } from "./generate-offers";
