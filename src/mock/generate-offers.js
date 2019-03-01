@@ -1,5 +1,5 @@
 import {
-  mockArrays
+  offers as offersArray
 } from "./mock-arrays";
 
 import {
@@ -13,7 +13,7 @@ const MIN_OFFER_PRICE = 20;
 const MIN_OFFERS = 0;
 
 export const fenerateOffers = () => {
-  const offers = getFewValues(mockArrays.offers, MIN_OFFERS, MAX_OFFERS);
+  const offers = getFewValues(offersArray, MIN_OFFERS, MAX_OFFERS);
   offers.forEach((offer, index) => {
     const offerItem = {
       name: offer,

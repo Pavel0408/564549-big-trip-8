@@ -1,6 +1,6 @@
 import {
-  mockArrays
-} from "./mock/mock-arrays";
+  typesOfPoints
+} from "./mock/mock-constants";
 
 import {
   formatOffers
@@ -12,7 +12,7 @@ import {
 
 export default (point) => {
   return `<article class="trip-point">
-  <i class="trip-icon">${mockArrays.typesOfPoints[point.type]}</i>
+  <i class="trip-icon">${typesOfPoints[point.type]}</i>
   <h3 class="trip-point__title">${point.title}</h3>
   <p class="trip-point__schedule">
     <span class="trip-point__timetable">${ firstZero(point.time.start.getHours())}:${firstZero(point.time.start.getMinutes())}&nbsp;&mdash;${firstZero(point.time.end.getHours())}:${firstZero(point.time.end.getMinutes())}</span>

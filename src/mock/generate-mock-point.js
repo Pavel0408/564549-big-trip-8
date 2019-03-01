@@ -4,7 +4,9 @@ import {
   getRandomNumber
 } from "./../utilities";
 import {
-  mockArrays
+  pointsTitles,
+  typesOfPoints,
+  descriptionArr
 } from "./mock-arrays";
 import {
   fenerateOffers
@@ -18,10 +20,10 @@ const MAX_PRICE = 100;
 const MIN_PRICE = 10;
 
 export const MockPoint = function () {
-  this.title = getRandomValue(mockArrays.pointsTitles);
-  this.type = getRandomValue(Object.keys(mockArrays.typesOfPoints));
+  this.title = getRandomValue(pointsTitles);
+  this.type = getRandomValue(Object.keys(typesOfPoints));
   this.offers = new Set(fenerateOffers());
-  this.descrittion = getFewValues(mockArrays.descriptionArr, 1, 3).join(`. `);
+  this.descrittion = getFewValues(descriptionArr, 1, 3).join(`. `);
   this.time = gnerateMockDate();
   this.price = getRandomNumber(MIN_PRICE, MAX_PRICE);
 
