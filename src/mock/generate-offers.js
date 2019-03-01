@@ -5,7 +5,7 @@ import {
 import {
   getFewValues,
   getRandomNumber
-} from "./../utilities";
+} from "../utilities";
 
 const MAX_OFFER_PRICE = 100;
 const MAX_OFFERS = 2;

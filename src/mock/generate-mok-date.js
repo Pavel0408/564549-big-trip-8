@@ -1,6 +1,6 @@
 import {
   getRandomNumber
-} from './../utilities';
+} from '../utilities';
 
 export const gnerateMockDate = () => {
   const MAX_TIME_LENGTH = 1000 * 60 * 60 * 24;

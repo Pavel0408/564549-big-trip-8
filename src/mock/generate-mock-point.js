@@ -2,7 +2,7 @@ import {
   getRandomValue,
   getFewValues,
   getRandomNumber
-} from "./../utilities";
+} from "../utilities";
 import {
   pointsTitles,
   typesOfPoints,
