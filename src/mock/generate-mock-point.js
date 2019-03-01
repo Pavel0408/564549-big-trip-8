@@ -19,12 +19,13 @@ import {
 const MAX_PRICE = 100;
 const MIN_PRICE = 10;
 
-export const MockPoint = function () {
-  this.title = getRandomValue(pointsTitles);
-  this.type = getRandomValue(Object.keys(typesOfPoints));
-  this.offers = new Set(fenerateOffers());
-  this.descrittion = getFewValues(descriptionArr, 1, 3).join(`. `);
-  this.time = gnerateMockDate();
-  this.price = getRandomNumber(MIN_PRICE, MAX_PRICE);
-
+export const mockPoint = function () {
+  return {
+    title: getRandomValue(pointsTitles),
+    type: getRandomValue(Object.keys(typesOfPoints)),
+    offers: new Set(fenerateOffers()),
+    descrittion: getFewValues(descriptionArr, 1, 3).join(`. `),
+    time: gnerateMockDate(),
+    price: getRandomNumber(MIN_PRICE, MAX_PRICE)
+  };
 };
