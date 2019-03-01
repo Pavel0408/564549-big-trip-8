@@ -9,10 +9,10 @@ export const gnerateMockDate = () => {
   const MS_IN_MINUTE = 60 * 1000;
 
   const dateNow = new Date();
-  const start = new Date(getRandomNumber(+dateNow, +dateNow + MS_IN_WEEK));
-  const end = new Date(getRandomNumber(+start, +start + MAX_TIME_LENGTH));
+  const start = new Date(getRandomNumber(dateNow.getTime(), dateNow.getTime() + MS_IN_WEEK));
+  const end = new Date(getRandomNumber(start.getTime(), start.getTime() + MAX_TIME_LENGTH));
 
-  const intervalInMs = (+end - +start);
+  const intervalInMs = (end.getTime() - start.getTime());
   const hours = Math.floor(intervalInMs / MS_IN_HOUR);
   const minutes = Math.floor(intervalInMs % MS_IN_HOUR / MS_IN_MINUTE);
   const interval = {
