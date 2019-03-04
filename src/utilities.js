@@ -11,9 +11,7 @@ export const getRandomIndex = (arr) => {
 
 // Случайное значение из массива
 export const getRandomValue = (arr) => {
-  const randInd = getRandomIndex(arr);
-  const val = arr[randInd];
-  return val;
+  return arr[getRandomIndex(arr)];
 };
 
 export const getFewValues = (arr, minNumberValues, maxNumberValues) => {
