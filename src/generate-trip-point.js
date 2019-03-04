@@ -1,5 +1,5 @@
 import {
-  typesOfPoints
+  pointsOptions
 } from "./mock/mock-constants";
 
 import {
@@ -12,7 +12,7 @@ import {
 
 export default (point) => {
   return `<article class="trip-point">
-  <i class="trip-icon">${typesOfPoints[point.type]}</i>
+  <i class="trip-icon">${pointsOptions[point.type]}</i>
   <h3 class="trip-point__title">${point.title}</h3>
   <p class="trip-point__schedule">
     <span class="trip-point__timetable">${ addLeadingZero(point.time.start.getHours())}:${addLeadingZero(point.time.start.getMinutes())}&nbsp;&mdash;${addLeadingZero(point.time.end.getHours())}:${addLeadingZero(point.time.end.getMinutes())}</span>

@@ -5,7 +5,7 @@ export const pointsTitles = [
   `Check into a hotel`
 ];
 
-export const typesOfPoints = {
+export const pointsOptions = {
   Taxi: `🚕`,
   Bus: `🚌`,
   Train: `🚂`,
