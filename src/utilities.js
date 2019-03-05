@@ -17,15 +17,13 @@ export const getRandomValue = (arr) => {
 export const getFewValues = (arr, minNumberValues, maxNumberValues) => {
   const localArr = arr.slice();
   const numberValues = getRandomNumber(minNumberValues, maxNumberValues);
-  const returnArr = [];
 
-  for (let i = 0; i < numberValues; i++) {
-    const randInd = getRandomIndex(localArr);
-    returnArr.push(localArr[randInd]);
-    localArr.splice(randInd, 1);
-  }
-
-  return returnArr;
+  return new Array(numberValues)
+    .fill(``)
+    .map(() => {
+      const randInd = getRandomIndex(localArr);
+      return localArr.splice(randInd, 1);
+    });
 };
 
 export const addLeadingZero = (number) => {
