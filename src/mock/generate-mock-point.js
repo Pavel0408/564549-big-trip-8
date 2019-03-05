@@ -22,7 +22,7 @@ const MIN_PRICE = 10;
 export const mockPoint = function () {
   return {
     title: getRandomValue(pointsTitles),
-    type: getRandomValue(Object.keys(pointsOptions)),
+    type: getRandomValue(pointsOptions),
     offers: new Set(fenerateOffers()),
     descrittion: getFewValues(descriptionArr, 1, 3).join(`. `),
     time: gnerateMockDate(),

@@ -5,7 +5,20 @@ export const pointsTitles = [
   `Check into a hotel`
 ];
 
-export const pointsOptions = {
+export const pointsOptions = [
+  `Taxi`,
+  `Bus`,
+  `Train`,
+  `Ship`,
+  `Transport`,
+  `Drive`,
+  `Flight`,
+  `Check`,
+  `Sightseeing`,
+  `Restaurant`
+];
+
+export const pointsIcons = {
   Taxi: `🚕`,
   Bus: `🚌`,
   Train: `🚂`,
