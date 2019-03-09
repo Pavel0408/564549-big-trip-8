@@ -34,7 +34,7 @@ const renderTripPoints = (numberTripPoints) => {
   const pointsArr = generatePointsArr(numberTripPoints);
   let fragment = document.createDocumentFragment();
   for (let i = 0; i < numberTripPoints; i++) {
-    fragment.appendChild(generateTripPoint(pointsArr[i]));
+    fragment.appendChild(pointsArr[i].render());
   }
   tripDayItems.appendChild(fragment);
 };

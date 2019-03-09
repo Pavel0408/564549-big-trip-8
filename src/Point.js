@@ -37,9 +37,9 @@ export class Point {
   }
 
   render() {
-    this._element = document.createElement(`div`)
-    .innerHTML(this.template)
-    .firstChild;
+    const fragment = document.createElement(`div`);
+    fragment.innerHTML = this.template;
+    this._element = fragment.firstChild;
 
     return this._element;
   }

@@ -18,7 +18,7 @@ import {
 
 import {
   Point
-} from "../point";
+} from "../point--edit";
 
 const MAX_PRICE = 100;
 const MIN_PRICE = 10;
@@ -36,4 +36,3 @@ export const mockPoint = function () {
   };
   return new Point(pointDate());
 };
-
