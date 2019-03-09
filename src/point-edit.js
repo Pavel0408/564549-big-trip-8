@@ -37,7 +37,7 @@ export class PointEdit {
         </label>
 
         <div class="travel-way">
-          <label class="travel-way__label" for="travel-way__toggle">✈️</label>
+          <label class="travel-way__label" for="travel-way__toggle">${pointsIcons[this._type]}</label>
 
           <input type="checkbox" class="travel-way__toggle visually-hidden" id="travel-way__toggle">
 
@@ -79,13 +79,13 @@ export class PointEdit {
 
         <label class="point__time">
           choose time
-          <input class="point__input" type="text" value="00:00 — 00:00" name="time" placeholder="00:00 — 00:00">
+          <input class="point__input" type="text" value="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())} — ${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}" name="time" placeholder="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())} —${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}">
         </label>
 
         <label class="point__price">
           write price
           <span class="point__price-currency">€</span>
-          <input class="point__input" type="text" value="160" name="price">
+          <input class="point__input" type="text" value="${this._price}" name="price">
         </label>
 
         <div class="point__buttons">
@@ -135,7 +135,6 @@ export class PointEdit {
 
   set submitHandler(fn) {
     const handler = function (evt) {
-      console.log(1);
       evt.preventDefault();
       fn();
     };
@@ -145,7 +144,6 @@ export class PointEdit {
   get resetHandler() {
     return (evt) => {
       evt.preventDefault();
-      console.log(this._element);
       this.unrender();
     };
   }
@@ -154,8 +152,6 @@ export class PointEdit {
     const form = this._element.querySelector(`.point form`);
     form.addEventListener(`submit`, this.submitHandler);
     form.addEventListener(`reset`, this.resetHandler);
-    console.log(this.submitHandler);
-
   }
 
   render() {
