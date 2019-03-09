@@ -31,7 +31,8 @@ export class Point {
   }
 
   set editHandler(fn) {
-    const handler = function () {
+    const handler = function (evt) {
+      evt.preventDefault();
       fn();
     };
     this._editHandler = handler;
@@ -60,6 +61,7 @@ export class Point {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;
     this._element = fragment.firstChild;
+    this.bind();
 
     return this._element;
   }

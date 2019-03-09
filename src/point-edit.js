@@ -23,6 +23,8 @@ export class PointEdit {
     this._time = data.time;
     this._price = data.price;
     this._element = null;
+    this._submitHandler = null;
+    this._resetHandler = null;
   }
 
   get template() {
@@ -127,15 +129,45 @@ export class PointEdit {
     return this._element;
   }
 
+  get submitHandler() {
+    return this._submitHandler;
+  }
+
+  set submitHandler(fn) {
+    const handler = function (evt) {
+      console.log(1);
+      evt.preventDefault();
+      fn();
+    };
+    this._submitHandler = handler;
+  }
+
+  get resetHandler() {
+    return (evt) => {
+      evt.preventDefault();
+      console.log(this._element);
+      this.unrender();
+    };
+  }
+
+  bind() {
+    const form = this._element.querySelector(`.point form`);
+    form.addEventListener(`submit`, this.submitHandler);
+    form.addEventListener(`reset`, this.resetHandler);
+    console.log(this.submitHandler);
+
+  }
+
   render() {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;
     this._element = fragment.firstChild;
+    this.bind();
 
     return this._element;
   }
 
   unrender() {
-    this._element = null;
+    this._element.remove();
   }
 }
