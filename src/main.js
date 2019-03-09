@@ -4,7 +4,9 @@ import {
   getRandomNumber
 } from "./utilities";
 
-import generateTripPoint from "./generate-trip-point";
+import {
+  generateTripPoint
+} from "./generate-trip-point";
 
 import {
   generatePointsArr
@@ -32,11 +34,7 @@ const renderFilters = (filterNamesArr) => {
 const renderTripPoints = (numberTripPoints) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
   const pointsArr = generatePointsArr(numberTripPoints);
-  let fragment = document.createDocumentFragment();
-  for (let i = 0; i < numberTripPoints; i++) {
-    fragment.appendChild(pointsArr[i].render());
-  }
-  tripDayItems.appendChild(fragment);
+  generateTripPoint(pointsArr, tripDayItems);
 };
 
 const filterClickHandler = (evt) => {

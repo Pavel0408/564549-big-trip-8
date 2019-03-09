@@ -10,17 +10,15 @@ import {
   addLeadingZero
 } from "./utilities";
 
-export default (point) => {
-  return `<article class="trip-point">
-  <i class="trip-icon">${pointsIcons[point.type]}</i>
-  <h3 class="trip-point__title">${point.title}</h3>
-  <p class="trip-point__schedule">
-    <span class="trip-point__timetable">${ addLeadingZero(point.time.start.getHours())}:${addLeadingZero(point.time.start.getMinutes())}&nbsp;&mdash;${addLeadingZero(point.time.end.getHours())}:${addLeadingZero(point.time.end.getMinutes())}</span>
-    <span class="trip-point__duration">${point.time.interval.hours}h ${point.time.interval.minutes}m</span>
-  </p>
-  <p class="trip-point__price">&euro;&nbsp;${point.price}</p>
-  <ul class="trip-point__offers">
-    ${formatOffers(point.offers)}
-  </ul>
-</article>`;
+export const generateTripPoint = (arr, container) => {
+  const fragment = document.createDocumentFragment();
+  arr.forEach((points) => {
+    container.appendChild(points.point.render());
+    points.point.editHandler = function () {
+      points.pointEdit.render();
+      container.replaceChild(points.pointEdit.element, points.point.element);
+    };
+    points.point.bind();
+  });
+
 };

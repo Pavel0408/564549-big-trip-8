@@ -18,7 +18,11 @@ import {
 
 import {
   Point
-} from "../point--edit";
+} from "../point";
+
+import {
+  PointEdit
+} from "../point-edit";
 
 const MAX_PRICE = 100;
 const MIN_PRICE = 10;
@@ -29,10 +33,17 @@ export const mockPoint = function () {
       title: getRandomValue(pointsTitles),
       type: getRandomValue(pointsOptions),
       offers: new Set(fenerateOffers()),
-      descrittion: getFewValues(descriptionArr, 1, 3).join(`. `),
+      description: getFewValues(descriptionArr, 1, 3).join(`. `),
       time: gnerateMockDate(),
       price: getRandomNumber(MIN_PRICE, MAX_PRICE)
     };
   };
-  return new Point(pointDate());
+  const mockPointDate = pointDate();
+  const pointItem = new Point(mockPointDate);
+  const pointEditItem = new PointEdit(mockPointDate);
+
+  return {
+    point: pointItem,
+    pointEdit: pointEditItem
+  };
 };

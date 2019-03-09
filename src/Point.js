@@ -19,6 +19,26 @@ export class Point {
     this._time = data.time;
     this._price = data.price;
     this._element = null;
+    this._editHandler = null;
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  get editHandler() {
+    return this._editHandler;
+  }
+
+  set editHandler(fn) {
+    const handler = function () {
+      fn();
+    };
+    this._editHandler = handler;
+  }
+
+  bind() {
+    this._element.querySelector(`.trip-point__title`).addEventListener(`click`, this.editHandler);
   }
 
   get template() {

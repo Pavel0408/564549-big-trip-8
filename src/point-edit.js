@@ -10,7 +10,11 @@ import {
   addLeadingZero
 } from "./utilities";
 
-export class Point {
+import {
+  formatOffersEdit
+} from "./format-offers-edit";
+
+export class PointEdit {
   constructor(data) {
     this._title = data.title;
     this._type = data.type;
@@ -98,31 +102,13 @@ export class Point {
           <h3 class="point__details-title">offers</h3>
 
           <div class="point__offers-wrap">
-            <input class="point__offers-input visually-hidden" type="checkbox" id="add-luggage" name="offer" value="add-luggage">
-            <label for="add-luggage" class="point__offers-label">
-              <span class="point__offer-service">Add luggage</span> + €<span class="point__offer-price">30</span>
-            </label>
-
-            <input class="point__offers-input visually-hidden" type="checkbox" id="switch-to-comfort-class" name="offer" value="switch-to-comfort-class">
-            <label for="switch-to-comfort-class" class="point__offers-label">
-              <span class="point__offer-service">Switch to comfort class</span> + €<span class="point__offer-price">100</span>
-            </label>
-
-            <input class="point__offers-input visually-hidden" type="checkbox" id="add-meal" name="offer" value="add-meal">
-            <label for="add-meal" class="point__offers-label">
-              <span class="point__offer-service">Add meal </span> + €<span class="point__offer-price">15</span>
-            </label>
-
-            <input class="point__offers-input visually-hidden" type="checkbox" id="choose-seats" name="offer" value="choose-seats">
-            <label for="choose-seats" class="point__offers-label">
-              <span class="point__offer-service">Choose seats</span> + €<span class="point__offer-price">5</span>
-            </label>
+          ${formatOffersEdit(this._offers)}
           </div>
 
         </section>
         <section class="point__destination">
           <h3 class="point__details-title">Destination</h3>
-          <p class="point__destination-text">Geneva is a city in Switzerland that lies at the southern tip of expansive Lac Léman (Lake Geneva). Surrounded by the Alps and Jura mountains, the city has views of dramatic Mont Blanc.</p>
+          <p class="point__destination-text">${this._description}</p>
           <div class="point__destination-images">
             <img src="http://picsum.photos/330/140?r=123" alt="picture from place" class="point__destination-image">
             <img src="http://picsum.photos/300/200?r=1234" alt="picture from place" class="point__destination-image">
@@ -135,6 +121,10 @@ export class Point {
       </section>
     </form>
   </article>`;
+  }
+
+  get element() {
+    return this._element;
   }
 
   render() {
