@@ -32,11 +32,11 @@ const renderFilters = (filterNamesArr) => {
 const renderTripPoints = (numberTripPoints) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
   const pointsArr = generatePointsArr(numberTripPoints);
-  let fragment = ``;
+  let fragment = document.createDocumentFragment();
   for (let i = 0; i < numberTripPoints; i++) {
-    fragment += generateTripPoint(pointsArr[i]);
+    fragment.appendChild(generateTripPoint(pointsArr[i]));
   }
-  tripDayItems.innerHTML = fragment;
+  tripDayItems.appendChild(fragment);
 };
 
 const filterClickHandler = (evt) => {
