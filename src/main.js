@@ -12,6 +12,14 @@ import {
   generatePointsArr
 } from "./mock/generate-points-array";
 
+import {
+  Point
+} from "./point";
+
+import {
+  PointEdit
+} from "./point-edit";
+
 export const filterNames = [
   `everything`,
   `future`,
@@ -33,7 +41,16 @@ const renderFilters = (filterNamesArr) => {
 
 const renderTripPoints = (numberTripPoints) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
-  const pointsArr = generatePointsArr(numberTripPoints);
+  const pointsArr = generatePointsArr(numberTripPoints)
+    .map((mockPointDate) => {
+      const pointItem = new Point(mockPointDate);
+      const pointEditItem = new PointEdit(mockPointDate);
+
+      return {
+        point: pointItem,
+        pointEdit: pointEditItem
+      };
+    });
   generateTripPoint(pointsArr, tripDayItems);
 };
 

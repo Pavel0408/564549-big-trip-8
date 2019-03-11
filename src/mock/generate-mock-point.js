@@ -8,6 +8,7 @@ import {
   pointsOptions,
   descriptionArr
 } from "./mock-constants";
+
 import {
   fenerateOffers
 } from "./generate-offers";
@@ -17,21 +18,13 @@ import {
 } from "./generate-mok-date";
 
 import {
-  Point
-} from "../point";
-
-import {
-  PointEdit
-} from "../point-edit";
-
-import {
   genrateImges
 } from "./generat-imges";
 
 const MAX_PRICE = 100;
 const MIN_PRICE = 10;
 
-export const mockPoint = function () {
+export const generatemockPoint = function () {
   const pointDate = () => {
 
     return {
@@ -45,12 +38,5 @@ export const mockPoint = function () {
     };
   };
 
-  const mockPointDate = pointDate();
-  const pointItem = new Point(mockPointDate);
-  const pointEditItem = new PointEdit(mockPointDate);
-
-  return {
-    point: pointItem,
-    pointEdit: pointEditItem
-  };
+  return pointDate();
 };
