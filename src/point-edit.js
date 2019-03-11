@@ -141,7 +141,7 @@ export class PointEdit {
     };
   }
 
-  bind() {
+  installHandlers() {
     const form = this._element.querySelector(`.point form`);
     form.addEventListener(`submit`, this.submitHandler);
     form.addEventListener(`reset`, this.resetHandler);
@@ -151,7 +151,7 @@ export class PointEdit {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;
     this._element = fragment.firstChild;
-    this.bind();
+    this.installHandlers();
 
     return this._element;
   }
