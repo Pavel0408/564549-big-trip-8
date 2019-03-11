@@ -3,10 +3,6 @@ import {
 } from "./mock/mock-constants";
 
 import {
-  formatOffers
-} from "./mock/format-offers";
-
-import {
   addLeadingZero
 } from "./utilities";
 
@@ -25,6 +21,7 @@ export class PointEdit {
     this._element = null;
     this._submitHandler = null;
     this._resetHandler = null;
+    this._images = data.images;
   }
 
   get template() {
@@ -112,11 +109,7 @@ export class PointEdit {
           <h3 class="point__details-title">Destination</h3>
           <p class="point__destination-text">${this._description}</p>
           <div class="point__destination-images">
-            <img src="http://picsum.photos/330/140?r=123" alt="picture from place" class="point__destination-image">
-            <img src="http://picsum.photos/300/200?r=1234" alt="picture from place" class="point__destination-image">
-            <img src="http://picsum.photos/300/100?r=12345" alt="picture from place" class="point__destination-image">
-            <img src="http://picsum.photos/200/300?r=123456" alt="picture from place" class="point__destination-image">
-            <img src="http://picsum.photos/100/300?r=1234567" alt="picture from place" class="point__destination-image">
+            ${this._images.join(` `)}
           </div>
         </section>
         <input type="hidden" class="point__total-price" name="total-price" value="">
