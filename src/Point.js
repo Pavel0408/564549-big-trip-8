@@ -26,10 +26,6 @@ export class Point {
     return this._element;
   }
 
-  get editHandler() {
-    return this._editHandler;
-  }
-
   set editHandler(fn) {
     const handler = function (evt) {
       evt.preventDefault();
@@ -39,7 +35,7 @@ export class Point {
   }
 
   installHandlers() {
-    this._element.querySelector(`.trip-point__title`).addEventListener(`click`, this.editHandler);
+    this._element.querySelector(`.trip-point__title`).addEventListener(`click`, this._editHandler);
   }
 
   get template() {

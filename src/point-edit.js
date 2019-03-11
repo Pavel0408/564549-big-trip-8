@@ -122,10 +122,6 @@ export class PointEdit {
     return this._element;
   }
 
-  get submitHandler() {
-    return this._submitHandler;
-  }
-
   set submitHandler(fn) {
     const handler = function (evt) {
       evt.preventDefault();
@@ -134,7 +130,11 @@ export class PointEdit {
     this._submitHandler = handler;
   }
 
-  get resetHandler() {
+  get submitHandler() {
+    return this._submitHandler;
+  }
+
+  installResetHandler() {
     return (evt) => {
       evt.preventDefault();
       this.unrender();
@@ -142,15 +142,17 @@ export class PointEdit {
   }
 
   installHandlers() {
+    this._resetHandler = this.installResetHandler;
     const form = this._element.querySelector(`.point form`);
-    form.addEventListener(`submit`, this.submitHandler);
-    form.addEventListener(`reset`, this.resetHandler);
+    form.addEventListener(`submit`, this._submitHandler);
+    form.addEventListener(`reset`, this._resetHandler());
   }
 
   render() {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;
     this._element = fragment.firstChild;
+    this._resetHandler = this.installResetHandler;
     this.installHandlers();
 
     return this._element;
