@@ -18,8 +18,8 @@ import {
 } from "./generate-mok-date";
 
 import {
-  genrateImges
-} from "./generat-imges";
+  generateImages
+} from "./generate-images";
 
 const MAX_PRICE = 100;
 const MIN_PRICE = 10;
@@ -33,7 +33,7 @@ export const generatemockPoint = function () {
       description: getFewValues(descriptionArr, 1, 3).join(`. `),
       time: gnerateMockDate(),
       price: getRandomNumber(MIN_PRICE, MAX_PRICE),
-      images: genrateImges()
+      images: generateImages()
     };
   };
 

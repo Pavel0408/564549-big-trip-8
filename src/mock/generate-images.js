@@ -2,7 +2,7 @@ import {
   getRandomNumber
 } from "../utilities";
 
-export const genrateImges = () => {
+export const generateImages = () => {
   const imagesNumber = getRandomNumber(1, 4);
   return new Array(imagesNumber)
     .fill(``)
