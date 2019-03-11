@@ -24,7 +24,7 @@ import {
 const MAX_PRICE = 100;
 const MIN_PRICE = 10;
 
-export const generatemockPoint = function () {
+export const generateMockPoint = function () {
   const pointDate = () => {
     return {
       title: getRandomValue(pointsTitles),
