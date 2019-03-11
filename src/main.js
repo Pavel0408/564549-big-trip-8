@@ -5,10 +5,6 @@ import {
 } from "./utilities";
 
 import {
-  generateTripPoint
-} from "./generate-trip-point";
-
-import {
   generatePointsArr
 } from "./mock/generate-points-array";
 
@@ -51,7 +47,18 @@ const renderTripPoints = (numberTripPoints) => {
         pointEdit: pointEditItem
       };
     });
-  generateTripPoint(pointsArr, tripDayItems);
+  pointsArr.forEach((points) => {
+    points.point.editHandler = function () {
+      points.pointEdit.render();
+      tripDayItems.replaceChild(points.pointEdit.element, points.point.element);
+    };
+
+    points.pointEdit.submitHandler = function () {
+      points.point.render();
+      tripDayItems.replaceChild(points.point.element, points.pointEdit.element);
+    };
+    tripDayItems.appendChild(points.point.render());
+  });
 };
 
 const filterClickHandler = (evt) => {

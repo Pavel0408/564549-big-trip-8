@@ -26,7 +26,6 @@ const MIN_PRICE = 10;
 
 export const generatemockPoint = function () {
   const pointDate = () => {
-
     return {
       title: getRandomValue(pointsTitles),
       type: getRandomValue(pointsOptions),
