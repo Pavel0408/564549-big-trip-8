@@ -24,18 +24,14 @@ import {
 const MAX_PRICE = 100;
 const MIN_PRICE = 10;
 
-export const generateMockPoint = function () {
-  const pointDate = () => {
-    return {
-      title: getRandomValue(pointsTitles),
-      type: getRandomValue(pointsOptions),
-      offers: new Set(fenerateOffers()),
-      description: getFewValues(descriptionArr, 1, 3).join(`. `),
-      time: gnerateMockDate(),
-      price: getRandomNumber(MIN_PRICE, MAX_PRICE),
-      images: generateImages()
-    };
+export const generateMockPoint = () => {
+  return {
+    title: getRandomValue(pointsTitles),
+    type: getRandomValue(pointsOptions),
+    offers: new Set(fenerateOffers()),
+    description: getFewValues(descriptionArr, 1, 3).join(`. `),
+    time: gnerateMockDate(),
+    price: getRandomNumber(MIN_PRICE, MAX_PRICE),
+    images: generateImages()
   };
-
-  return pointDate();
 };
