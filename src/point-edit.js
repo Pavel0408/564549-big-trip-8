@@ -20,7 +20,10 @@ export class PointEdit {
     this._price = data.price;
     this._element = null;
     this._submitHandler = null;
-    this._resetHandler = null;
+    this._resetHandler = (evt) => {
+      evt.preventDefault();
+      this._unrender();
+    };
     this._images = data.images;
   }
 
@@ -130,35 +133,22 @@ export class PointEdit {
     this._submitHandler = handler;
   }
 
-  get submitHandler() {
-    return this._submitHandler;
-  }
-
-  installResetHandler() {
-    return (evt) => {
-      evt.preventDefault();
-      this.unrender();
-    };
-  }
-
-  installHandlers() {
-    this._resetHandler = this.installResetHandler;
+  _installHandlers() {
     const form = this._element.querySelector(`.point form`);
     form.addEventListener(`submit`, this._submitHandler);
-    form.addEventListener(`reset`, this._resetHandler());
+    form.addEventListener(`reset`, this._resetHandler);
+  }
+
+  _unrender() {
+    this._element.remove();
   }
 
   render() {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;
     this._element = fragment.firstChild;
-    this._resetHandler = this.installResetHandler;
-    this.installHandlers();
+    this._installHandlers();
 
     return this._element;
-  }
-
-  unrender() {
-    this._element.remove();
   }
 }
