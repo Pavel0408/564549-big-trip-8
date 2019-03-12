@@ -34,7 +34,7 @@ export class Point {
     this._editHandler = handler;
   }
 
-  installHandlers() {
+  _installHandlers() {
     this._element.querySelector(`.trip-point__title`).addEventListener(`click`, this._editHandler);
   }
 
@@ -57,7 +57,7 @@ export class Point {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;
     this._element = fragment.firstChild;
-    this.installHandlers();
+    this._installHandlers();
 
     return this._element;
   }
