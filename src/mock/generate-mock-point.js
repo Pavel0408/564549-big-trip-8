@@ -10,7 +10,7 @@ import {
 } from "./mock-constants";
 
 import {
-  fenerateOffers
+  generateOffers
 } from "./generate-offers";
 
 import {
@@ -28,7 +28,7 @@ export const generateMockPoint = () => {
   return {
     title: getRandomValue(pointsTitles),
     type: getRandomValue(pointsOptions),
-    offers: new Set(fenerateOffers()),
+    offers: new Set(generateOffers()),
     description: getFewValues(descriptionArr, 1, 3).join(`. `),
     time: gnerateMockDate(),
     price: getRandomNumber(MIN_PRICE, MAX_PRICE),
