@@ -5,6 +5,6 @@ import {
 export const generatePointsArr = (pointsNumber) => {
 
   return new Array(pointsNumber)
-  .fill(``)
-  .map(generateMockPoint);
+    .fill(``)
+    .map(generateMockPoint);
 };
