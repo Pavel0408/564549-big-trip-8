@@ -48,12 +48,12 @@ const renderTripPoints = (numberTripPoints) => {
       };
     });
   pointsArr.forEach((points) => {
-    points.point.editHandler = function () {
+    points.point.editHandler = () => {
       points.pointEdit.render();
       tripDayItems.replaceChild(points.pointEdit.element, points.point.element);
     };
 
-    points.pointEdit.submitHandler = function () {
+    points.pointEdit.submitHandler = () => {
       points.point.render();
       tripDayItems.replaceChild(points.point.element, points.pointEdit.element);
     };
