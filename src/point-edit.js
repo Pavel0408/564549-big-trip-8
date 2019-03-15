@@ -24,11 +24,6 @@ export class PointEdit {
     this._images = data.images;
   }
 
-  _resetHandler(evt) {
-    evt.preventDefault();
-    this._unrender();
-  }
-
   get template() {
     return `<article class="point">
     <form action="" method="get">
@@ -116,17 +111,8 @@ export class PointEdit {
       evt.preventDefault();
       fn();
     };
+
     this._submitHandler = handler;
-  }
-
-  _installHandlers() {
-    const form = this._element.querySelector(`.point form`);
-    form.addEventListener(`submit`, this._submitHandler);
-    form.addEventListener(`reset`, this._resetHandler);
-  }
-
-  _unrender() {
-    this._element.remove();
   }
 
   render() {
@@ -136,5 +122,20 @@ export class PointEdit {
     this._installHandlers();
 
     return this._element;
+  }
+
+  _unrender() {
+    this._element.remove();
+  }
+
+  _resetHandler(evt) {
+    evt.preventDefault();
+    this._unrender();
+  }
+
+  _installHandlers() {
+    const form = this._element.querySelector(`.point form`);
+    form.addEventListener(`submit`, this._submitHandler);
+    form.addEventListener(`reset`, this._resetHandler);
   }
 }

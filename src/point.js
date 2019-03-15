@@ -26,18 +26,6 @@ export class Point {
     return this._element;
   }
 
-  set editHandler(fn) {
-    const handler = function (evt) {
-      evt.preventDefault();
-      fn();
-    };
-    this._editHandler = handler;
-  }
-
-  _installHandlers() {
-    this._element.querySelector(`.trip-point__title`).addEventListener(`click`, this._editHandler);
-  }
-
   get template() {
     return `<article class="trip-point">
     <i class="trip-icon">${pointsIcons[this._type]}</i>
@@ -53,6 +41,14 @@ export class Point {
   </article>`;
   }
 
+  set editHandler(fn) {
+    const handler = function (evt) {
+      evt.preventDefault();
+      fn();
+    };
+    this._editHandler = handler;
+  }
+
   render() {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;
@@ -64,5 +60,9 @@ export class Point {
 
   unrender() {
     this._element = null;
+  }
+
+  _installHandlers() {
+    this._element.querySelector(`.trip-point__title`).addEventListener(`click`, this._editHandler);
   }
 }
