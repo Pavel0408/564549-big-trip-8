@@ -4,11 +4,17 @@ import {
   getRandomNumber
 } from "./utilities";
 
-import generateTripPoint from "./generate-trip-point";
-
 import {
   generatePointsArr
 } from "./mock/generate-points-array";
+
+import {
+  Point
+} from "./point";
+
+import {
+  PointEdit
+} from "./point-edit";
 
 export const filterNames = [
   `everything`,
@@ -31,12 +37,28 @@ const renderFilters = (filterNamesArr) => {
 
 const renderTripPoints = (numberTripPoints) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
-  const pointsArr = generatePointsArr(numberTripPoints);
-  let fragment = ``;
-  for (let i = 0; i < numberTripPoints; i++) {
-    fragment += generateTripPoint(pointsArr[i]);
-  }
-  tripDayItems.innerHTML = fragment;
+  const pointsArr = generatePointsArr(numberTripPoints)
+    .map((mockPointDate) => {
+      const pointItem = new Point(mockPointDate);
+      const pointEditItem = new PointEdit(mockPointDate);
+
+      return {
+        point: pointItem,
+        pointEdit: pointEditItem
+      };
+    });
+  pointsArr.forEach((points) => {
+    points.point.editHandler = () => {
+      points.pointEdit.render();
+      tripDayItems.replaceChild(points.pointEdit.element, points.point.element);
+    };
+
+    points.pointEdit.submitHandler = () => {
+      points.point.render();
+      tripDayItems.replaceChild(points.point.element, points.pointEdit.element);
+    };
+    tripDayItems.appendChild(points.point.render());
+  });
 };
 
 const filterClickHandler = (evt) => {

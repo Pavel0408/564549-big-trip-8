@@ -12,7 +12,7 @@ const MAX_OFFERS = 2;
 const MIN_OFFER_PRICE = 20;
 const MIN_OFFERS = 0;
 
-export const fenerateOffers = () => {
+export const generateOffers = () => {
   const offers = getFewValues(offersArray, MIN_OFFERS, MAX_OFFERS);
   offers.forEach((offer, index) => {
     const offerItem = {
