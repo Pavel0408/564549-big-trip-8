@@ -20,11 +20,11 @@ export class PointEdit {
     this._price = data.price;
     this._element = null;
     this._submitHandler = null;
-    this._resetHandler = this._reset.bind(this);
+    this._resetHandler = this._resetHandler.bind(this);
     this._images = data.images;
   }
 
-  _reset(evt) {
+  _resetHandler(evt) {
     evt.preventDefault();
     this._unrender();
   }
