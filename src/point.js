@@ -10,8 +10,14 @@ import {
   addLeadingZero
 } from "./utilities";
 
-export class Point {
+import {
+  Component
+} from "./component";
+
+export class Point extends Component {
   constructor(data) {
+    super();
+
     this._title = data.title;
     this._type = data.type;
     this._offers = data.offers;
@@ -46,20 +52,8 @@ export class Point {
       evt.preventDefault();
       fn();
     };
+
     this._editHandler = handler;
-  }
-
-  render() {
-    const fragment = document.createElement(`div`);
-    fragment.innerHTML = this.template;
-    this._element = fragment.firstChild;
-    this._installHandlers();
-
-    return this._element;
-  }
-
-  unrender() {
-    this._element = null;
   }
 
   _installHandlers() {

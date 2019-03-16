@@ -10,8 +10,14 @@ import {
   formatOffersEdit
 } from "./format-offers-edit";
 
-export class PointEdit {
+import {
+  Component
+} from "./component";
+
+export class PointEdit extends Component {
   constructor(data) {
+    super();
+
     this._title = data.title;
     this._type = data.type;
     this._offers = data.offers;
@@ -102,10 +108,6 @@ export class PointEdit {
   </article>`;
   }
 
-  get element() {
-    return this._element;
-  }
-
   set submitHandler(fn) {
     const handler = function (evt) {
       evt.preventDefault();
@@ -113,19 +115,6 @@ export class PointEdit {
     };
 
     this._submitHandler = handler;
-  }
-
-  render() {
-    const fragment = document.createElement(`div`);
-    fragment.innerHTML = this.template;
-    this._element = fragment.firstChild;
-    this._installHandlers();
-
-    return this._element;
-  }
-
-  _unrender() {
-    this._element.remove();
   }
 
   _resetHandler(evt) {
