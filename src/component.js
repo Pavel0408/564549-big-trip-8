@@ -26,7 +26,5 @@ export class Component {
     this._element.remove();
   }
 
-  _installHandlers() {
-    throw new Error(`You cannot install handlers until you create a point`);
-  }
+  _installHandlers() {}
 }
