@@ -6,29 +6,29 @@ export const pointsTitles = [
 ];
 
 export const pointsOptions = [
-  `Taxi`,
-  `Bus`,
-  `Train`,
-  `Ship`,
-  `Transport`,
-  `Drive`,
-  `Flight`,
-  `Check`,
-  `Sightseeing`,
-  `Restaurant`
+  `taxi`,
+  `bus`,
+  `train`,
+  `ship`,
+  `transport`,
+  `drive`,
+  `flight`,
+  `check`,
+  `sightseeing`,
+  `restaurant`
 ];
 
 export const pointsIcons = {
-  Taxi: `🚕`,
-  Bus: `🚌`,
-  Train: `🚂`,
-  Ship: `🛳️`,
-  Transport: `🚊`,
-  Drive: `🚗`,
-  Flight: `✈️`,
-  Check: `🏨`,
-  Sightseeing: `🏛️`,
-  Restaurant: `🍴`
+  taxi: `🚕`,
+  bus: `🚌`,
+  train: `🚂`,
+  ship: `🛳️`,
+  transport: `🚊`,
+  drive: `🚗`,
+  flight: `✈️`,
+  check: `🏨`,
+  sightseeing: `🏛️`,
+  restaurant: `🍴`
 };
 
 export const offers = [
