@@ -138,6 +138,14 @@ export class PointEdit extends Component {
     this._unrender();
   }
 
+  _changeIconHandler() {
+    let type = this._element.querySelector(`.travel-way__select-input:checked`);
+    type = type.value;
+    const icon = this._element.querySelector(`.travel-way__label`);
+
+    icon.textContent = pointsIcons[type];
+  }
+
   _installHandlers() {
     const form = this._element.querySelector(`.point form`);
     form.addEventListener(`submit`, this._submitHandler);
@@ -147,6 +155,13 @@ export class PointEdit extends Component {
       altFormat: `M j`,
       dateFormat: `M j`
     });
+
+    this._element.querySelectorAll(`.travel-way__select-input`).forEach((option) => {
+      option.addEventListener(`change`, () => {
+        this._changeIconHandler();
+      });
+    });
+
     this._element.querySelector(`.point__date`).style.display = `inline`;
   }
 }

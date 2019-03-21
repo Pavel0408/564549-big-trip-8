@@ -89,8 +89,6 @@ const generateEntry = (formData) => {
     price: formData.get(`price`),
     type: formData.get(`travel-way`)
   };
-
-
 };
 
 const instalDate = (formData) => {
