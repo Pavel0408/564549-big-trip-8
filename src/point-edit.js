@@ -150,6 +150,7 @@ export class PointEdit extends Component {
     const form = this._element.querySelector(`.point form`);
     form.addEventListener(`submit`, this._submitHandler);
     form.addEventListener(`reset`, this._resetHandler);
+
     flatpickr(this._element.querySelector(`.point__input`), {
       altInput: true,
       altFormat: `M j`,
