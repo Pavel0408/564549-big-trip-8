@@ -14,6 +14,15 @@ import {
   Component
 } from "./component";
 
+const flatpickr = require(`flatpickr`);
+
+const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
+  day: `numeric`
+});
+const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
+  month: `short`
+});
+
 export class PointEdit extends Component {
   constructor(data) {
     super();
@@ -36,7 +45,7 @@ export class PointEdit extends Component {
       <header class="point__header">
         <label class="point__date">
           choose day
-          <input class="point__input" type="text" placeholder="MAR 18" name="day">
+          <input class="point__input" type="text" placeholder="${monthFormatter.format(this._time.start)} ${dateFormatter.format(this._time.start)}" name="day">
         </label>
         <div class="travel-way">
           <label class="travel-way__label" for="travel-way__toggle">${pointsIcons[this._type]}</label>
@@ -131,5 +140,11 @@ export class PointEdit extends Component {
     const form = this._element.querySelector(`.point form`);
     form.addEventListener(`submit`, this._submitHandler);
     form.addEventListener(`reset`, this._resetHandler);
+    flatpickr(this._element.querySelector(`.point__input`), {
+      altInput: true,
+      altFormat: `M j`,
+      dateFormat: `M j`
+    });
+    this._element.querySelector(`.point__date`).style.display = `inline`;
   }
 }

@@ -92,7 +92,7 @@ const instalDate = (formData) => {
   const MS_IN_HOUR = 1000 * 60 * 60;
   const MS_IN_MINUTE = 1000 * 60;
   const day = formData.get(`day`);
-  const start = new Date();
+  let start = new Date();
   if (day) {
     start = new Date(formData.get(`day`));
   }
