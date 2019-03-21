@@ -1,5 +1,6 @@
 import {
-  pointsIcons
+  pointsIcons,
+  pointsTexts
 } from "./mock/mock-constants";
 
 import {
@@ -37,6 +38,7 @@ export class PointEdit extends Component {
     this._submitHandler = null;
     this._resetHandler = this._resetHandler.bind(this);
     this._images = data.images;
+    this._destination = data.destination;
   }
 
   get template() {
@@ -75,8 +77,8 @@ export class PointEdit extends Component {
           </div>
         </div>
         <div class="point__destination-wrap">
-          <label class="point__destination-label" for="destination">Flight to</label>
-          <input class="point__destination-input" list="destination-select" id="destination" value="Chamonix" name="destination">
+          <label class="point__destination-label" for="destination">${pointsTexts[this._type]}</label>
+          <input class="point__destination-input" list="destination-select" id="destination" value="${this._destination}" name="destination">
           <datalist id="destination-select">
             <option value="airport"></option>
             <option value="Geneva"></option>
@@ -103,7 +105,7 @@ export class PointEdit extends Component {
         </div>
       </header>
       <section class="point__details">
-        <section class="point__offers">
+        <section class="point__offers ${this._offers.size > 0 ? `` : `visually-hidden`}">
           <h3 class="point__details-title">offers</h3>
           <div class="point__offers-wrap">
           ${formatOffersEdit(this._offers)}

@@ -58,9 +58,12 @@ const renderTripPoints = (numberTripPoints) => {
       const formData = new FormData(points.pointEdit._element.querySelector(`form`));
       const entry = generateEntry(formData);
       entry.time = instalDate(formData);
+
       points.point.update(entry);
       points.pointEdit.update(entry);
+
       points.point.render();
+
       tripDayItems.replaceChild(points.point.element, points.pointEdit.element);
     };
 
@@ -82,10 +85,12 @@ document.body.addEventListener(`click`, filterClickHandler);
 
 const generateEntry = (formData) => {
   return {
-    title: formData.get(`destination`),
-    type: formData.get(`travel-way`),
-    price: formData.get(`price`)
+    destination: formData.get(`destination`),
+    price: formData.get(`price`),
+    type: formData.get(`travel-way`)
   };
+
+
 };
 
 const instalDate = (formData) => {

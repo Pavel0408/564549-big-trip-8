@@ -23,8 +23,8 @@ export class Component {
   }
 
   update(data) {
-    this._title = data.title;
-    this._type = data.type;
+    this._destination = data.destination;
+    this._type = data.type || this._type;
     this._time = data.time;
     this._price = data.price;
   }
