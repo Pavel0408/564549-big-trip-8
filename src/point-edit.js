@@ -111,7 +111,7 @@ export class PointEdit extends Component {
   set submitHandler(fn) {
     const handler = function (evt) {
       evt.preventDefault();
-      fn();
+      fn(evt);
     };
 
     this._submitHandler = handler;
