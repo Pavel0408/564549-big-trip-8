@@ -47,7 +47,7 @@ export class PointEdit extends Component {
       <header class="point__header">
         <label class="point__date">
           choose day
-          <input class="point__input" type="text" placeholder="${monthFormatter.format(this._time.start)} ${dateFormatter.format(this._time.start)}" name="day">
+          <input class="point__input" type="text" placeholder="${monthFormatter.format(this._time.start)} ${dateFormatter.format(this._time.start)}" name="day" value = "${monthFormatter.format(this._time.start)} ${dateFormatter.format(this._time.start)}">
         </label>
         <div class="travel-way">
           <label class="travel-way__label" for="travel-way__toggle">${pointsIcons[this._type]}</label>

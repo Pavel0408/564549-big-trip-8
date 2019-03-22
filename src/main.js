@@ -95,20 +95,33 @@ const instalDate = (formData) => {
   const MS_IN_HOUR = 1000 * 60 * 60;
   const MS_IN_MINUTE = 1000 * 60;
   const day = formData.get(`day`);
+
+  // Устанавливаем в start текущую дату
   let start = new Date();
+
+  // Проверяем, есть ли значение в поле выбора даты
   if (day) {
-    start = new Date(formData.get(`day`));
+
+    // Если значение есть устанавливаем в start его
+    start = new Date(day);
   }
 
+  // Приравниваем end к start (предположим, что событие началось и закончилось в один день)
   const end = new Date(start);
+
+  // Разбираем значение поля выбора диапазона времени
   const time = parseTime(formData);
+
+  // Устанавливаем время
   start.setHours(time.startHours, time.startMinutes);
   end.setHours(time.endHours, time.endMinutes);
 
+  // Проверяем не получилось ли окончание события раньше начала. Такое может быть, если время события пересекает полночь например 23:00 - 01:00, и если это произошло, то добавляем в end 1 день.
   if (end.getTime() < start.getTime()) {
     end.setDate(end.getDate() + 1);
   }
 
+  // высчитываем временной интервал события в часах и минутах
   const intervalInMs = (end.getTime() - start.getTime());
   const hours = Math.floor(intervalInMs / MS_IN_HOUR);
   const minutes = Math.floor(intervalInMs % MS_IN_HOUR / MS_IN_MINUTE);
