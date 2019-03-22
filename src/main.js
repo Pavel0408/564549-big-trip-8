@@ -57,7 +57,7 @@ const renderTripPoints = (numberTripPoints) => {
     points.pointEdit.submitHandler = () => {
       const formData = new FormData(points.pointEdit._element.querySelector(`form`));
       const entry = generateEntry(formData);
-      entry.time = instalDate(formData);
+      entry.time = generateDate(formData);
 
       points.point.update(entry);
       points.pointEdit.update(entry);
@@ -91,7 +91,7 @@ const generateEntry = (formData) => {
   };
 };
 
-const instalDate = (formData) => {
+const generateDate = (formData) => {
   const MS_IN_HOUR = 1000 * 60 * 60;
   const MS_IN_MINUTE = 1000 * 60;
   const day = formData.get(`day`);
