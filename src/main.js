@@ -122,7 +122,7 @@ const generateDate = (formData) => {
   }
 
   // высчитываем временной интервал события в часах и минутах
-  const intervalInMs = (end.getTime() - start.getTime());
+  const intervalInMs = end.getTime() - start.getTime();
   const hours = Math.floor(intervalInMs / MS_IN_HOUR);
   const minutes = Math.floor(intervalInMs % MS_IN_HOUR / MS_IN_MINUTE);
 
