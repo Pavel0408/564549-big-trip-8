@@ -139,11 +139,8 @@ export class PointEdit extends Component {
   }
 
   _changeIconHandler() {
-    let type = this._element.querySelector(`.travel-way__select-input:checked`);
-    type = type.value;
-    const icon = this._element.querySelector(`.travel-way__label`);
-
-    icon.textContent = pointsIcons[type];
+    this._element.querySelector(`.travel-way__label`)
+      .textContent = pointsIcons[this._element.querySelector(`.travel-way__select-input:checked`).value];
   }
 
   _installHandlers() {
