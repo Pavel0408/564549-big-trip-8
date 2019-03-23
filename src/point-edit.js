@@ -171,6 +171,28 @@ export class PointEdit extends Component {
       dateFormat: `M j`
     });
 
+    flatpickr(this._element.querySelector(`input[name=first-time]`), {
+      enableTime: true,
+      noCalendar: true,
+      altInput: true,
+      altFormat: `H:i`,
+      dateFormat: `H:i`,
+      // eslint-disable-next-line camelcase
+      time_24hr: true,
+      defaultDate: this._time.start
+    });
+
+    flatpickr(this._element.querySelector(`input[name=second-time]`), {
+      enableTime: true,
+      noCalendar: true,
+      altInput: true,
+      altFormat: `H:i`,
+      dateFormat: `H:i`,
+      // eslint-disable-next-line camelcase
+      time_24hr: true,
+      defaultDate: this._time.end
+    });
+
     this._element.querySelectorAll(`.travel-way__select-input`).forEach((option) => {
       option.addEventListener(`change`, () => {
         this._changeIconHandler();
