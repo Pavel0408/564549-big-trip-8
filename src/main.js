@@ -107,12 +107,12 @@ const generateDate = (formData) => {
   // Приравниваем end к start (предположим, что событие началось и закончилось в один день)
   const end = new Date(start);
 
-  // Разбираем значение поля выбора диапазона времени
-  const time = parseTime(formData);
-
   // Устанавливаем время
-  start.setHours(time.startTime.hours, time.startTime.minutes);
-  end.setHours(time.endTime.hours, time.endTime.minutes);
+  const startTime = parseTimeValue(formData.get(`first-time`));
+  const endTime = parseTimeValue(formData.get(`second-time`));
+
+  start.setHours(startTime.hours, startTime.minutes);
+  end.setHours(endTime.hours, endTime.minutes);
 
   // Проверяем не получилось ли окончание события раньше начала. Такое может быть, если время события пересекает полночь например 23:00 - 01:00, и если это произошло, то добавляем в end 1 день.
   if (end.getTime() < start.getTime()) {
@@ -125,25 +125,12 @@ const generateDate = (formData) => {
   };
 };
 
-const parseTime = (formData) => {
-  const value = formData.get(`time`);
-  const valueArr = value.split(`—`).map((values) => {
-    return parseTimeValue(values);
-  });
-
-  const [startTime, endTime] = valueArr;
-
-  return {
-    startTime,
-    endTime
-  };
-};
-
 const parseTimeValue = (value) => {
-  const valueArr = value.split(`:`);
-  let [hours, minutes] = valueArr;
-  hours = parseInt(hours, 10);
-  minutes = parseInt(minutes, 10);
+  const valueArr = value.split(`:`).map((timeString) => {
+    return parseInt(timeString, 10);
+  });
+  const [hours, minutes] = valueArr;
+
   return {
     hours,
     minutes

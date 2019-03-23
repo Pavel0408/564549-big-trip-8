@@ -86,10 +86,13 @@ export class PointEdit extends Component {
             <option value="hotel"></option>
           </datalist>
         </div>
-        <label class="point__time">
+
+        <div class="point__time">
           choose time
-          <input class="point__input" type="text" value="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())} — ${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}" name="time" placeholder="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())} —${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}">
-        </label>
+          <input class="point__input" type="text" value="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())}" name="first-time" placeholder="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())}">
+          <input class="point__input" type="text" value="${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}" name="second-time" placeholder="${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}">
+        </div>
+
         <label class="point__price">
           write price
           <span class="point__price-currency">€</span>
