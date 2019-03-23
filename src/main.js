@@ -111,8 +111,8 @@ const generateDate = (formData) => {
   const time = parseTime(formData);
 
   // Устанавливаем время
-  start.setHours(time.startHours, time.startMinutes);
-  end.setHours(time.endHours, time.endMinutes);
+  start.setHours(time.startTime.hours, time.startTime.minutes);
+  end.setHours(time.endTme.hours, time.endTime.minutes);
 
   // Проверяем не получилось ли окончание события раньше начала. Такое может быть, если время события пересекает полночь например 23:00 - 01:00, и если это произошло, то добавляем в end 1 день.
   if (end.getTime() < start.getTime()) {
@@ -127,22 +127,25 @@ const generateDate = (formData) => {
 
 const parseTime = (formData) => {
   const value = formData.get(`time`);
-  const valueArr = value.split(`—`);
-  let [startTime, endTime] = valueArr;
-  startTime = startTime.split(`:`);
-  endTime = endTime.split(`:`);
-  let [startHours, startMinutes] = startTime;
-  let [endHours, endMinutes] = endTime;
+  const valueArr = value.split(`—`).map((values) => {
+    return parseTimeValue(values);
+  });
 
-  startHours = parseInt(startHours, 10);
-  startMinutes = parseInt(startMinutes, 10);
-  endHours = parseInt(endHours, 10);
-  endMinutes = parseInt(endMinutes, 10);
+  const [startTime, endTime] = valueArr;
 
   return {
-    startHours,
-    startMinutes,
-    endHours,
-    endMinutes
+    startTime,
+    endTime
+  };
+};
+
+const parseTimeValue = (value) => {
+  const valueArr = value.split(`:`);
+  const [hours, minutes] = valueArr;
+  hours = parseInt(hours, 10);
+  minutes = parseInt(minutes, 10);
+  return {
+    hours,
+    minutes
   };
 };
