@@ -65,6 +65,15 @@ export class PointEdit extends Component {
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-flight" name="travel-way" value="flight" ${this._type === `flight` ? `checked` : ``}>
               <label class="travel-way__select-label" for="travel-way-flight">${pointsIcons.flight} flight</label>
+
+              <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-transport" name="travel-way" value="transport" ${this._type === `transport` ? `checked` : ``}>
+              <label class="travel-way__select-label" for="travel-way-transport">${pointsIcons.transport}  transport</label>
+
+              <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-drive" name="travel-way" value="drive" ${this._type === `drive` ? `checked` : ``}>
+              <label class="travel-way__select-label" for="travel-way-drive">${pointsIcons.drive} drive</label>
+
+              <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-ship" name="travel-way" value="ship" ${this._type === `ship` ? `checked` : ``}>
+              <label class="travel-way__select-label" for="travel-way-ship">${pointsIcons.ship} ship</label>
             </div>
 
             <div class="travel-way__select-group">
@@ -73,6 +82,9 @@ export class PointEdit extends Component {
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-sightseeing" name="travel-way" value="sightseeing" ${this._type === `sightseeing` ? `checked` : ``}>
               <label class="travel-way__select-label" for="travel-way-sightseeing">${pointsIcons.sightseeing} sightseeing</label>
+
+              <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-restaurant" name="travel-way" value="restaurant" ${this._type === `restaurant` ? `checked` : ``}>
+              <label class="travel-way__select-label" for="travel-way-restaurant">${pointsIcons.restaurant} restaurant</label>
             </div>
           </div>
         </div>
