@@ -112,7 +112,7 @@ const generateDate = (formData) => {
 
   // Устанавливаем время
   start.setHours(time.startTime.hours, time.startTime.minutes);
-  end.setHours(time.endTme.hours, time.endTime.minutes);
+  end.setHours(time.endTime.hours, time.endTime.minutes);
 
   // Проверяем не получилось ли окончание события раньше начала. Такое может быть, если время события пересекает полночь например 23:00 - 01:00, и если это произошло, то добавляем в end 1 день.
   if (end.getTime() < start.getTime()) {
@@ -141,7 +141,7 @@ const parseTime = (formData) => {
 
 const parseTimeValue = (value) => {
   const valueArr = value.split(`:`);
-  const [hours, minutes] = valueArr;
+  let [hours, minutes] = valueArr;
   hours = parseInt(hours, 10);
   minutes = parseInt(minutes, 10);
   return {
