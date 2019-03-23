@@ -92,8 +92,6 @@ const generateEntry = (formData) => {
 };
 
 const generateDate = (formData) => {
-  const MS_IN_HOUR = 1000 * 60 * 60;
-  const MS_IN_MINUTE = 1000 * 60;
   const day = formData.get(`day`);
 
   // Устанавливаем в start текущую дату
@@ -121,20 +119,9 @@ const generateDate = (formData) => {
     end.setDate(end.getDate() + 1);
   }
 
-  // высчитываем временной интервал события в часах и минутах
-  const intervalInMs = end.getTime() - start.getTime();
-  const hours = Math.floor(intervalInMs / MS_IN_HOUR);
-  const minutes = Math.floor(intervalInMs % MS_IN_HOUR / MS_IN_MINUTE);
-
-  const interval = {
-    hours,
-    minutes
-  };
-
   return {
     start,
-    end,
-    interval
+    end
   };
 };
 
