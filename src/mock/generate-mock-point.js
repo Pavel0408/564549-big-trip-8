@@ -32,6 +32,7 @@ export const generateMockPoint = () => {
     description: getFewValues(descriptionArr, 1, 3).join(`. `),
     time: gnerateMockDate(),
     price: getRandomNumber(MIN_PRICE, MAX_PRICE),
-    images: generateImages()
+    images: generateImages(),
+    destination: `Chamonix`
   };
 };
