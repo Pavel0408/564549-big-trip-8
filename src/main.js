@@ -21,10 +21,6 @@ import {
 } from "./points-by-id";
 
 import {
-  getPointsArr
-} from "./get-points-arr";
-
-import {
   Filter
 } from "./filter";
 
@@ -34,8 +30,7 @@ export const filterNames = [
   `past`
 ];
 
-const MAX_NUMBER_POINTS = 10;
-const MIN_NUMBER_POINTS = 1;
+
 const START_NUMBER_POINTS = 7;
 
 const renderFilters = (filterNamesArr) => {
@@ -44,6 +39,7 @@ const renderFilters = (filterNamesArr) => {
 
   filterNamesArr.forEach((filterName) => {
     const filterItem = new Filter(filterName);
+    filterItem.renderPoints = renderPoints;
     filterItem.render().forEach((element) => {
       fragment.appendChild(element);
     });
@@ -52,8 +48,8 @@ const renderFilters = (filterNamesArr) => {
   formTripFilter.appendChild(fragment);
 };
 
-const renderTripPoints = (numberTripPoints) => {
-  const tripDayItems = document.querySelector(`.trip-day__items`);
+const generateTripPoints = (numberTripPoints) => {
+
   const pointsArr = generatePointsArr(numberTripPoints)
     .map((mockPointDate) => {
       const pointItem = new Point(mockPointDate);
@@ -68,7 +64,15 @@ const renderTripPoints = (numberTripPoints) => {
       return points;
     });
 
-  pointsArr.forEach((points) => {
+  return pointsArr;
+};
+
+const pointsArr = generateTripPoints(START_NUMBER_POINTS);
+
+const renderPoints = (tripsArr) => {
+  const tripDayItems = document.querySelector(`.trip-day__items`);
+  tripDayItems.innerHTML = ``;
+  tripsArr.forEach((points) => {
     points.point.editHandler = () => {
       points.pointEdit.render();
       tripDayItems.replaceChild(points.pointEdit.element, points.point.element);
@@ -91,17 +95,10 @@ const renderTripPoints = (numberTripPoints) => {
   });
 };
 
-const filterClickHandler = (evt) => {
-  const filter = evt.target.closest(`.trip-filter__item`);
-  if (filter) {
-    renderTripPoints(getRandomNumber(MIN_NUMBER_POINTS, MAX_NUMBER_POINTS));
-  }
-};
-
 renderFilters(filterNames);
-renderTripPoints(START_NUMBER_POINTS);
+renderPoints(pointsArr);
 
-document.body.addEventListener(`click`, filterClickHandler);
+document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 
 const generateEntry = (formData) => {
   return {

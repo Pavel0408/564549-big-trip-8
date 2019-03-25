@@ -1,5 +1,5 @@
 export const pointsById = {
-  newIndex: 0,
+  newIndex: 1,
   add(points) {
     this[this.newIndex] = points;
 

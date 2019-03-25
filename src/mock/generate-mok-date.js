@@ -7,7 +7,7 @@ export const gnerateMockDate = () => {
   const MS_IN_WEEK = 1000 * 60 * 60 * 24 * 7;
 
   const dateNow = new Date();
-  const start = new Date(getRandomNumber(dateNow.getTime(), dateNow.getTime() + MS_IN_WEEK));
+  const start = new Date(getRandomNumber(dateNow.getTime() - MS_IN_WEEK, dateNow.getTime() + MS_IN_WEEK));
   const end = new Date(getRandomNumber(start.getTime(), start.getTime() + MAX_TIME_LENGTH));
 
   return {
