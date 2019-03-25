@@ -30,10 +30,6 @@ export class Point extends Component {
     this._id = ``;
   }
 
-  get element() {
-    return this._element;
-  }
-
   get template() {
     const interval = calculateInterval(this._time.start, this._time.end);
 

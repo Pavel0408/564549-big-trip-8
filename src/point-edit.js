@@ -15,6 +15,10 @@ import {
   Component
 } from "./component";
 
+import {
+  pointsById
+} from "./points-by-id";
+
 const flatpickr = require(`flatpickr`);
 
 const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
@@ -151,6 +155,7 @@ export class PointEdit extends Component {
 
   _resetHandler(evt) {
     evt.preventDefault();
+    pointsById[this.id] = null;
     this._unrender();
   }
 

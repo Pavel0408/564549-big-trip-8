@@ -24,6 +24,10 @@ import {
   getPointsArr
 } from "./get-points-arr";
 
+import {
+  Filter
+} from "./filter";
+
 export const filterNames = [
   `everything`,
   `future`,
@@ -36,11 +40,16 @@ const START_NUMBER_POINTS = 7;
 
 const renderFilters = (filterNamesArr) => {
   const formTripFilter = document.querySelector(`.trip-filter`);
-  let fragment = ``;
+  let fragment = document.createDocumentFragment();
+
   filterNamesArr.forEach((filterName) => {
-    fragment += generateFilter(filterName);
+    const filterItem = new Filter(filterName);
+    filterItem.render().forEach((element) => {
+      fragment.appendChild(element);
+    });
+
   });
-  formTripFilter.innerHTML = fragment;
+  formTripFilter.appendChild(fragment);
 };
 
 const renderTripPoints = (numberTripPoints) => {
@@ -147,5 +156,3 @@ const parseTimeValue = (value) => {
     minutes
   };
 };
-
-
