@@ -24,6 +24,10 @@ import {
   Filter
 } from "./filter";
 
+import {
+  stats
+} from "./stats";
+
 export const filterNames = [
   `everything`,
   `future`,
@@ -96,18 +100,29 @@ const renderPoints = (tripsArr) => {
 };
 
 const switchsArr = document.querySelectorAll(`.view-switch__item`);
+const [tableButton, statsButton] = switchsArr;
+const pointsContainer = document.querySelector(`.trip-points`);
+const statsContainer = document.querySelector(`.statistic`);
 
-const switchsClickHandler = (evt) => {
+const tableClickHandler = (evt) => {
   evt.preventDefault();
 
-  const pointsContainer = document.querySelector(`.trip-points`);
-  const statsContainer = document.querySelector(`.statistic`);
+  pointsContainer.classList.remove(`visually-hidden`);
+  statsContainer.classList.add(`visually-hidden`);
+  tableButton.classList.add(`view-switch__item--active`);
+  statsButton.classList.remove(`view-switch__item--active`);
 
-  pointsContainer.classList.toggle(`visually-hidden`);
-  statsContainer.classList.toggle(`visually-hidden`);
-  switchsArr.forEach((switchs)=>{
-    switchs.classList.toggle(`view-switch__item--active`);
-  });
+};
+
+const statsClickHandler = (evt) => {
+  evt.preventDefault();
+
+  pointsContainer.classList.add(`visually-hidden`);
+  statsContainer.classList.remove(`visually-hidden`);
+  tableButton.classList.remove(`view-switch__item--active`);
+  statsButton.classList.add(`view-switch__item--active`);
+
+  stats();
 };
 
 renderFilters(filterNames);
@@ -115,9 +130,8 @@ renderPoints(pointsArr);
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 
-document.querySelectorAll(`.view-switch__item`).forEach((link)=>{
-  link.addEventListener(`click`, switchsClickHandler);
-});
+tableButton.addEventListener(`click`, tableClickHandler);
+statsButton.addEventListener(`click`, statsClickHandler);
 
 
 const generateEntry = (formData) => {
