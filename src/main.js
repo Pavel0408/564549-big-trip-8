@@ -20,6 +20,10 @@ import {
   pointsById
 } from "./points-by-id";
 
+import {
+  getPointsArr
+} from "./get-points-arr";
+
 export const filterNames = [
   `everything`,
   `future`,
@@ -143,3 +147,5 @@ const parseTimeValue = (value) => {
     minutes
   };
 };
+
+
