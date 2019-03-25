@@ -47,8 +47,8 @@ const renderFilters = (filterNamesArr) => {
     filterItem.render().forEach((element) => {
       fragment.appendChild(element);
     });
-
   });
+
   formTripFilter.appendChild(fragment);
 };
 
