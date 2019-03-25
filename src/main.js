@@ -95,10 +95,30 @@ const renderPoints = (tripsArr) => {
   });
 };
 
+const switchsArr = document.querySelectorAll(`.view-switch__item`);
+
+const switchsClickHandler = (evt) => {
+  evt.preventDefault();
+
+  const pointsContainer = document.querySelector(`.trip-points`);
+  const statsContainer = document.querySelector(`.statistic`);
+
+  pointsContainer.classList.toggle(`visually-hidden`);
+  statsContainer.classList.toggle(`visually-hidden`);
+  switchsArr.forEach((switchs)=>{
+    switchs.classList.toggle(`view-switch__item--active`);
+  });
+};
+
 renderFilters(filterNames);
 renderPoints(pointsArr);
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
+
+document.querySelectorAll(`.view-switch__item`).forEach((link)=>{
+  link.addEventListener(`click`, switchsClickHandler);
+});
+
 
 const generateEntry = (formData) => {
   return {
