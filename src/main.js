@@ -16,6 +16,10 @@ import {
   PointEdit
 } from "./point-edit";
 
+import {
+  pointsById
+} from "./points-by-id";
+
 export const filterNames = [
   `everything`,
   `future`,
@@ -41,11 +45,14 @@ const renderTripPoints = (numberTripPoints) => {
     .map((mockPointDate) => {
       const pointItem = new Point(mockPointDate);
       const pointEditItem = new PointEdit(mockPointDate);
-
-      return {
+      const points = {
         point: pointItem,
         pointEdit: pointEditItem
       };
+
+      pointsById.add(points);
+
+      return points;
     });
 
   pointsArr.forEach((points) => {

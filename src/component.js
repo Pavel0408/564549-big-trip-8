@@ -13,6 +13,14 @@ export class Component {
     return this._element;
   }
 
+  get id() {
+    return this._id;
+  }
+
+  set id(id) {
+    this._id = id;
+  }
+
   render() {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;

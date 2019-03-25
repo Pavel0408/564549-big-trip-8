@@ -39,6 +39,7 @@ export class PointEdit extends Component {
     this._resetHandler = this._resetHandler.bind(this);
     this._images = data.images;
     this._destination = data.destination;
+    this._id = ``;
   }
 
   get template() {

@@ -27,6 +27,7 @@ export class Point extends Component {
     this._price = data.price;
     this._element = null;
     this._editHandler = null;
+    this._id = ``;
   }
 
   get element() {
