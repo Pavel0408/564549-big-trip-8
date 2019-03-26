@@ -17,6 +17,14 @@ export class Component {
     return this._id;
   }
 
+  get type() {
+    return this._type;
+  }
+
+  get price() {
+    return this._price;
+  }
+
   set id(id) {
     this._id = id;
   }

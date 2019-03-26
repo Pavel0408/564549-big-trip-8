@@ -13,6 +13,8 @@ export const stats = () => {
   const transportCtx = document.querySelector(`.statistic__transport`);
   const timeSpendCtx = document.querySelector(`.statistic__time-spend`);
 
+  const pointArr = getPointsArr();
+
   const transportTypes = [
     `taxi`,
     `bus`,
@@ -24,9 +26,9 @@ export const stats = () => {
   ];
 
   const transportSet = new Set();
-  getPointsArr().forEach((points) => {
-    if (transportTypes.indexOf(points.point._type) !== -1) {
-      transportSet.add(points.point._type);
+  pointArr.forEach((points) => {
+    if (transportTypes.indexOf(points.point.type) !== -1) {
+      transportSet.add(points.point.type);
     }
   });
 
@@ -36,14 +38,14 @@ export const stats = () => {
     });
 
     return labelsArr;
-  }
+  };
 
   const transportLabelsArr = generateLabelsArr(transportSet);
 
   const transportDataArr = [...transportSet].map((type) => {
     let typeCount = 0;
-    getPointsArr().forEach((points) => {
-      if (points.point._type === type) {
+    pointArr.forEach((points) => {
+      if (points.point.type === type) {
         typeCount++;
       }
     });
@@ -51,15 +53,15 @@ export const stats = () => {
   });
 
   const moneySet = new Set();
-  getPointsArr().forEach((points) => {
-    moneySet.add(points.point._type);
+  pointArr.forEach((points) => {
+    moneySet.add(points.point.type);
   });
 
   const moneyDataArr = [...moneySet].map((type) => {
     let typeMoney = 0;
-    getPointsArr().forEach((points) => {
-      if (points.point._type === type) {
-        typeMoney += points.point._price;
+    pointArr.forEach((points) => {
+      if (points.point.type === type) {
+        typeMoney += points.point.price;
       }
     });
 
@@ -74,6 +76,7 @@ export const stats = () => {
   transportCtx.height = BAR_HEIGHT * 4;
   timeSpendCtx.height = BAR_HEIGHT * 4;
 
+  // eslint-disable-next-line no-unused-vars
   const moneyChart = new Chart(moneyCtx, {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
@@ -93,8 +96,8 @@ export const stats = () => {
             size: 13
           },
           color: `#000000`,
-          anchor: 'end',
-          align: 'start',
+          anchor: `end`,
+          align: `start`,
           formatter: (val) => `€ ${val}`
         }
       },
@@ -139,6 +142,7 @@ export const stats = () => {
     }
   });
 
+  // eslint-disable-next-line no-unused-vars
   const transportChart = new Chart(transportCtx, {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
@@ -158,8 +162,8 @@ export const stats = () => {
             size: 13
           },
           color: `#000000`,
-          anchor: 'end',
-          align: 'start',
+          anchor: `end`,
+          align: `start`,
           formatter: (val) => `${val}x`
         }
       },
