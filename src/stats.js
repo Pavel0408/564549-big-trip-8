@@ -1,10 +1,48 @@
 import Chart from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import {
+  getPointsArr
+} from "./get-points-arr";
+
+import {
+  pointsIcons
+} from "./mock/mock-constants";
 
 export const stats = () => {
   const moneyCtx = document.querySelector(`.statistic__money`);
   const transportCtx = document.querySelector(`.statistic__transport`);
   const timeSpendCtx = document.querySelector(`.statistic__time-spend`);
+
+  const transportTypes = [
+    `taxi`,
+    `bus`,
+    `train`,
+    `ship`,
+    `transport`,
+    `drive`,
+    `flight`
+  ];
+
+  const transportSet = new Set();
+  getPointsArr().forEach((points) => {
+    if (transportTypes.indexOf(points.point._type) !== -1) {
+      transportSet.add(points.point._type);
+    }
+  });
+
+  const transportLabelsArr = [...transportSet].map((type) => {
+    return `${pointsIcons[type]} ${type.toUpperCase()}`;
+  });
+
+  const transportDataArr = [...transportSet].map((type) => {
+    let typeCount = 0;
+    getPointsArr().forEach((points) => {
+      if (points.point._type === type) {
+        typeCount++;
+      }
+    });
+    return typeCount;
+  });
 
   // Рассчитаем высоту канваса в зависимости от того, сколько данных в него будет передаваться
   const BAR_HEIGHT = 55;
@@ -81,9 +119,9 @@ export const stats = () => {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
     data: {
-      labels: [`🚗 DRIVE`, `🚕 RIDE`, `✈️ FLY`, `🛳️ SAIL`],
+      labels: transportLabelsArr,
       datasets: [{
-        data: [4, 3, 2, 1],
+        data: transportDataArr,
         backgroundColor: `#ffffff`,
         hoverBackgroundColor: `#ffffff`,
         anchor: `start`
