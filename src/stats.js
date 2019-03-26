@@ -30,9 +30,15 @@ export const stats = () => {
     }
   });
 
-  const transportLabelsArr = [...transportSet].map((type) => {
-    return `${pointsIcons[type]} ${type.toUpperCase()}`;
-  });
+  const generateLabelsArr = (set) => {
+    const labelsArr = [...set].map((type) => {
+      return `${pointsIcons[type]} ${type.toUpperCase()}`;
+    });
+
+    return labelsArr;
+  }
+
+  const transportLabelsArr = generateLabelsArr(transportSet);
 
   const transportDataArr = [...transportSet].map((type) => {
     let typeCount = 0;
@@ -44,6 +50,24 @@ export const stats = () => {
     return typeCount;
   });
 
+  const moneySet = new Set();
+  getPointsArr().forEach((points) => {
+    moneySet.add(points.point._type);
+  });
+
+  const moneyDataArr = [...moneySet].map((type) => {
+    let typeMoney = 0;
+    getPointsArr().forEach((points) => {
+      if (points.point._type === type) {
+        typeMoney += points.point._price;
+      }
+    });
+
+    return typeMoney;
+  });
+
+  const monyLabeslArr = generateLabelsArr(moneySet);
+
   // Рассчитаем высоту канваса в зависимости от того, сколько данных в него будет передаваться
   const BAR_HEIGHT = 55;
   moneyCtx.height = BAR_HEIGHT * 6;
@@ -54,9 +78,9 @@ export const stats = () => {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
     data: {
-      labels: [`✈️ FLY`, `🏨 STAY`, `🚗 DRIVE`, `🏛️ LOOK`, `🏨 EAT`, `🚕 RIDE`],
+      labels: monyLabeslArr,
       datasets: [{
-        data: [400, 300, 200, 160, 150, 100],
+        data: moneyDataArr,
         backgroundColor: `#ffffff`,
         hoverBackgroundColor: `#ffffff`,
         anchor: `start`
