@@ -10,6 +10,10 @@ import {
   getPointsArr
 } from "./get-points-arr";
 
+import {
+  renderPoints
+} from "./main";
+
 export class Filter extends Component {
   constructor(name) {
     super();
@@ -19,7 +23,6 @@ export class Filter extends Component {
     this._function = filterFunctions[name];
     this._elment = null;
     this._changeHandler = this._changeHandler.bind(this);
-    this._renderPoints = null;
   }
 
   get template() {
@@ -37,21 +40,16 @@ export class Filter extends Component {
     return this._element;
   }
 
-  set renderPoints(fn) {
-    this._renderPoints = fn;
-  }
-
   _filterArr() {
     return getPointsArr().filter(this._function);
   }
 
   _changeHandler() {
-    this._renderPoints(this._filterArr());
+    renderPoints(this._filterArr());
   }
 
   _installHandler() {
     const input = this._element[0];
     input.addEventListener(`change`, this._changeHandler);
   }
-
 }

@@ -37,7 +37,6 @@ const renderFilters = (filterNamesArr) => {
 
   filterNamesArr.forEach((filterName) => {
     const filterItem = new Filter(filterName);
-    filterItem.renderPoints = renderPoints;
     filterItem.render().forEach((element) => {
       fragment.appendChild(element);
     });
@@ -178,4 +177,8 @@ const parseTimeValue = (value) => {
     hours,
     minutes
   };
+};
+
+export {
+  renderPoints
 };
