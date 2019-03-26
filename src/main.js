@@ -1,3 +1,4 @@
+// test
 import {
   generatePointsArr
 } from "./mock/generate-points-array";
