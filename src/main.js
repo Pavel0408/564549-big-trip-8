@@ -1,9 +1,3 @@
-import generateFilter from "./generate-filter";
-
-import {
-  getRandomNumber
-} from "./utilities";
-
 import {
   generatePointsArr
 } from "./mock/generate-points-array";
@@ -53,7 +47,6 @@ const renderFilters = (filterNamesArr) => {
 };
 
 const generateTripPoints = (numberTripPoints) => {
-
   const pointsArr = generatePointsArr(numberTripPoints)
     .map((mockPointDate) => {
       const pointItem = new Point(mockPointDate);
@@ -111,7 +104,6 @@ const tableClickHandler = (evt) => {
   statsContainer.classList.add(`visually-hidden`);
   tableButton.classList.add(`view-switch__item--active`);
   statsButton.classList.remove(`view-switch__item--active`);
-
 };
 
 const statsClickHandler = (evt) => {
