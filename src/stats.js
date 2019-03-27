@@ -1,7 +1,7 @@
 import Chart from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import {
-  getPointsArr
+  getPoints
 } from "./get-points-arr";
 
 import {
@@ -13,7 +13,7 @@ export const stats = () => {
   const transportCtx = document.querySelector(`.statistic__transport`);
   const timeSpendCtx = document.querySelector(`.statistic__time-spend`);
 
-  const pointArr = getPointsArr();
+  const pointArr = getPoints();
 
   const transportTypes = [
     `taxi`,

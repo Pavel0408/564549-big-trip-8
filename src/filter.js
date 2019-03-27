@@ -3,11 +3,7 @@ import {
 } from "./component";
 
 import {
-  filterFunctions
-} from "./filter-functions";
-
-import {
-  getPointsArr
+  getPoints
 } from "./get-points-arr";
 
 import {
@@ -41,7 +37,7 @@ export class Filter extends Component {
   }
 
   _filterArr() {
-    return getPointsArr().filter(this._function);
+    return getPoints().filter(this._function);
   }
 
   _changeHandler() {
@@ -53,3 +49,19 @@ export class Filter extends Component {
     input.addEventListener(`change`, this._changeHandler);
   }
 }
+
+const filterFunctions = {
+  everything() {
+    return true;
+  },
+
+  future(item) {
+    const now = new Date();
+    return now < item.point._time.start;
+  },
+
+  past(item) {
+    const now = new Date();
+    return now > item.point._time.end;
+  }
+};
