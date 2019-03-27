@@ -91,8 +91,8 @@ const renderPoints = (tripsArr) => {
   });
 };
 
-const switchsArr = document.querySelectorAll(`.view-switch__item`);
-const [tableButton, statsButton] = switchsArr;
+const switchesArr = document.querySelectorAll(`.view-switch__item`);
+const [tableButton, statsButton] = switchesArr;
 const pointsContainer = document.querySelector(`.trip-points`);
 const statsContainer = document.querySelector(`.statistic`);
 
