@@ -13,22 +13,6 @@ export class Component {
     return this._element;
   }
 
-  get id() {
-    return this._id;
-  }
-
-  get type() {
-    return this._type;
-  }
-
-  get price() {
-    return this._price;
-  }
-
-  set id(id) {
-    this._id = id;
-  }
-
   render() {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;

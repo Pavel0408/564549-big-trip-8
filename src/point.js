@@ -47,6 +47,22 @@ export class Point extends Component {
   </article>`;
   }
 
+  get id() {
+    return this._id;
+  }
+
+  set id(id) {
+    this._id = id;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  get price() {
+    return this._price;
+  }
+
   set editHandler(fn) {
     const handler = function (evt) {
       evt.preventDefault();
