@@ -16,7 +16,7 @@ export class Filter extends Component {
 
     this._name = name;
     this._pointsArr = null;
-    this._function = filterFunctions[name];
+    this._filterFunction = filterFunctions[name];
     this._elment = null;
     this._changeHandler = this._changeHandler.bind(this);
   }
@@ -39,7 +39,7 @@ export class Filter extends Component {
   _filterArr() {
     return points.filter((item)=>{
       return item && item.point;
-    }).filter(this._function);
+    }).filter(this._filterFunction);
   }
 
   _changeHandler() {
