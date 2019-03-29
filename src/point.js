@@ -12,10 +12,10 @@ import {
 } from "./utilities";
 
 import {
-  Component
-} from "./component";
+  ComponentPoint
+} from "./component-point";
 
-export class Point extends Component {
+export class Point extends ComponentPoint {
   constructor(data) {
     super();
 
