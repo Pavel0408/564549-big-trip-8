@@ -1,17 +1,17 @@
 import Chart from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
-const moneyCtx = document.querySelector(`.statistic__money`);
-const transportCtx = document.querySelector(`.statistic__transport`);
 const timeSpendCtx = document.querySelector(`.statistic__time-spend`);
 
 // Рассчитаем высоту канваса в зависимости от того, сколько данных в него будет передаваться
 const BAR_HEIGHT = 55;
-moneyCtx.height = BAR_HEIGHT * 6;
-transportCtx.height = BAR_HEIGHT * 4;
+
 timeSpendCtx.height = BAR_HEIGHT * 4;
 
 export const renderMoneyStats = (monyLabeslArr, moneyDataArr) => {
+  const moneyCtx = document.querySelector(`.statistic__money`);
+  moneyCtx.height = BAR_HEIGHT * 6;
+
   // eslint-disable-next-line no-unused-vars
   const moneyChart = new Chart(moneyCtx, {
     plugins: [ChartDataLabels],
@@ -80,6 +80,9 @@ export const renderMoneyStats = (monyLabeslArr, moneyDataArr) => {
 };
 
 export const renderTransportStats = (transportLabelsArr, transportDataArr) => {
+  const transportCtx = document.querySelector(`.statistic__transport`);
+  transportCtx.height = BAR_HEIGHT * 4;
+
   // eslint-disable-next-line no-unused-vars
   const transportChart = new Chart(transportCtx, {
     plugins: [ChartDataLabels],
