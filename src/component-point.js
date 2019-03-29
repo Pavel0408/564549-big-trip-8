@@ -11,6 +11,17 @@ export class ComponentPoint extends Component {
     }
   }
 
+  get time() {
+    return this._time;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  get price() {
+    return this._price;
+  }
 
   render() {
     const fragment = document.createElement(`div`);

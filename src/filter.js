@@ -57,11 +57,11 @@ const filterFunctions = {
 
   future(item) {
     const now = new Date();
-    return now < item.point._time.start;
+    return now < item.point.time.start;
   },
 
   past(item) {
     const now = new Date();
-    return now > item.point._time.end;
+    return now > item.point.time.end;
   }
 };

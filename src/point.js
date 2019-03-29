@@ -55,14 +55,6 @@ export class Point extends ComponentPoint {
     this._id = id;
   }
 
-  get type() {
-    return this._type;
-  }
-
-  get price() {
-    return this._price;
-  }
-
   set editHandler(fn) {
     const handler = function (evt) {
       evt.preventDefault();
