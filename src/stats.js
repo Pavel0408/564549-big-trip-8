@@ -52,9 +52,9 @@ export const stats = () => {
     return labelsArr;
   };
 
-  const transportLabelsArr = generateLabelsArr(transportSet);
+  const transportLabels = generateLabelsArr(transportSet);
 
-  const transportDataArr = [...transportSet].map((type) => {
+  const transportData = [...transportSet].map((type) => {
     let totalСostType = 0;
     points.filter((item)=>{
       return item && item.point;
@@ -73,7 +73,7 @@ export const stats = () => {
     moneySet.add(pointsItem.point.type);
   });
 
-  const moneyDataArr = [...moneySet].map((type) => {
+  const moneyData = [...moneySet].map((type) => {
     let typeMoney = 0;
     points.filter((item)=>{
       return item && item.point;
@@ -86,8 +86,8 @@ export const stats = () => {
     return typeMoney;
   });
 
-  const monyLabeslArr = generateLabelsArr(moneySet);
+  const monyLabels = generateLabelsArr(moneySet);
 
-  renderMoneyStats(monyLabeslArr, moneyDataArr);
-  renderTransportStats(transportLabelsArr, transportDataArr);
+  renderMoneyStats(monyLabels, moneyData);
+  renderTransportStats(transportLabels, transportData);
 };
