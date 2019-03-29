@@ -36,7 +36,9 @@ export const stats = () => {
   ];
 
   const transportSet = new Set();
-  points.forEach((pointsItem) => {
+  points.filter((item)=>{
+    return item && item.point;
+  }).forEach((pointsItem) => {
     if (transportTypes.indexOf(pointsItem.point.type) !== -1) {
       transportSet.add(pointsItem.point.type);
     }
@@ -54,7 +56,9 @@ export const stats = () => {
 
   const transportDataArr = [...transportSet].map((type) => {
     let typeCount = 0;
-    points.forEach((pointsItem) => {
+    points.filter((item)=>{
+      return item && item.point;
+    }).forEach((pointsItem) => {
       if (pointsItem.point.type === type) {
         typeCount++;
       }
@@ -64,13 +68,17 @@ export const stats = () => {
 
 
   const moneySet = new Set();
-  points.forEach((pointsItem) => {
+  points.filter((item)=>{
+    return item && item.point;
+  }).forEach((pointsItem) => {
     moneySet.add(pointsItem.point.type);
   });
 
   const moneyDataArr = [...moneySet].map((type) => {
     let typeMoney = 0;
-    points.forEach((pointsItem) => {
+    points.filter((item)=>{
+      return item && item.point;
+    }).forEach((pointsItem) => {
       if (pointsItem.point.type === type) {
         typeMoney += pointsItem.point.price;
       }

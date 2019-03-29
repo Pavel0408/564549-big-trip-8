@@ -166,7 +166,7 @@ export class PointEdit extends Component {
 
   _resetHandler(evt) {
     evt.preventDefault();
-    points.splice(this.id, 1);
+    points[this.id] = null;
     this._unrender();
   }
 

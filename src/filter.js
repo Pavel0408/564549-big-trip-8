@@ -37,7 +37,9 @@ export class Filter extends Component {
   }
 
   _filterArr() {
-    return points.filter(this._function);
+    return points.filter((item)=>{
+      return item && item.point;
+    }).filter(this._function);
   }
 
   _changeHandler() {
