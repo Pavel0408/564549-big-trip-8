@@ -55,17 +55,16 @@ export const stats = () => {
   const transportLabelsArr = generateLabelsArr(transportSet);
 
   const transportDataArr = [...transportSet].map((type) => {
-    let typeCount = 0;
+    let totalСostType = 0;
     points.filter((item)=>{
       return item && item.point;
     }).forEach((pointsItem) => {
       if (pointsItem.point.type === type) {
-        typeCount++;
+        totalСostType++;
       }
     });
-    return typeCount;
+    return totalСostType;
   });
-
 
   const moneySet = new Set();
   points.filter((item)=>{
