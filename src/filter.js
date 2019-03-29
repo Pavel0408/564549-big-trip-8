@@ -3,8 +3,8 @@ import {
 } from "./component";
 
 import {
-  getPoints
-} from "./get-points-arr";
+  points
+} from "./main";
 
 import {
   renderPoints
@@ -37,7 +37,7 @@ export class Filter extends Component {
   }
 
   _filterArr() {
-    return getPoints().filter(this._function);
+    return points.filter(this._function);
   }
 
   _changeHandler() {

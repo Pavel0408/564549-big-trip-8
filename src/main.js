@@ -11,10 +11,6 @@ import {
 } from "./point-edit";
 
 import {
-  pointsById
-} from "./points-by-id";
-
-import {
   Filter
 } from "./filter";
 
@@ -50,44 +46,53 @@ const generateTripPoints = (numberTripPoints) => {
     .map((mockPointDate) => {
       const pointItem = new Point(mockPointDate);
       const pointEditItem = new PointEdit(mockPointDate);
-      const points = {
+      const pointElement = {
         point: pointItem,
         pointEdit: pointEditItem
       };
+      pointElement.pointEdit.item = pointEditItem;
 
-      pointsById.add(points);
-
-      return points;
+      return pointElement;
     });
 
   return pointsArr;
 };
 
-const pointsArr = generateTripPoints(START_NUMBER_POINTS);
+const points = generateTripPoints(START_NUMBER_POINTS);
+
+let startId = 0;
+
+points.forEach((pointItem) => {
+  pointItem.pointEdit.id = startId;
+  startId++;
+});
 
 const renderPoints = (tripsArr) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
   tripDayItems.innerHTML = ``;
-  tripsArr.forEach((points) => {
-    points.point.editHandler = () => {
-      points.pointEdit.render();
-      tripDayItems.replaceChild(points.pointEdit.element, points.point.element);
-    };
+  tripsArr.forEach((pointsItem) => {
 
-    points.pointEdit.submitHandler = () => {
-      const formData = new FormData(points.pointEdit._element.querySelector(`form`));
-      const entry = generateEntry(formData);
-      entry.time = generateDate(formData);
+    if (pointsItem && pointsItem.point) {
+      pointsItem.point.editHandler = () => {
+        pointsItem.pointEdit.render();
+        tripDayItems.replaceChild(pointsItem.pointEdit.element, pointsItem.point.element);
+      };
 
-      points.point.update(entry);
-      points.pointEdit.update(entry);
+      pointsItem.pointEdit.submitHandler = () => {
+        const formData = new FormData(pointsItem.pointEdit._element.querySelector(`form`));
+        const entry = generateEntry(formData);
+        entry.time = generateDate(formData);
 
-      points.point.render();
+        pointsItem.point.update(entry);
+        pointsItem.pointEdit.update(entry);
 
-      tripDayItems.replaceChild(points.point.element, points.pointEdit.element);
-    };
+        pointsItem.point.render();
 
-    tripDayItems.appendChild(points.point.render());
+        tripDayItems.replaceChild(pointsItem.point.element, pointsItem.pointEdit.element);
+      };
+
+      tripDayItems.appendChild(pointsItem.point.render());
+    }
   });
 };
 
@@ -117,7 +122,7 @@ const statsClickHandler = (evt) => {
 };
 
 renderFilters(filterNames);
-renderPoints(pointsArr);
+renderPoints(points);
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 
@@ -180,5 +185,6 @@ const parseTimeValue = (value) => {
 };
 
 export {
-  renderPoints
+  renderPoints,
+  points
 };

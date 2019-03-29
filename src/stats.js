@@ -1,6 +1,6 @@
 import {
-  getPoints
-} from "./get-points-arr";
+  points
+} from "./main";
 
 import {
   pointsIcons
@@ -12,7 +12,6 @@ import {
 } from "./render-stats";
 
 export const stats = () => {
-  const pointArr = getPoints();
   const statsСontainer = document.querySelector(`#stats`);
   statsСontainer.innerHTML = `<div class="statistic__item statistic__item--money">
   <canvas class="statistic__money" width="900"></canvas>
@@ -37,9 +36,9 @@ export const stats = () => {
   ];
 
   const transportSet = new Set();
-  pointArr.forEach((points) => {
-    if (transportTypes.indexOf(points.point.type) !== -1) {
-      transportSet.add(points.point.type);
+  points.forEach((pointsItem) => {
+    if (transportTypes.indexOf(pointsItem.point.type) !== -1) {
+      transportSet.add(pointsItem.point.type);
     }
   });
 
@@ -55,24 +54,25 @@ export const stats = () => {
 
   const transportDataArr = [...transportSet].map((type) => {
     let typeCount = 0;
-    pointArr.forEach((points) => {
-      if (points.point.type === type) {
+    points.forEach((pointsItem) => {
+      if (pointsItem.point.type === type) {
         typeCount++;
       }
     });
     return typeCount;
   });
 
+
   const moneySet = new Set();
-  pointArr.forEach((points) => {
-    moneySet.add(points.point.type);
+  points.forEach((pointsItem) => {
+    moneySet.add(pointsItem.point.type);
   });
 
   const moneyDataArr = [...moneySet].map((type) => {
     let typeMoney = 0;
-    pointArr.forEach((points) => {
-      if (points.point.type === type) {
-        typeMoney += points.point.price;
+    points.forEach((pointsItem) => {
+      if (pointsItem.point.type === type) {
+        typeMoney += pointsItem.point.price;
       }
     });
 

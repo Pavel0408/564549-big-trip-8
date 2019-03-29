@@ -16,8 +16,8 @@ import {
 } from "./component";
 
 import {
-  pointsById
-} from "./points-by-id";
+  points
+} from "./main";
 
 const flatpickr = require(`flatpickr`);
 
@@ -43,7 +43,7 @@ export class PointEdit extends Component {
     this._resetHandler = this._resetHandler.bind(this);
     this._images = data.images;
     this._destination = data.destination;
-    this._id = ``;
+    this._item = null;
   }
 
   get template() {
@@ -153,6 +153,10 @@ export class PointEdit extends Component {
     this._submitHandler = handler;
   }
 
+  set(id) {
+    this._id = id;
+  }
+
   update(data) {
     this._destination = data.destination;
     this._type = data.type;
@@ -162,7 +166,7 @@ export class PointEdit extends Component {
 
   _resetHandler(evt) {
     evt.preventDefault();
-    pointsById[this.id] = null;
+    points.splice(this.id, 1);
     this._unrender();
   }
 

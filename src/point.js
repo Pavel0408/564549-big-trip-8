@@ -59,14 +59,6 @@ export class Point extends Component {
     return this._price;
   }
 
-  get id() {
-    return this._id;
-  }
-
-  set id(id) {
-    this._id = id;
-  }
-
   update(data) {
     this._destination = data.destination;
     this._type = data.type;
