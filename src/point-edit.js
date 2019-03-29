@@ -12,8 +12,8 @@ import {
 } from "./format-offers-edit";
 
 import {
-  ComponentPoint
-} from "./component-point";
+  Component
+} from "./component";
 
 import {
   pointsById
@@ -28,7 +28,7 @@ const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
   month: `short`
 });
 
-export class PointEdit extends ComponentPoint {
+export class PointEdit extends Component {
   constructor(data) {
     super();
 
@@ -151,6 +151,13 @@ export class PointEdit extends ComponentPoint {
     };
 
     this._submitHandler = handler;
+  }
+
+  update(data) {
+    this._destination = data.destination;
+    this._type = data.type;
+    this._time = data.time;
+    this._price = data.price;
   }
 
   _resetHandler(evt) {

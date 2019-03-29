@@ -12,10 +12,10 @@ import {
 } from "./utilities";
 
 import {
-  ComponentPoint
-} from "./component-point";
+  Component
+} from "./component";
 
-export class Point extends ComponentPoint {
+export class Point extends Component {
   constructor(data) {
     super();
 
@@ -47,12 +47,31 @@ export class Point extends ComponentPoint {
   </article>`;
   }
 
+  get time() {
+    return this._time;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  get price() {
+    return this._price;
+  }
+
   get id() {
     return this._id;
   }
 
   set id(id) {
     this._id = id;
+  }
+
+  update(data) {
+    this._destination = data.destination;
+    this._type = data.type;
+    this._time = data.time;
+    this._price = data.price;
   }
 
   set editHandler(fn) {

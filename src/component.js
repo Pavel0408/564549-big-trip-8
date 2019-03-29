@@ -13,6 +13,17 @@ export class Component {
     return this._element;
   }
 
+  render() {
+    const fragment = document.createElement(`div`);
+    fragment.innerHTML = this.template;
+    this._element = fragment.firstChild;
+    this._installHandlers();
+
+    return this._element;
+  }
+
+  update() {}
+
   _unrender() {
     this._element.remove();
   }
