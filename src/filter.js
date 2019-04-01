@@ -4,11 +4,11 @@ import {
 
 import {
   points
-} from "./main";
+} from "./points";
 
 import {
   renderPoints
-} from "./main";
+} from "./render-points";
 
 export class Filter extends Component {
   constructor(name) {

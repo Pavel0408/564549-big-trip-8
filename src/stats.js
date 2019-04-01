@@ -1,6 +1,6 @@
 import {
   points
-} from "./main";
+} from "./points";
 
 import {
   pointsIcons
