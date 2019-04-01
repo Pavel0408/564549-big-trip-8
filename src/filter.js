@@ -39,7 +39,7 @@ export class Filter extends Component {
   _filterArr() {
     return points.filter((item) => {
       return item && item.point;
-    }).filter(this._filterPoints);
+    }).filter(this._filterPoints(new Date()));
   }
 
   _changeHandler() {
@@ -60,16 +60,20 @@ export const filterNames = [
 
 const filterByName = {
   everything: () => {
-    return true;
+    return () => {
+      return true;
+    };
   },
 
-  future: (item) => {
-    const now = new Date();
-    return now < item.point.time.start;
+  future: (now) => {
+    return (item) => {
+      return now < item.point.time.start;
+    };
   },
 
-  past: (item) => {
-    const now = new Date();
-    return now > item.point.time.end;
+  past: (now) => {
+    return (item) => {
+      return now > item.point.time.end;
+    };
   }
 };
