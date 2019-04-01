@@ -15,7 +15,7 @@ import {
   pointsOptions
 } from "./mock/mock-constants";
 
-export const stats = () => {
+export const showStats = () => {
   const statsСontainer = document.querySelector(`#stats`);
   statsСontainer.innerHTML = `<div class="statistic__item statistic__item--money">
   <canvas class="statistic__money" width="900"></canvas>
@@ -51,15 +51,15 @@ export const stats = () => {
   const transportLabels = generateLabelsArr(transportSet);
 
   const transportData = [...transportSet].map((type) => {
-    let totalСostType = 0;
+    let totalTransportEvents = 0;
     points.filter((item) => {
       return item && item.point;
     }).forEach((pointsItem) => {
       if (pointsItem.point.type === type) {
-        totalСostType++;
+        totalTransportEvents++;
       }
     });
-    return totalСostType;
+    return totalTransportEvents;
   });
 
   const moneySet = new Set();
@@ -70,16 +70,16 @@ export const stats = () => {
   });
 
   const moneyData = [...moneySet].map((type) => {
-    let typeMoney = 0;
+    let eventTotalCost = 0;
     points.filter((item) => {
       return item && item.point;
     }).forEach((pointsItem) => {
       if (pointsItem.point.type === type) {
-        typeMoney += pointsItem.point.price;
+        eventTotalCost += pointsItem.point.price;
       }
     });
 
-    return typeMoney;
+    return eventTotalCost;
   });
 
   const monyLabels = generateLabelsArr(moneySet);
