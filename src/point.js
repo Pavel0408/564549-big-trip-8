@@ -12,10 +12,10 @@ import {
 } from "./utilities";
 
 import {
-  Component
-} from "./component";
+  AbstractPoint
+} from "./abstract-point";
 
-export class Point extends Component {
+export class Point extends AbstractPoint {
   constructor(data) {
     super();
 
@@ -57,13 +57,6 @@ export class Point extends Component {
 
   get price() {
     return this._price;
-  }
-
-  update(data) {
-    this._destination = data.destination;
-    this._type = data.type;
-    this._time = data.time;
-    this._price = data.price;
   }
 
   set editHandler(fn) {

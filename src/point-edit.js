@@ -12,12 +12,12 @@ import {
 } from "./format-offers-edit";
 
 import {
-  Component
-} from "./component";
+  points
+} from "./points";
 
 import {
-  points
-} from "./main";
+  AbstractPoint
+} from "./abstract-point";
 
 const flatpickr = require(`flatpickr`);
 
@@ -28,7 +28,7 @@ const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
   month: `short`
 });
 
-export class PointEdit extends Component {
+export class PointEdit extends AbstractPoint {
   constructor(data) {
     super();
 
@@ -155,13 +155,6 @@ export class PointEdit extends Component {
 
   set(id) {
     this._id = id;
-  }
-
-  update(data) {
-    this._destination = data.destination;
-    this._type = data.type;
-    this._time = data.time;
-    this._price = data.price;
   }
 
   _resetHandler(evt) {
