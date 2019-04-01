@@ -1,5 +1,6 @@
 import {
-  Filter
+  Filter,
+  filterNames
 } from "./filter";
 
 import {
@@ -13,12 +14,6 @@ import {
 import {
   points
 } from "./points";
-
-export const filterNames = [
-  `everything`,
-  `future`,
-  `past`
-];
 
 const renderFilters = (filterNamesArr) => {
   const formTripFilter = document.querySelector(`.trip-filter`);

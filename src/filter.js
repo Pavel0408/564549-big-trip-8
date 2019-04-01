@@ -37,7 +37,7 @@ export class Filter extends Component {
   }
 
   _filterArr() {
-    return points.filter((item)=>{
+    return points.filter((item) => {
       return item && item.point;
     }).filter(this._filterPoints);
   }
@@ -52,17 +52,23 @@ export class Filter extends Component {
   }
 }
 
+export const filterNames = [
+  `everything`,
+  `future`,
+  `past`
+];
+
 const filterByName = {
-  everything() {
+  everything: () => {
     return true;
   },
 
-  future(item) {
+  future: (item) => {
     const now = new Date();
     return now < item.point.time.start;
   },
 
-  past(item) {
+  past: (item) => {
     const now = new Date();
     return now > item.point.time.end;
   }
