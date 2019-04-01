@@ -11,6 +11,10 @@ import {
   renderMoneyStats
 } from "./render-stats";
 
+import {
+  pointsOptions
+} from "./mock/mock-constants";
+
 export const stats = () => {
   const statsСontainer = document.querySelector(`#stats`);
   statsСontainer.innerHTML = `<div class="statistic__item statistic__item--money">
@@ -25,18 +29,10 @@ export const stats = () => {
   <canvas class="statistic__time-spend" width="900"></canvas>
 </div>`;
 
-  const transportTypes = [
-    `taxi`,
-    `bus`,
-    `train`,
-    `ship`,
-    `transport`,
-    `drive`,
-    `flight`
-  ];
+  const transportTypes = pointsOptions.slice(0, 7);
 
   const transportSet = new Set();
-  points.filter((item)=>{
+  points.filter((item) => {
     return item && item.point;
   }).forEach((pointsItem) => {
     if (transportTypes.indexOf(pointsItem.point.type) !== -1) {
@@ -56,7 +52,7 @@ export const stats = () => {
 
   const transportData = [...transportSet].map((type) => {
     let totalСostType = 0;
-    points.filter((item)=>{
+    points.filter((item) => {
       return item && item.point;
     }).forEach((pointsItem) => {
       if (pointsItem.point.type === type) {
@@ -67,7 +63,7 @@ export const stats = () => {
   });
 
   const moneySet = new Set();
-  points.filter((item)=>{
+  points.filter((item) => {
     return item && item.point;
   }).forEach((pointsItem) => {
     moneySet.add(pointsItem.point.type);
@@ -75,7 +71,7 @@ export const stats = () => {
 
   const moneyData = [...moneySet].map((type) => {
     let typeMoney = 0;
-    points.filter((item)=>{
+    points.filter((item) => {
       return item && item.point;
     }).forEach((pointsItem) => {
       if (pointsItem.point.type === type) {
