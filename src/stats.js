@@ -12,7 +12,6 @@ import {
 } from "./render-stats";
 
 import {
-  pointsOptions,
   PointEvents
 } from "./mock/mock-constants";
 

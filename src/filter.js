@@ -73,7 +73,7 @@ const filterEnum = {
 };
 
 const filterByName = {
-  everything: filterEnum.everything,
-  future: filterEnum.future,
-  past: filterEnum.past
+  'everything': filterEnum.everything,
+  'future': filterEnum.future,
+  'past': filterEnum.past
 };
