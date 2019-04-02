@@ -16,7 +16,7 @@ export class Filter extends Component {
 
     this._name = name;
     this._pointsArr = null;
-    this._filterPoints = filterByName[name];
+    this._filterPoints = filterPoints.get(this._name);
     this._elment = null;
     this._changeHandler = this._changeHandler.bind(this);
   }
@@ -52,28 +52,26 @@ export class Filter extends Component {
   }
 }
 
-export const filterNames = [
-  `everything`,
-  `future`,
-  `past`
-];
 
-const filterEnum = {
-  everything: () => {
+
+const filterPoints = new Map([
+  [`everything`, () => {
     return true;
-  },
+  }],
 
-  future: (now, item) => {
+  [`future`, (now, item) => {
     return now < item.point.time.start;
-  },
+  }],
 
-  past: (now, item) => {
+  [`past`, (now, item) => {
     return now > item.point.time.end;
-  }
-};
+  }]
+]);
+
+export const filterNames = Array.from(filterPoints.keys());
 
 const filterByName = {
-  'everything': filterEnum.everything,
-  'future': filterEnum.future,
-  'past': filterEnum.past
+  everything: `everything`,
+  future: `future`,
+  past: `past`
 };
