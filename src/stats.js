@@ -12,7 +12,8 @@ import {
 } from "./render-stats";
 
 import {
-  pointsOptions
+  pointsOptions,
+  PointEvents
 } from "./mock/mock-constants";
 
 export const showStats = () => {
@@ -29,7 +30,7 @@ export const showStats = () => {
   <canvas class="statistic__time-spend" width="900"></canvas>
 </div>`;
 
-  const transportTypes = pointsOptions.slice(0, 7);
+  const transportTypes = PointEvents.transportTypes;
 
   const transportSet = new Set();
   points.filter((item) => {
