@@ -39,9 +39,7 @@ export class Filter extends Component {
   _filterArr() {
     return points.filter((item) => {
       return item && item.point;
-    }).filter((item) => {
-      return this._filterPoints(new Date(), item);
-    });
+    }).filter((item) => this._filterPoints(new Date(), item));
   }
 
   _changeHandler() {
