@@ -52,8 +52,6 @@ export class Filter extends Component {
   }
 }
 
-
-
 const filterPoints = new Map([
   [`everything`, () => {
     return true;
@@ -69,9 +67,3 @@ const filterPoints = new Map([
 ]);
 
 export const filterNames = Array.from(filterPoints.keys());
-
-const filterByName = {
-  everything: `everything`,
-  future: `future`,
-  past: `past`
-};

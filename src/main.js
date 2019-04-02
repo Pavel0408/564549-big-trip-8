@@ -4,7 +4,7 @@ import {
 } from "./filter";
 
 import {
-  showStats
+  Stats
 } from "./stats";
 
 import {
@@ -58,7 +58,7 @@ const statsClickHandler = (evt) => {
   tableButton.classList.remove(`view-switch__item--active`);
   statsButton.classList.add(`view-switch__item--active`);
 
-  showStats();
+  new Stats().render();
 };
 
 renderFilters(filterNames);
