@@ -58,7 +58,7 @@ export const filterNames = [
   `past`
 ];
 
-const filterByName = {
+const filterEnum = {
   everything: () => {
     return () => {
       return true;
@@ -76,4 +76,10 @@ const filterByName = {
       return now > item.point.time.end;
     };
   }
+};
+
+const filterByName = {
+  everything: filterEnum.everything,
+  future: filterEnum.future,
+  past: filterEnum.past
 };
