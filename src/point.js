@@ -12,10 +12,10 @@ import {
 } from "./utilities";
 
 import {
-  Component
-} from "./component";
+  AbstractPoint
+} from "./abstract-point";
 
-export class Point extends Component {
+export class Point extends AbstractPoint {
   constructor(data) {
     super();
 
@@ -27,10 +27,7 @@ export class Point extends Component {
     this._price = data.price;
     this._element = null;
     this._editHandler = null;
-  }
-
-  get element() {
-    return this._element;
+    this._id = ``;
   }
 
   get template() {
@@ -48,6 +45,18 @@ export class Point extends Component {
       ${formatOffers(this._offers)}
     </ul>
   </article>`;
+  }
+
+  get time() {
+    return this._time;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  get price() {
+    return this._price;
   }
 
   set editHandler(fn) {

@@ -22,12 +22,7 @@ export class Component {
     return this._element;
   }
 
-  update(data) {
-    this._destination = data.destination;
-    this._type = data.type;
-    this._time = data.time;
-    this._price = data.price;
-  }
+  update() {}
 
   _unrender() {
     this._element.remove();

@@ -5,17 +5,27 @@ export const pointsTitles = [
   `Check into a hotel`
 ];
 
+export const PointEvents = {
+  transportTypes: [
+    `taxi`,
+    `bus`,
+    `train`,
+    `ship`,
+    `transport`,
+    `drive`,
+    `flight`,
+  ],
+
+  stopTypes: [
+    `check`,
+    `sightseeing`,
+    `restaurant`
+  ]
+};
+
 export const pointsOptions = [
-  `taxi`,
-  `bus`,
-  `train`,
-  `ship`,
-  `transport`,
-  `drive`,
-  `flight`,
-  `check`,
-  `sightseeing`,
-  `restaurant`
+  ...PointEvents.transportTypes,
+  ...PointEvents.stopTypes
 ];
 
 export const pointsIcons = {
