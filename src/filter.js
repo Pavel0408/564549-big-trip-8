@@ -16,7 +16,7 @@ export class Filter extends Component {
 
     this._name = name;
     this._pointsArr = null;
-    this._filterPoints = filterPoints.get(this._name);
+    this._filterPoints = FilterByName[name];
     this._elment = null;
     this._changeHandler = this._changeHandler.bind(this);
   }
@@ -52,18 +52,20 @@ export class Filter extends Component {
   }
 }
 
-const filterPoints = new Map([
-  [`everything`, () => {
+export const filterName = {
+  EVRYTHING: `everything`,
+  FUTURE: `future`,
+  PAST: `past`
+};
+
+const FilterByName = {
+  [filterName.EVRYTHING]: () => {
     return true;
-  }],
-
-  [`future`, (now, item) => {
+  },
+  [filterName.FUTURE]: (now, item) => {
     return now < item.point.time.start;
-  }],
-
-  [`past`, (now, item) => {
+  },
+  [filterName.PAST]: (now, item) => {
     return now > item.point.time.end;
-  }]
-]);
-
-export const filterNames = Array.from(filterPoints.keys());
+  },
+};

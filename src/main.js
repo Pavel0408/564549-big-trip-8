@@ -1,6 +1,6 @@
 import {
   Filter,
-  filterNames
+  filterName
 } from "./filter";
 
 import {
@@ -15,15 +15,17 @@ import {
   points
 } from "./points";
 
-const renderFilters = (filterNamesArr) => {
+const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
   let fragment = document.createDocumentFragment();
-
-  filterNamesArr.forEach((filterName) => {
-    const filterItem = new Filter(filterName);
-    filterItem.render().forEach((element) => {
-      fragment.appendChild(element);
-    });
+  new Filter(filterName.EVRYTHING).render().forEach((elem) => {
+    fragment.appendChild(elem);
+  });
+  new Filter(filterName.FUTURE).render().forEach((elem) => {
+    fragment.appendChild(elem);
+  });
+  new Filter(filterName.PAST).render().forEach((elem) => {
+    fragment.appendChild(elem);
   });
 
   formTripFilter.appendChild(fragment);
@@ -61,7 +63,7 @@ const statsClickHandler = (evt) => {
   new Stats().render();
 };
 
-renderFilters(filterNames);
+renderFilters();
 renderPoints(points);
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
