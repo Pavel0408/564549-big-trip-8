@@ -18,9 +18,11 @@ export class AbstractPoint extends Component {
   }
 
   updateDestination(data) {
-    this._destination = data.destination;
+    this._destination = data.name;
     this._description = data.description;
     this._images = data.pictures;
+
+    console.log(this._destination);
   }
 
   updateOffers(offers) {

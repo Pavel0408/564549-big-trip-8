@@ -15,7 +15,7 @@ let destinationsNames;
 
 export const getDestinations = () => {
   api.getDestinations().then((data) => {
-
+    console.log(data);
     destinationsNames = data.map((destination) => {
       destinations[destination.name] = destination;
       return destination.name;

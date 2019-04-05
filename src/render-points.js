@@ -1,3 +1,8 @@
+import {
+  api
+} from "./backend";
+
+
 export const renderPoints = (tripsArr) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
   tripDayItems.innerHTML = ``;
@@ -10,16 +15,21 @@ export const renderPoints = (tripsArr) => {
       };
 
       pointsItem.pointEdit.submitHandler = () => {
-        const formData = new FormData(pointsItem.pointEdit._element.querySelector(`form`));
-        const entry = generateEntry(formData);
-        entry.time = generateDate(formData);
+        api.updatePoint({id: pointsItem.pointEdit._id, data: pointsItem.pointEdit.toRAW()}).then((entry) => {
+          pointsItem.point.update(entry);
+          pointsItem.pointEdit.update(entry);
+          pointsItem.point.render();
 
-        pointsItem.point.update(entry);
-        pointsItem.pointEdit.update(entry);
+          tripDayItems.replaceChild(pointsItem.point.element, pointsItem.pointEdit.element);
+        });
+        // const formData = new FormData(pointsItem.pointEdit._element.querySelector(`form`));
+        // const entry = generateEntry(formData);
+        // entry.time = generateDate(formData);
 
-        pointsItem.point.render();
+        // pointsItem.point.update(entry);
+        // pointsItem.pointEdit.update(entry);
 
-        tripDayItems.replaceChild(pointsItem.point.element, pointsItem.pointEdit.element);
+
       };
 
       tripDayItems.appendChild(pointsItem.point.render());

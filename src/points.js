@@ -1,25 +1,20 @@
-import { generatePointsArr } from "./mock/generate-points-array";
+import {generatePointsArr} from "./mock/generate-points-array";
 
-import { Point } from "./point";
+import {Point} from "./point";
 
-import { PointEdit } from "./point-edit";
+import {PointEdit} from "./point-edit";
 
-import { API } from "./api";
+import {renderPoints} from "./render-points";
 
-import { renderPoints } from "./render-points";
-
-const URL = `https://es8-demo-srv.appspot.com/big-trip/`;
-const AUTHORIZATION = `Basic eo0w590ik29889aaaa`;
-const api = new API({
-  endPoint: URL,
-  authorization: AUTHORIZATION
-});
+import {
+  api
+} from "./backend";
 
 const points = [];
 
 const getPoints = () => {
   api
-    .getTask()
+    .getPoints()
     .then((pointsItems) => {
       pointsItems.forEach((date) => {
         const pointItem = new Point(date);
@@ -28,7 +23,7 @@ const getPoints = () => {
           point: pointItem,
           pointEdit: pointEditItem
         };
-        points[pointElement.point._id] = pointElement;
+        points[parseInt(pointElement.point._id, 10)] = pointElement;
       });
       return points;
     })
@@ -36,4 +31,4 @@ const getPoints = () => {
     .then(renderPoints);
 };
 
-export { points, getPoints };
+export {points, getPoints};

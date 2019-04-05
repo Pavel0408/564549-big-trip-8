@@ -28,6 +28,7 @@ export class Point extends AbstractPoint {
     this._element = null;
     this._editHandler = null;
     this._id = data.id;
+    this._isFavorite = data.isFavorite;
   }
 
   get template() {
@@ -85,7 +86,8 @@ export class Point extends AbstractPoint {
       price: data.base_price,
       images: data.destination.pictures,
       destination: data.destination.name,
-      id: parseInt(data.id, 10)
+      id: data.id,
+      isFavorite: data.is_favorite
     };
   }
 

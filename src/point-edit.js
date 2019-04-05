@@ -30,8 +30,10 @@ import {
 } from "./format-images";
 
 import {
-  offers
+  getOffers
 } from "./offfers";
+
+const offers = getOffers();
 
 const flatpickr = require(`flatpickr`);
 
@@ -59,14 +61,13 @@ export class PointEdit extends AbstractPoint {
     this._destination = data.destination;
     this._item = null;
     this._id = data.id;
+    this._isFavorite = data.isFavorite;
   }
 
   get template() {
     const destinationsOptions = formatDestinationsNames(destinationsNames);
 
     const pictures = formatImages(this._images);
-
-    console.log(offers);
 
     return `<article class="point">
     <form action="" method="get">
@@ -124,7 +125,7 @@ export class PointEdit extends AbstractPoint {
 
         <div class="point__time">
           choose time
-          <input class="point__input" type="text" value="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())}" name="first-time" placeholder="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())}">
+          <input class="point__input" type="text" value="${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())}" name="first-time" placeholder="${addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())}">
           <input class="point__input" type="text" value="${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}" name="second-time" placeholder="${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}">
         </div>
 
@@ -175,6 +176,24 @@ export class PointEdit extends AbstractPoint {
     this._id = id;
   }
 
+  toRAW() {
+    return {
+      destination: {
+        name: this._destination,
+        description: this._description
+      },
+
+      type: this._type === `check` ? `check-in` : this._type,
+      offers: [...this._offers.values()],
+      date_from: this._time.start.getTime(),
+      date_to: this._time.end.getTime(),
+      base_price: this._price,
+      pictures: this._images,
+      id: this._id,
+      is_favorite: this._isFavorite
+    };
+  }
+
   _resetHandler(evt) {
     evt.preventDefault();
     points[this.id] = null;
@@ -191,13 +210,14 @@ export class PointEdit extends AbstractPoint {
     points[this._id].pointEdit.updateOffers(offers[type.value]);
     const offersWrap = this._element.querySelector(`.point__offers-wrap`);
     offersWrap.innerHTML = formatOffersEdit(this._offers);
+
     console.log(this);
   }
 
   _changeDestinationHandler(evt) {
     console.log(this.dataset.id);
     const newDestination = evt.target.value;
-    console.log(destinations);
+
     points[this.dataset.id].point.updateDestination(destinations[newDestination]);
     points[this.dataset.id].pointEdit.updateDestination(destinations[newDestination]);
 
@@ -206,6 +226,8 @@ export class PointEdit extends AbstractPoint {
 
     const images = points[this.dataset.id].pointEdit._element.querySelector(`.point__destination-images`);
     images.innerHTML = formatImages(points[this.dataset.id].pointEdit._images);
+    // points[this._id].point._destination = type.value;
+    // points[this._id].pointEdit._destination = type.value;
   }
 
   _installHandlers() {

@@ -25,7 +25,7 @@ export const API = class {
     this._authorization = authorization;
   }
 
-  getTask() {
+  getPoints() {
     return this._load({
       url: `points`
     })
@@ -54,7 +54,7 @@ export const API = class {
       });
   }
 
-  createTask({task}) {
+  createPoint({task}) {
     return this._load({
       url: `tasks`,
       method: Method.POST,
@@ -67,17 +67,10 @@ export const API = class {
       .then(Task.parseTask);
   }
 
-  updateTask({id, data}, card) {
-    card
-      .querySelectorAll(`form input, form select, form textarea, form button`)
-      .forEach((elem) => {
-        elem.setAttribute(`disabled`, `disabled`);
-      });
-
-    card.querySelector(`.card__save`).textContent = `Saving...`;
-
+  updatePoint({id, data}) {
+    console.log(id, data);
     return this._load({
-      url: `tasks/${id}`,
+      url: `points/${id}`,
       method: Method.PUT,
       body: JSON.stringify(data),
       headers: new Headers({
@@ -85,7 +78,7 @@ export const API = class {
       })
     })
       .then(toJSON)
-      .then(Task.parseTask);
+      .then(Point.parseServerData);
   }
 
   deleteTask({id}, card) {
