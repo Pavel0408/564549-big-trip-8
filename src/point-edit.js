@@ -12,12 +12,26 @@ import {
 } from "./format-offers-edit";
 
 import {
-  points
+  points,
 } from "./points";
 
 import {
   AbstractPoint
 } from "./abstract-point";
+
+import {
+  formatDestinationsNames,
+  destinationsNames,
+  destinations
+} from "./format-destinations-names";
+
+import {
+  formatImages
+} from "./format-images";
+
+import {
+  offers
+} from "./offfers";
 
 const flatpickr = require(`flatpickr`);
 
@@ -44,9 +58,16 @@ export class PointEdit extends AbstractPoint {
     this._images = data.images;
     this._destination = data.destination;
     this._item = null;
+    this._id = data.id;
   }
 
   get template() {
+    const destinationsOptions = formatDestinationsNames(destinationsNames);
+
+    const pictures = formatImages(this._images);
+
+    console.log(offers);
+
     return `<article class="point">
     <form action="" method="get">
       <header class="point__header">
@@ -95,12 +116,9 @@ export class PointEdit extends AbstractPoint {
         </div>
         <div class="point__destination-wrap">
           <label class="point__destination-label" for="destination">${pointsTexts[this._type]}</label>
-          <input class="point__destination-input" list="destination-select" id="destination" value="${this._destination}" name="destination">
-          <datalist id="destination-select">
-            <option value="airport"></option>
-            <option value="Geneva"></option>
-            <option value="Chamonix"></option>
-            <option value="hotel"></option>
+          <input list="destination-list" class="point__destination-input"  id="destination" value="${this._destination}" name="destination" data-id="${this._id}">
+          <datalist id="destination-list">
+            ${destinationsOptions}
           </datalist>
         </div>
 
@@ -135,7 +153,7 @@ export class PointEdit extends AbstractPoint {
           <h3 class="point__details-title">Destination</h3>
           <p class="point__destination-text">${this._description}</p>
           <div class="point__destination-images">
-            ${this._images.join(` `)}
+            ${pictures.join(` `)}
           </div>
         </section>
         <input type="hidden" class="point__total-price" name="total-price" value="">
@@ -168,6 +186,26 @@ export class PointEdit extends AbstractPoint {
     const icon = this._element.querySelector(`.travel-way__label`);
 
     icon.textContent = pointsIcons[type.value];
+    console.log(this);
+    points[this._id].point.updateOffers(offers[type.value]);
+    points[this._id].pointEdit.updateOffers(offers[type.value]);
+    const offersWrap = this._element.querySelector(`.point__offers-wrap`);
+    offersWrap.innerHTML = formatOffersEdit(this._offers);
+    console.log(this);
+  }
+
+  _changeDestinationHandler(evt) {
+    console.log(this.dataset.id);
+    const newDestination = evt.target.value;
+    console.log(destinations);
+    points[this.dataset.id].point.updateDestination(destinations[newDestination]);
+    points[this.dataset.id].pointEdit.updateDestination(destinations[newDestination]);
+
+    const description = points[this.dataset.id].pointEdit._element.querySelector(`.point__destination-text`);
+    description.textContent = points[this.dataset.id].pointEdit._description;
+
+    const images = points[this.dataset.id].pointEdit._element.querySelector(`.point__destination-images`);
+    images.innerHTML = formatImages(points[this.dataset.id].pointEdit._images);
   }
 
   _installHandlers() {
@@ -210,5 +248,7 @@ export class PointEdit extends AbstractPoint {
     });
 
     this._element.querySelector(`.point__date`).style.display = `inline`;
+
+    this._element.querySelector(`.point__destination-input`).addEventListener(`change`, this._changeDestinationHandler);
   }
 }

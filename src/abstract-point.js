@@ -16,4 +16,14 @@ export class AbstractPoint extends Component {
     this._time = data.time;
     this._price = data.price;
   }
+
+  updateDestination(data) {
+    this._destination = data.destination;
+    this._description = data.description;
+    this._images = data.pictures;
+  }
+
+  updateOffers(offers) {
+    this._offers = offers;
+  }
 }

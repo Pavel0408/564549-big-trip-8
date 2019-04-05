@@ -80,5 +80,3 @@ const parseTimeValue = (value) => {
     minutes
   };
 };
-
-

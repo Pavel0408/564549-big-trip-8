@@ -29,16 +29,16 @@ export const pointsOptions = [
 ];
 
 export const pointsIcons = {
-  taxi: `🚕`,
-  bus: `🚌`,
-  train: `🚂`,
-  ship: `🛳️`,
-  transport: `🚊`,
-  drive: `🚗`,
-  flight: `✈️`,
-  check: `🏨`,
-  sightseeing: `🏛️`,
-  restaurant: `🍴`
+  'taxi': `🚕`,
+  'bus': `🚌`,
+  'train': `🚂`,
+  'ship': `🛳️`,
+  'transport': `🚊`,
+  'drive': `🚗`,
+  'flight': `✈️`,
+  'check': `🏨`,
+  'sightseeing': `🏛️`,
+  'restaurant': `🍴`
 };
 
 export const pointsTexts = {

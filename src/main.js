@@ -1,3 +1,4 @@
+// test
 import {
   Filter,
   filterName
@@ -12,8 +13,12 @@ import {
 } from "./render-points";
 
 import {
-  points
+  getPoints
 } from "./points";
+
+import {
+  getDestinations
+} from "./format-destinations-names";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -30,13 +35,6 @@ const renderFilters = () => {
 
   formTripFilter.appendChild(fragment);
 };
-
-let startId = 0;
-
-points.forEach((pointItem) => {
-  pointItem.pointEdit.id = startId;
-  startId++;
-});
 
 const switchesArr = document.querySelectorAll(`.view-switch__item`);
 const [tableButton, statsButton] = switchesArr;
@@ -64,7 +62,8 @@ const statsClickHandler = (evt) => {
 };
 
 renderFilters();
-renderPoints(points);
+getPoints();
+getDestinations();
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 

@@ -37,7 +37,9 @@ export class Filter extends Component {
   }
 
   _filterArr() {
+    console.log(points);
     return points.filter((item) => {
+      console.log(item);
       return item && item.point;
     }).filter((item) => this._filterPoints(new Date(), item));
   }

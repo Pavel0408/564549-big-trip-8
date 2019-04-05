@@ -1,32 +1,39 @@
-import {
-  generatePointsArr
-} from "./mock/generate-points-array";
+import { generatePointsArr } from "./mock/generate-points-array";
 
-import {
-  Point
-} from "./point";
+import { Point } from "./point";
 
-import {
-  PointEdit
-} from "./point-edit";
+import { PointEdit } from "./point-edit";
 
-const START_NUMBER_POINTS = 7;
+import { API } from "./api";
 
-const generateTripPoints = (numberTripPoints) => {
-  const pointsArr = generatePointsArr(numberTripPoints)
-    .map((mockPointDate) => {
-      const pointItem = new Point(mockPointDate);
-      const pointEditItem = new PointEdit(mockPointDate);
-      const pointElement = {
-        point: pointItem,
-        pointEdit: pointEditItem
-      };
-      pointElement.pointEdit.item = pointEditItem;
+import { renderPoints } from "./render-points";
 
-      return pointElement;
-    });
+const URL = `https://es8-demo-srv.appspot.com/big-trip/`;
+const AUTHORIZATION = `Basic eo0w590ik29889aaaa`;
+const api = new API({
+  endPoint: URL,
+  authorization: AUTHORIZATION
+});
 
-  return pointsArr;
+const points = [];
+
+const getPoints = () => {
+  api
+    .getTask()
+    .then((pointsItems) => {
+      pointsItems.forEach((date) => {
+        const pointItem = new Point(date);
+        const pointEditItem = new PointEdit(date);
+        const pointElement = {
+          point: pointItem,
+          pointEdit: pointEditItem
+        };
+        points[pointElement.point._id] = pointElement;
+      });
+      return points;
+    })
+
+    .then(renderPoints);
 };
 
-export const points = generateTripPoints(START_NUMBER_POINTS);
+export { points, getPoints };

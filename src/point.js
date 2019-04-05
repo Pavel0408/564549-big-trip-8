@@ -22,12 +22,13 @@ export class Point extends AbstractPoint {
     this._title = data.title;
     this._type = data.type;
     this._offers = data.offers;
+    console.log(this._offers);
     this._description = data.description;
     this._time = data.time;
     this._price = data.price;
     this._element = null;
     this._editHandler = null;
-    this._id = ``;
+    this._id = data.id;
   }
 
   get template() {
@@ -70,5 +71,26 @@ export class Point extends AbstractPoint {
 
   _installHandlers() {
     this._element.querySelector(`.trip-point__title`).addEventListener(`click`, this._editHandler);
+  }
+
+  static parseServerData(data) {
+    return {
+      title: data.destination.name,
+      type: data.type === `check-in` ? `check` : data.type,
+      offers: new Set(data.offers),
+      description: data.destination.description,
+      time: {
+        start: new Date(data.date_from),
+        end: new Date(data.date_to)
+      },
+      price: data.base_price,
+      images: data.destination.pictures,
+      destination: data.destination.name,
+      id: parseInt(data.id, 10)
+    };
+  }
+
+  static parseData(serverData) {
+    return serverData.map(Point.parseServerData);
   }
 }
