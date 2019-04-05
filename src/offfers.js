@@ -6,7 +6,7 @@ const api = new API({
   endPoint: URL,
   authorization: AUTHORIZATION
 });
-export const offers = {};
+const offers = {};
 
 api.getOffers().then((offersArr) => {
   console.log(offersArr);
@@ -24,3 +24,5 @@ api.getOffers().then((offersArr) => {
   });
   offers.check = offers[`check-in`];
 });
+
+export {offers};
