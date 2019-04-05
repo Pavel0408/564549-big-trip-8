@@ -13,7 +13,7 @@ import {
 } from "./render-points";
 
 import {
-  getPoints
+  getPoints, points
 } from "./points";
 
 import {
@@ -61,9 +61,10 @@ const statsClickHandler = (evt) => {
   new Stats().render();
 };
 
-renderFilters();
-getPoints();
 getDestinations();
+renderFilters();
+getPoints().then(renderPoints);
+
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 

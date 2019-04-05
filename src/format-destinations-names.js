@@ -1,14 +1,4 @@
-import {
-  API
-} from "./api";
-const URL = `https://es8-demo-srv.appspot.com/big-trip/`;
-const AUTHORIZATION = `Basic eo0w590ik29889aaaa`;
-
-
-const api = new API({
-  endPoint: URL,
-  authorization: AUTHORIZATION
-});
+import {api} from "./backend";
 
 let destinations = {};
 let destinationsNames;
@@ -21,8 +11,6 @@ export const getDestinations = () => {
       return destination.name;
     });
   });
-
-  console.log(destinations);
 };
 
 export const formatDestinationsNames = (names) => {
@@ -33,7 +21,4 @@ export const formatDestinationsNames = (names) => {
   return destinationsOptions;
 };
 
-export {
-  destinations,
-  destinationsNames
-};
+export {destinations, destinationsNames};

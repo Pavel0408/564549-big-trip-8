@@ -56,7 +56,7 @@ export const API = class {
 
   createPoint({task}) {
     return this._load({
-      url: `tasks`,
+      url: `points`,
       method: Method.POST,
       body: JSON.stringify(task),
       headers: new Headers({
@@ -81,17 +81,9 @@ export const API = class {
       .then(Point.parseServerData);
   }
 
-  deleteTask({id}, card) {
-    card
-      .querySelectorAll(`form input, form select, form textarea, form button`)
-      .forEach((elem) => {
-        elem.setAttribute(`disabled`, `disabled`);
-      });
-
-    card.querySelector(`.card__delete`).textContent = `Deleting...`;
-
+  deletePoint({id}) {
     return this._load({
-      url: `tasks/${id}`,
+      url: `points/${id}`,
       method: Method.DELETE
     });
   }

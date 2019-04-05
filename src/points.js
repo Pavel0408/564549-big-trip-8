@@ -10,10 +10,12 @@ import {
   api
 } from "./backend";
 
-const points = [];
+let points;
 
 const getPoints = () => {
-  api
+  points = [];
+
+  return api
     .getPoints()
     .then((pointsItems) => {
       pointsItems.forEach((date) => {
@@ -26,9 +28,7 @@ const getPoints = () => {
         points[parseInt(pointElement.point._id, 10)] = pointElement;
       });
       return points;
-    })
+    });
 
-    .then(renderPoints);
 };
-
 export {points, getPoints};

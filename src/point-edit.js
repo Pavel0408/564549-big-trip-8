@@ -12,7 +12,8 @@ import {
 } from "./format-offers-edit";
 
 import {
-  points,
+  getPoints,
+  points
 } from "./points";
 
 import {
@@ -32,6 +33,7 @@ import {
 import {
   getOffers
 } from "./offfers";
+import { api } from "./backend";
 
 const offers = getOffers();
 
@@ -196,8 +198,9 @@ export class PointEdit extends AbstractPoint {
 
   _resetHandler(evt) {
     evt.preventDefault();
-    points[this.id] = null;
-    this._unrender();
+    api.deletePoint({id: this._id}).then(getPoints).then(() => {
+      this._unrender();
+    });
   }
 
   _changeIconHandler() {
