@@ -63,7 +63,12 @@ const statsClickHandler = (evt) => {
 
 getDestinations();
 renderFilters();
-getPoints().then(renderPoints);
+
+const tripDayItems = document.querySelector(`.trip-day__items`)
+tripDayItems.textContent = `Loading route...`;
+getPoints().then(renderPoints).catch(()=>{
+  tripDayItems.textContent = `Something went wrong while loading your route info. Check your connection or try again later`;
+});
 
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
