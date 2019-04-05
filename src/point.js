@@ -22,7 +22,6 @@ export class Point extends AbstractPoint {
     this._title = data.title;
     this._type = data.type;
     this._offers = data.offers;
-    console.log(this._offers);
     this._description = data.description;
     this._time = data.time;
     this._price = data.price;
