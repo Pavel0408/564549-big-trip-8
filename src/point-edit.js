@@ -143,7 +143,7 @@ export class PointEdit extends AbstractPoint {
         </div>
       </header>
       <section class="point__details">
-        <section class="point__offers ${this._offers.size > 0 ? `` : `visually-hidden`}">
+        <section class="point__offers">
           <h3 class="point__details-title">offers</h3>
           <div class="point__offers-wrap">
           ${formatOffersEdit(this._offers)}

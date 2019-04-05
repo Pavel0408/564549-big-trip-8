@@ -22,4 +22,5 @@ api.getOffers().then((offersArr) => {
         })
     );
   });
-}).then(offers[`check`] = offers[`check-in`]).then(console.log(offers[`check-in`]));
+  offers.check = offers[`check-in`];
+});
