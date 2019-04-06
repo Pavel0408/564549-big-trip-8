@@ -1,4 +1,4 @@
-import {pointsIcons, pointsTexts} from "./mock/mock-constants";
+import {pointsIcons, pointsTexts} from "./constants";
 
 import {addLeadingZero} from "./utilities";
 
@@ -12,7 +12,7 @@ import {
   formatDestinationsNames,
   destinationsNames,
   destinations
-} from "./format-destinations-names";
+} from "./destinations";
 
 import {formatImages} from "./format-images";
 
@@ -246,11 +246,15 @@ export class PointEdit extends AbstractPoint {
 
       type: this._type === `check` ? `check-in` : this._type,
       offers: [...this._offers.values()],
+      // eslint-disable-next-line camelcase
       date_from: this._time.start.getTime(),
+      // eslint-disable-next-line camelcase
       date_to: this._time.end.getTime(),
+      // eslint-disable-next-line camelcase
       base_price: this._price,
       pictures: this._images,
       id: this._id,
+      // eslint-disable-next-line camelcase
       is_favorite: this._isFavorite
     };
   }
@@ -291,37 +295,31 @@ export class PointEdit extends AbstractPoint {
     const icon = this._element.querySelector(`.travel-way__label`);
 
     icon.textContent = pointsIcons[type.value];
-    console.log(this);
+
     points[this._id].point.updateOffers(offers[type.value]);
     points[this._id].pointEdit.updateOffers(offers[type.value]);
     const offersWrap = this._element.querySelector(`.point__offers-wrap`);
     offersWrap.innerHTML = formatOffersEdit(this._offers);
-
-    console.log(this);
   }
 
   _changeDestinationHandler(evt) {
-    console.log(this.dataset.id);
     const newDestination = evt.target.value;
+    const thisPoints = points[this.dataset.id];
 
-    points[this.dataset.id].point.updateDestination(
-        destinations[newDestination]
-    );
-    points[this.dataset.id].pointEdit.updateDestination(
-        destinations[newDestination]
-    );
+    if (destinations[newDestination]) {
+      thisPoints.point.updateDestination(destinations[newDestination]);
+      thisPoints.pointEdit.updateDestination(destinations[newDestination]);
+    }
 
-    const description = points[
-      this.dataset.id
-    ].pointEdit._element.querySelector(`.point__destination-text`);
+    const description = thisPoints.pointEdit._element.querySelector(
+        `.point__destination-text`
+    );
     description.textContent = points[this.dataset.id].pointEdit._description;
 
-    const images = points[this.dataset.id].pointEdit._element.querySelector(
+    const images = thisPoints.pointEdit._element.querySelector(
         `.point__destination-images`
     );
-    images.innerHTML = formatImages(points[this.dataset.id].pointEdit._images);
-    // points[this._id].point._destination = type.value;
-    // points[this._id].pointEdit._destination = type.value;
+    images.innerHTML = formatImages(thisPoints.pointEdit._images);
   }
 
   _installHandlers() {

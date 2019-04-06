@@ -31,7 +31,6 @@ export const API = class {
     })
       .then(toJSON)
       .then((data) => {
-        console.log(data);
         return data;
       })
       .then(Point.parseData);
@@ -49,26 +48,22 @@ export const API = class {
     })
       .then(toJSON)
       .then((data) => {
-        console.log(data);
         return data;
       });
   }
 
-  createPoint({task}) {
+  createPoint({point}) {
     return this._load({
       url: `points`,
       method: Method.POST,
-      body: JSON.stringify(task),
+      body: JSON.stringify(point),
       headers: new Headers({
         "Content-Type": `application/json`
       })
-    })
-      .then(toJSON)
-      .then(Task.parseTask);
+    }).then(toJSON);
   }
 
   updatePoint({id, data}) {
-    console.log(id, data);
     return this._load({
       url: `points/${id}`,
       method: Method.PUT,

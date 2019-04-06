@@ -1,10 +1,10 @@
 import {points} from "./points";
 
-import {pointsIcons} from "./mock/mock-constants";
+import {pointsIcons} from "./constants";
 
 import {renderTransportStats, renderMoneyStats} from "./render-stats";
 
-import {PointEvents} from "./mock/mock-constants";
+import {PointEvents} from "./constants";
 
 import {Component} from "./component";
 

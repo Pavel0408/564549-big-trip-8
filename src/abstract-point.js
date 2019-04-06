@@ -1,6 +1,4 @@
-import {
-  Component
-} from "./component";
+import {Component} from "./component";
 
 export class AbstractPoint extends Component {
   constructor() {
@@ -21,8 +19,6 @@ export class AbstractPoint extends Component {
     this._destination = data.name;
     this._description = data.description;
     this._images = data.pictures;
-
-    console.log(this._destination);
   }
 
   updateOffers(offers) {

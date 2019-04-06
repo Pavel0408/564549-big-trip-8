@@ -1,11 +1,11 @@
 import {
   pointsIcons,
   pointsTexts
-} from "./mock/mock-constants";
+} from "./constants";
 
 import {
   formatOffers
-} from "./mock/format-offers";
+} from "./format-offers";
 
 import {
   addLeadingZero,
