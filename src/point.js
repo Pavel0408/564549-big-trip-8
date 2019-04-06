@@ -1,5 +1,6 @@
 import {
-  pointsIcons
+  pointsIcons,
+  pointsTexts
 } from "./mock/mock-constants";
 
 import {
@@ -29,6 +30,7 @@ export class Point extends AbstractPoint {
     this._editHandler = null;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
+    this._destination = data.destination;
   }
 
   get template() {
@@ -36,7 +38,7 @@ export class Point extends AbstractPoint {
 
     return `<article class="trip-point">
     <i class="trip-icon">${pointsIcons[this._type]}</i>
-    <h3 class="trip-point__title">${this._title}</h3>
+    <h3 class="trip-point__title">${pointsTexts[this._type]} ${this._destination}</h3>
     <p class="trip-point__schedule">
       <span class="trip-point__timetable">${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())}&nbsp;&mdash;${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}</span>
       <span class="trip-point__duration">${interval.hours}h ${interval.minutes}m</span>
