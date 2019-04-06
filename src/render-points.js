@@ -15,19 +15,20 @@ export const renderPoints = (tripsArr) => {
       };
 
       pointsItem.pointEdit.submitHandler = () => {
-        api.updatePoint({id: pointsItem.pointEdit._id, data: pointsItem.pointEdit.toRAW()}).then((entry) => {
-          pointsItem.point.update(entry);
-          pointsItem.pointEdit.update(entry);
+        const formData = new FormData(pointsItem.pointEdit._element.querySelector(`form`));
+        const entry = generateEntry(formData);
+        entry.time = generateDate(formData);
+
+        pointsItem.point.update(entry);
+        pointsItem.pointEdit.update(entry);
+        api.updatePoint({id: pointsItem.pointEdit._id, data: pointsItem.pointEdit.toRAW()}).then(() => {
+          // pointsItem.point.update(entry);
+          // pointsItem.pointEdit.update(entry);
           pointsItem.point.render();
 
           tripDayItems.replaceChild(pointsItem.point.element, pointsItem.pointEdit.element);
         });
-        // const formData = new FormData(pointsItem.pointEdit._element.querySelector(`form`));
-        // const entry = generateEntry(formData);
-        // entry.time = generateDate(formData);
 
-        // pointsItem.point.update(entry);
-        // pointsItem.pointEdit.update(entry);
 
 
       };
