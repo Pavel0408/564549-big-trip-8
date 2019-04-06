@@ -1,23 +1,12 @@
-import {
-  points
-} from "./points";
+import {points} from "./points";
 
-import {
-  pointsIcons
-} from "./mock/mock-constants";
+import {pointsIcons} from "./mock/mock-constants";
 
-import {
-  renderTransportStats,
-  renderMoneyStats
-} from "./render-stats";
+import {renderTransportStats, renderMoneyStats} from "./render-stats";
 
-import {
-  PointEvents
-} from "./mock/mock-constants";
+import {PointEvents} from "./mock/mock-constants";
 
-import {
-  Component
-} from "./component";
+import {Component} from "./component";
 
 export class Stats extends Component {
   constructor() {
@@ -26,45 +15,52 @@ export class Stats extends Component {
     this._statsСontainer = document.querySelector(`#stats`);
 
     this._transportSet = new Set();
-    points.filter((item) => {
-      return item && item.point;
-    }).forEach((pointsItem) => {
-      if (PointEvents.transportTypes.indexOf(pointsItem.point.type) !== -1) {
-        this._transportSet.add(pointsItem.point.type);
-      }
-    });
+    points
+      .filter((item) => {
+        return item && item.point;
+      })
+      .forEach((pointsItem) => {
+        if (PointEvents.transportTypes.indexOf(pointsItem.point.type) !== -1) {
+          this._transportSet.add(pointsItem.point.type);
+        }
+      });
 
     this._transportLabels = this._generateLabelsArr(this._transportSet);
 
     this._transportData = [...this._transportSet].map((type) => {
       let totalTransportEvents = 0;
-      points.filter((item) => {
-        return item && item.point;
-      }).forEach((pointsItem) => {
-        if (pointsItem.point.type === type) {
-          totalTransportEvents++;
-        }
-      });
+      points
+        .filter((item) => {
+          return item && item.point;
+        })
+        .forEach((pointsItem) => {
+          if (pointsItem.point.type === type) {
+            totalTransportEvents++;
+          }
+        });
       return totalTransportEvents;
     });
 
-
     this._moneySet = new Set();
-    points.filter((item) => {
-      return item && item.point;
-    }).forEach((pointsItem) => {
-      this._moneySet.add(pointsItem.point.type);
-    });
+    points
+      .filter((item) => {
+        return item && item.point;
+      })
+      .forEach((pointsItem) => {
+        this._moneySet.add(pointsItem.point.type);
+      });
 
     this._moneyData = [...this._moneySet].map((type) => {
       let eventTotalCost = 0;
-      points.filter((item) => {
-        return item && item.point;
-      }).forEach((pointsItem) => {
-        if (pointsItem.point.type === type) {
-          eventTotalCost += pointsItem.point.price;
-        }
-      });
+      points
+        .filter((item) => {
+          return item && item.point;
+        })
+        .forEach((pointsItem) => {
+          if (pointsItem.point.type === type) {
+            eventTotalCost += parseInt(pointsItem.point.price, 10);
+          }
+        });
 
       return eventTotalCost;
     });
