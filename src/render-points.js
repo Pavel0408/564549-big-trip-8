@@ -14,6 +14,8 @@ export const renderPoints = (tripsArr) => {
       };
 
       pointsItem.pointEdit.submitHandler = () => {
+        const submitButton = pointsItem.pointEdit._element.querySelector(`button[type=submit]`);
+        submitButton.textContent = `Saving...`;
         pointsItem.pointEdit._element.style.border = `none`;
         const formData = new FormData(
             pointsItem.pointEdit._element.querySelector(`form`)
@@ -50,7 +52,7 @@ export const renderPoints = (tripsArr) => {
             });
             pointsItem.pointEdit._element.querySelector(`.point`);
             pointsItem.pointEdit._element.style.border = `1px solid red`;
-
+            submitButton.textContent = `Save`;
             pointsItem.pointEdit.shake();
           });
       };
