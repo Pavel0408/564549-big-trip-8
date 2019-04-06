@@ -22,6 +22,6 @@ export class AbstractPoint extends Component {
   }
 
   updateOffers(offers) {
-    this._offers = offers;
+    this._offers = new Set(offers);
   }
 }

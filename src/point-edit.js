@@ -299,7 +299,7 @@ export class PointEdit extends AbstractPoint {
     points[this._id].point.updateOffers(offers[type.value]);
     points[this._id].pointEdit.updateOffers(offers[type.value]);
     const offersWrap = this._element.querySelector(`.point__offers-wrap`);
-    offersWrap.innerHTML = formatOffersEdit(this._offers);
+    offersWrap.innerHTML = formatOffersEdit(offers[type.value]);
   }
 
   _changeDestinationHandler(evt) {
