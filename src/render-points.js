@@ -1,36 +1,58 @@
-import {
-  api
-} from "./backend";
-
+import {api} from "./backend";
 
 export const renderPoints = (tripsArr) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
   tripDayItems.innerHTML = ``;
   tripsArr.forEach((pointsItem) => {
-
     if (pointsItem && pointsItem.point) {
       pointsItem.point.editHandler = () => {
         pointsItem.pointEdit.render();
-        tripDayItems.replaceChild(pointsItem.pointEdit.element, pointsItem.point.element);
+        tripDayItems.replaceChild(
+            pointsItem.pointEdit.element,
+            pointsItem.point.element
+        );
       };
 
       pointsItem.pointEdit.submitHandler = () => {
-        const formData = new FormData(pointsItem.pointEdit._element.querySelector(`form`));
+        pointsItem.pointEdit._element.style.border = `none`;
+        const formData = new FormData(
+            pointsItem.pointEdit._element.querySelector(`form`)
+        );
         const entry = generateEntry(formData);
         entry.time = generateDate(formData);
 
         pointsItem.point.update(entry);
         pointsItem.pointEdit.update(entry);
-        api.updatePoint({id: pointsItem.pointEdit._id, data: pointsItem.pointEdit.toRAW()}).then(() => {
-          // pointsItem.point.update(entry);
-          // pointsItem.pointEdit.update(entry);
-          pointsItem.point.render();
 
-          tripDayItems.replaceChild(pointsItem.point.element, pointsItem.pointEdit.element);
+        const formElements = pointsItem.pointEdit._element.querySelectorAll(
+            `form input, form select, form textarea, form button`
+        );
+        formElements.forEach((elem) => {
+          elem.setAttribute(`disabled`, `disabled`);
         });
 
+        api
+          .updatePoint({
+            id: pointsItem.pointEdit._id,
+            data: pointsItem.pointEdit.toRAW()
+          })
+          .then(() => {
+            pointsItem.point.render();
 
+            tripDayItems.replaceChild(
+                pointsItem.point.element,
+                pointsItem.pointEdit.element
+            );
+          })
+          .catch(() => {
+            formElements.forEach((elem) => {
+              elem.removeAttribute(`disabled`);
+            });
+            pointsItem.pointEdit._element.querySelector(`.point`);
+            pointsItem.pointEdit._element.style.border = `1px solid red`;
 
+            pointsItem.pointEdit.shake();
+          });
       };
 
       tripDayItems.appendChild(pointsItem.point.render());
@@ -54,7 +76,6 @@ const generateDate = (formData) => {
 
   // Проверяем, есть ли значение в поле выбора даты
   if (day) {
-
     // Если значение есть устанавливаем в start его
     start = new Date(day);
   }

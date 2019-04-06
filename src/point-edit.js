@@ -178,6 +178,16 @@ export class PointEdit extends AbstractPoint {
     this._id = id;
   }
 
+  shake() {
+
+    const ANIMATION_TIMEOUT = 600;
+    this._element.style.animation = `shake ${ANIMATION_TIMEOUT / 1000}s`;
+
+    setTimeout(() => {
+      this._element.style.animation = ``;
+    }, ANIMATION_TIMEOUT);
+  }
+
   toRAW() {
     return {
       destination: {
