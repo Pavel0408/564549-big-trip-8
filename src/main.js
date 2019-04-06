@@ -55,9 +55,10 @@ renderFilters();
 const tripDayItems = document.querySelector(`.trip-day__items`);
 tripDayItems.textContent = `Loading route...`;
 
-getDestinations();
-getPoints()
+getDestinations
+  .then(getPoints)
   .then(renderPoints)
+
   .catch(() => {
     tripDayItems.textContent = `Something went wrong while loading your route info. Check your connection or try again later`;
   });

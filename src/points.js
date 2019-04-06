@@ -8,7 +8,7 @@ let points;
 
 const getPoints = () => {
   points = [];
-
+  console.log(3);
   return api.getPoints().then((pointsItems) => {
     pointsItems.forEach((date) => {
       const pointItem = new Point(date);
