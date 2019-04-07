@@ -55,8 +55,7 @@ renderFilters();
 const tripDayItems = document.querySelector(`.trip-day__items`);
 tripDayItems.textContent = `Loading route...`;
 
-getDestinations();
-getPoints()
+getDestinations().then(getPoints)
   .then(renderPoints)
 
   .catch(() => {

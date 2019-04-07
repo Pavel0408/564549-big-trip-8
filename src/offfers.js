@@ -1,8 +1,9 @@
 import {api} from "./backend";
 
-const offers = {};
+
 
 export const getOffers = () => {
+  const offers = {};
   api.getOffers().then((offersArr) => {
     offersArr.forEach((offer) => {
       offers[offer.type] = new Set(

@@ -10,6 +10,7 @@ export const getDestinations = () => {
       return destination.name;
     });
   });
+  return Promise.resolve(true);
 };
 
 export const formatDestinationsNames = (names) => {
