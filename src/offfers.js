@@ -1,7 +1,5 @@
 import {api} from "./backend";
 
-
-
 export const getOffers = () => {
   const offers = {};
   api.getOffers().then((offersArr) => {
