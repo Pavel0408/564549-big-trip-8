@@ -1,4 +1,3 @@
-// test
 import {Filter, filterName} from "./filter";
 
 import {Stats} from "./stats";
@@ -55,7 +54,6 @@ tripDayItems.textContent = `Loading route...`;
 
 getPoints()
   .then(renderPoints)
-
   .catch(() => {
     tripDayItems.textContent = `Something went wrong while loading your route info. Check your connection or try again later`;
   });
