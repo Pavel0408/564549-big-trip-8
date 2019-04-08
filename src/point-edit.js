@@ -57,9 +57,7 @@ export class PointEdit extends AbstractPoint {
   }
 
   get template() {
-    const destinationsOptions = getMarkupDestinations(
-        this._destinations.names
-    );
+    const destinationsOptions = getMarkupDestinations(this._destinations.names);
 
     const pictures = getMarkupImages(this._images);
 
@@ -247,23 +245,23 @@ export class PointEdit extends AbstractPoint {
 
   toRAW() {
     return {
-      destination: {
+      "destination": {
         name: this._destination,
         description: this._description
       },
 
-      type: this._type === `check` ? `check-in` : this._type,
-      offers: [...this._offers.values()],
+      "type": this._type === `check` ? `check-in` : this._type,
+      "offers": [...this._offers.values()],
       // eslint-disable-next-line camelcase
-      date_from: this._time.start.getTime(),
+      "date_from": this._time.start.getTime(),
       // eslint-disable-next-line camelcase
-      date_to: this._time.end.getTime(),
+      "date_to": this._time.end.getTime(),
       // eslint-disable-next-line camelcase
-      base_price: this._price,
-      pictures: this._images,
-      id: this._id,
+      "base_price": this._price,
+      " pictures": this._images,
+      "id": this._id,
       // eslint-disable-next-line camelcase
-      is_favorite: this._isFavorite
+      "is_favorite": this._isFavorite
     };
   }
 
