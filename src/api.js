@@ -26,17 +26,29 @@ export const API = class {
   }
 
   getPoints() {
+    console.log(1);
     return this._load({
       url: `points`
     })
       .then(toJSON)
+      .then((data) => this.getDestinations(data))
       .then(Point.parseData);
   }
 
-  getDestinations() {
+  getDestinations(data) {
+    console.log(data);
     return this._load({
       url: `destinations`
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then((destinations) => {
+        console.log(destinations);
+        data = data.map((it) => {
+          it.destinations = destinations;
+          return it;
+        });
+        return data;
+      });
   }
 
   getOffers() {

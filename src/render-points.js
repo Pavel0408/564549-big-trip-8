@@ -14,7 +14,9 @@ export const renderPoints = (tripsArr) => {
       };
 
       pointsItem.pointEdit.submitHandler = () => {
-        const submitButton = pointsItem.pointEdit._element.querySelector(`button[type=submit]`);
+        const submitButton = pointsItem.pointEdit._element.querySelector(
+            `button[type=submit]`
+        );
         submitButton.textContent = `Saving...`;
         pointsItem.pointEdit._element.style.border = `none`;
         const formData = new FormData(

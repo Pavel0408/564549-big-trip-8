@@ -1,16 +1,20 @@
-import {api} from "./backend";
-
-let destinations = {};
-let destinationsNames;
+import { api } from "./backend";
 
 export const getDestinations = () => {
-  api.getDestinations().then((data) => {
+  let destinations = {};
+  let destinationsNames;
+
+  return api.getDestinations().then((data) => {
     destinationsNames = data.map((destination) => {
       destinations[destination.name] = destination;
       return destination.name;
     });
+    return {
+      destinations,
+      destinationsNames
+    };
   });
-  return Promise.resolve(true);
+
 };
 
 export const formatDestinationsNames = (names) => {
@@ -21,4 +25,4 @@ export const formatDestinationsNames = (names) => {
   return destinationsOptions;
 };
 
-export {destinations, destinationsNames};
+

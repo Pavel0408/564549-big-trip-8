@@ -8,11 +8,7 @@ import {getPoints, points} from "./points";
 
 import {AbstractPoint} from "./abstract-point";
 
-import {
-  formatDestinationsNames,
-  destinationsNames,
-  destinations
-} from "./destinations";
+import {formatDestinationsNames} from "./destinations";
 
 import {formatImages} from "./format-images";
 
@@ -27,6 +23,17 @@ const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
 const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
   month: `short`
 });
+
+const parseDestinations = (data) => {
+  const destinations = {};
+
+  destinations.names = data.map((destination) => {
+    destinations[destination.name] = destination;
+    return destination.name;
+  });
+
+  return destinations;
+};
 
 export class PointEdit extends AbstractPoint {
   constructor(data) {
@@ -46,10 +53,13 @@ export class PointEdit extends AbstractPoint {
     this._item = null;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
+    this._destinations = parseDestinations(data.destinations);
   }
 
   get template() {
-    const destinationsOptions = formatDestinationsNames(destinationsNames);
+    const destinationsOptions = formatDestinationsNames(
+        this._destinations.names
+    );
 
     const pictures = formatImages(this._images);
 
@@ -306,9 +316,13 @@ export class PointEdit extends AbstractPoint {
     const newDestination = evt.target.value;
     const thisPoints = points[this.dataset.id];
 
-    if (destinations[newDestination]) {
-      thisPoints.point.updateDestination(destinations[newDestination]);
-      thisPoints.pointEdit.updateDestination(destinations[newDestination]);
+    if (thisPoints.pointEdit._destinations[newDestination]) {
+      thisPoints.point.updateDestination(
+          thisPoints.pointEdit._destinations[newDestination]
+      );
+      thisPoints.pointEdit.updateDestination(
+          thisPoints.pointEdit._destinations[newDestination]
+      );
     }
 
     const description = thisPoints.pointEdit._element.querySelector(
