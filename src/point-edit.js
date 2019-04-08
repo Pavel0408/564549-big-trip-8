@@ -295,7 +295,7 @@ export class PointEdit extends AbstractPoint {
   }
 
   _changeIconHandler() {
-    getOffers().then((offers) => {
+    Promise.resolve(true).then(getOffers).then((offers) => {
       const type = this._element.querySelector(
           `.travel-way__select-input:checked`
       );
