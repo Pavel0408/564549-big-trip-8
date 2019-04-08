@@ -1,4 +1,4 @@
-export const formatOffersEdit = (offers) => {
+export const getMarkupOffersEdit = (offers) => {
   let offersStr = ``;
 
   if (offers && offers.size > 0) {

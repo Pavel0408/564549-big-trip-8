@@ -7,8 +7,6 @@ import {renderPoints} from "./render-points";
 
 import {getPoints} from "./points";
 
-import {getDestinations} from "./destinations";
-
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
   let fragment = document.createDocumentFragment();

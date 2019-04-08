@@ -2,15 +2,15 @@ import {pointsIcons, pointsTexts} from "./constants";
 
 import {addLeadingZero} from "./utilities";
 
-import {formatOffersEdit} from "./format-offers-edit";
+import {getMarkupOffersEdit} from "./get-markup-offers-edit";
 
 import {getPoints, points} from "./points";
 
 import {AbstractPoint} from "./abstract-point";
 
-import {formatDestinationsNames} from "./destinations";
+import {getMarkupDestinations} from "./get-markup-destinations";
 
-import {formatImages} from "./format-images";
+import {getMarkupImages} from "./get-markup-images";
 
 import {getOffers} from "./offfers";
 import {api} from "./backend";
@@ -57,11 +57,11 @@ export class PointEdit extends AbstractPoint {
   }
 
   get template() {
-    const destinationsOptions = formatDestinationsNames(
+    const destinationsOptions = getMarkupDestinations(
         this._destinations.names
     );
 
-    const pictures = formatImages(this._images);
+    const pictures = getMarkupImages(this._images);
 
     return `<article class="point">
     <form action="" method="get">
@@ -207,7 +207,7 @@ export class PointEdit extends AbstractPoint {
         <section class="point__offers">
           <h3 class="point__details-title">offers</h3>
           <div class="point__offers-wrap">
-          ${formatOffersEdit(this._offers)}
+          ${getMarkupOffersEdit(this._offers)}
           </div>
         </section>
         <section class="point__destination">
@@ -308,7 +308,7 @@ export class PointEdit extends AbstractPoint {
       points[this._id].point.updateOffers(offers[type.value]);
       points[this._id].pointEdit.updateOffers(offers[type.value]);
       const offersWrap = this._element.querySelector(`.point__offers-wrap`);
-      offersWrap.innerHTML = formatOffersEdit(offers[type.value]);
+      offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
     });
   }
 
@@ -333,7 +333,7 @@ export class PointEdit extends AbstractPoint {
     const images = thisPoints.pointEdit._element.querySelector(
         `.point__destination-images`
     );
-    images.innerHTML = formatImages(thisPoints.pointEdit._images);
+    images.innerHTML = getMarkupImages(thisPoints.pointEdit._images);
   }
 
   _installHandlers() {

@@ -1,4 +1,4 @@
-export const formatOffers = (offers) => {
+export const getMarkupOffers = (offers) => {
   let offersStr = ``;
   let offersCount = 0;
 

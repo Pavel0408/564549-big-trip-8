@@ -26,7 +26,6 @@ export const API = class {
   }
 
   getPoints() {
-    console.log(1);
     return this._load({
       url: `points`
     })
@@ -36,13 +35,11 @@ export const API = class {
   }
 
   getDestinations(data) {
-    console.log(data);
     return this._load({
       url: `destinations`
     })
       .then(toJSON)
       .then((destinations) => {
-        console.log(destinations);
         data = data.map((it) => {
           it.destinations = destinations;
           return it;

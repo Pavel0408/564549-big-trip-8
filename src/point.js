@@ -1,20 +1,10 @@
-import {
-  pointsIcons,
-  pointsTexts
-} from "./constants";
+import {pointsIcons, pointsTexts} from "./constants";
 
-import {
-  formatOffers
-} from "./format-offers";
+import {getMarkupOffers} from "./get-markup-offers";
 
-import {
-  addLeadingZero,
-  calculateInterval
-} from "./utilities";
+import {addLeadingZero, calculateInterval} from "./utilities";
 
-import {
-  AbstractPoint
-} from "./abstract-point";
+import {AbstractPoint} from "./abstract-point";
 
 export class Point extends AbstractPoint {
   constructor(data) {
@@ -33,20 +23,29 @@ export class Point extends AbstractPoint {
     this._destination = data.destination;
   }
 
-
   get template() {
     const interval = calculateInterval(this._time.start, this._time.end);
 
     return `<article class="trip-point">
     <i class="trip-icon">${pointsIcons[this._type]}</i>
-    <h3 class="trip-point__title">${pointsTexts[this._type]} ${this._destination}</h3>
+    <h3 class="trip-point__title">${pointsTexts[this._type]} ${
+  this._destination
+}</h3>
     <p class="trip-point__schedule">
-      <span class="trip-point__timetable">${ addLeadingZero(this._time.start.getHours())}:${addLeadingZero(this._time.start.getMinutes())}&nbsp;&mdash;${addLeadingZero(this._time.end.getHours())}:${addLeadingZero(this._time.end.getMinutes())}</span>
-      <span class="trip-point__duration">${interval.hours}h ${interval.minutes}m</span>
+      <span class="trip-point__timetable">${addLeadingZero(
+      this._time.start.getHours()
+  )}:${addLeadingZero(
+    this._time.start.getMinutes()
+)}&nbsp;&mdash;${addLeadingZero(
+    this._time.end.getHours()
+)}:${addLeadingZero(this._time.end.getMinutes())}</span>
+      <span class="trip-point__duration">${interval.hours}h ${
+  interval.minutes
+}m</span>
     </p>
     <p class="trip-point__price">&euro;&nbsp;${this._price}</p>
     <ul class="trip-point__offers">
-      ${formatOffers(this._offers)}
+      ${getMarkupOffers(this._offers)}
     </ul>
   </article>`;
   }
@@ -73,7 +72,9 @@ export class Point extends AbstractPoint {
   }
 
   _installHandlers() {
-    this._element.querySelector(`.trip-point__title`).addEventListener(`click`, this._editHandler);
+    this._element
+      .querySelector(`.trip-point__title`)
+      .addEventListener(`click`, this._editHandler);
   }
 
   static parseServerData(data) {
@@ -96,7 +97,6 @@ export class Point extends AbstractPoint {
   }
 
   static parseData(serverData) {
-    console.log(serverData);
     return serverData.map(Point.parseServerData);
   }
 }
