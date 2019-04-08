@@ -45,7 +45,7 @@ export class Point extends AbstractPoint {
     </p>
     <p class="trip-point__price">&euro;&nbsp;${this._price}</p>
     <ul class="trip-point__offers">
-      ${getMarkupOffers(this._offers)}
+      ${getMarkupOffers([...this._offers].slice(0, 2))}
     </ul>
   </article>`;
   }
