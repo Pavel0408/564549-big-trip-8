@@ -19,8 +19,6 @@ import {formatImages} from "./format-images";
 import {getOffers} from "./offfers";
 import {api} from "./backend";
 
-const offers = getOffers();
-
 const flatpickr = require(`flatpickr`);
 
 const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
@@ -289,17 +287,19 @@ export class PointEdit extends AbstractPoint {
   }
 
   _changeIconHandler() {
-    const type = this._element.querySelector(
-        `.travel-way__select-input:checked`
-    );
-    const icon = this._element.querySelector(`.travel-way__label`);
+    getOffers().then((offers) => {
+      const type = this._element.querySelector(
+          `.travel-way__select-input:checked`
+      );
+      const icon = this._element.querySelector(`.travel-way__label`);
 
-    icon.textContent = pointsIcons[type.value];
+      icon.textContent = pointsIcons[type.value];
 
-    points[this._id].point.updateOffers(offers[type.value]);
-    points[this._id].pointEdit.updateOffers(offers[type.value]);
-    const offersWrap = this._element.querySelector(`.point__offers-wrap`);
-    offersWrap.innerHTML = formatOffersEdit(offers[type.value]);
+      points[this._id].point.updateOffers(offers[type.value]);
+      points[this._id].pointEdit.updateOffers(offers[type.value]);
+      const offersWrap = this._element.querySelector(`.point__offers-wrap`);
+      offersWrap.innerHTML = formatOffersEdit(offers[type.value]);
+    });
   }
 
   _changeDestinationHandler(evt) {

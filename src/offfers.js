@@ -1,8 +1,8 @@
 import {api} from "./backend";
 
 export const getOffers = () => {
-  const offers = {};
-  api.getOffers().then((offersArr) => {
+  return api.getOffers().then((offersArr) => {
+    const offers = {};
     offersArr.forEach((offer) => {
       offers[offer.type] = new Set(
           offer.offers.map((element) => {
@@ -14,7 +14,7 @@ export const getOffers = () => {
       );
     });
     offers.check = offers[`check-in`];
-  });
 
-  return offers;
+    return offers;
+  });
 };
