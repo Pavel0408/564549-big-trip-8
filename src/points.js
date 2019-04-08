@@ -21,4 +21,5 @@ const getPoints = () => {
     return points;
   });
 };
+
 export {points, getPoints};

@@ -30,9 +30,6 @@ export const API = class {
       url: `points`
     })
       .then(toJSON)
-      .then((data) => {
-        return data;
-      })
       .then(Point.parseData);
   }
 
@@ -45,11 +42,7 @@ export const API = class {
   getOffers() {
     return this._load({
       url: `offers`
-    })
-      .then(toJSON)
-      .then((data) => {
-        return data;
-      });
+    }).then(toJSON);
   }
 
   createPoint({point}) {
