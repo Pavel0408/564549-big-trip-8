@@ -18,6 +18,7 @@ const getPoints = () => {
       };
       points[parseInt(pointElement.point._id, 10)] = pointElement;
     });
+
     return points;
   });
 };

@@ -13,6 +13,7 @@ import {getMarkupDestinations} from "./get-markup-destinations";
 import {getMarkupImages} from "./get-markup-images";
 
 import {getOffers} from "./offfers";
+
 import {api} from "./backend";
 
 const flatpickr = require(`flatpickr`);

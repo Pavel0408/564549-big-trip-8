@@ -8,6 +8,7 @@ export class AbstractPoint extends Component {
       throw new Error(`Can't instantiate Component, only concrete one.`);
     }
   }
+
   update(data) {
     this._destination = data.destination;
     this._type = data.type;
