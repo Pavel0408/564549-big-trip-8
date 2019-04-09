@@ -315,28 +315,27 @@ export class PointEdit extends AbstractPoint {
 
   _changeDestinationHandler(evt) {
     const newDestination = evt.target.value;
-    Promise.resolve(getPoints()).then((points) => {
-      const thisPoints = points[this.dataset.id];
+    const points = getPoints();
+    const thisPoints = points[this.dataset.id];
 
-      if (thisPoints.pointEdit._destinations[newDestination]) {
-        thisPoints.point.updateDestination(
-            thisPoints.pointEdit._destinations[newDestination]
-        );
-        thisPoints.pointEdit.updateDestination(
-            thisPoints.pointEdit._destinations[newDestination]
-        );
-      }
-
-      const description = thisPoints.pointEdit._element.querySelector(
-          `.point__destination-text`
+    if (thisPoints.pointEdit._destinations[newDestination]) {
+      thisPoints.point.updateDestination(
+          thisPoints.pointEdit._destinations[newDestination]
       );
-      description.textContent = points[this.dataset.id].pointEdit._description;
-
-      const images = thisPoints.pointEdit._element.querySelector(
-          `.point__destination-images`
+      thisPoints.pointEdit.updateDestination(
+          thisPoints.pointEdit._destinations[newDestination]
       );
-      images.innerHTML = getMarkupImages(thisPoints.pointEdit._images);
-    });
+    }
+
+    const description = thisPoints.pointEdit._element.querySelector(
+        `.point__destination-text`
+    );
+    description.textContent = points[this.dataset.id].pointEdit._description;
+
+    const images = thisPoints.pointEdit._element.querySelector(
+        `.point__destination-images`
+    );
+    images.innerHTML = getMarkupImages(thisPoints.pointEdit._images);
   }
 
   _installHandlers() {
