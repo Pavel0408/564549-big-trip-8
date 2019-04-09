@@ -4,7 +4,7 @@ import {addLeadingZero} from "./utilities";
 
 import {getMarkupOffersEdit} from "./get-markup-offers-edit";
 
-import {getPoints, points} from "./points";
+import {getPoints} from "./points";
 
 import {AbstractPoint} from "./abstract-point";
 
@@ -280,7 +280,7 @@ export class PointEdit extends AbstractPoint {
     evt.preventDefault();
     api
       .deletePoint({id: this._id})
-      .then(getPoints)
+      .then(getPoints(true))
       .then(() => {
         this._unrender();
       })
@@ -296,43 +296,48 @@ export class PointEdit extends AbstractPoint {
   }
 
   _changeIconHandler() {
-    Promise.resolve(true).then(getOffers).then((offers) => {
-      const type = this._element.querySelector(
-          `.travel-way__select-input:checked`
-      );
-      const icon = this._element.querySelector(`.travel-way__label`);
+    Promise.resolve(true)
+      .then(getOffers)
+      .then((offers) => {
+        const type = this._element.querySelector(
+            `.travel-way__select-input:checked`
+        );
+        const icon = this._element.querySelector(`.travel-way__label`);
 
-      icon.textContent = pointsIcons[type.value];
-
-      points[this._id].point.updateOffers(offers[type.value]);
-      points[this._id].pointEdit.updateOffers(offers[type.value]);
-      const offersWrap = this._element.querySelector(`.point__offers-wrap`);
-      offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
-    });
+        icon.textContent = pointsIcons[type.value];
+        Promise.resolve(getPoints()).then((points) => {
+          points[this._id].point.updateOffers(offers[type.value]);
+          points[this._id].pointEdit.updateOffers(offers[type.value]);
+          const offersWrap = this._element.querySelector(`.point__offers-wrap`);
+          offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
+        });
+      });
   }
 
   _changeDestinationHandler(evt) {
     const newDestination = evt.target.value;
-    const thisPoints = points[this.dataset.id];
+    Promise.resolve(getPoints()).then((points) => {
+      const thisPoints = points[this.dataset.id];
 
-    if (thisPoints.pointEdit._destinations[newDestination]) {
-      thisPoints.point.updateDestination(
-          thisPoints.pointEdit._destinations[newDestination]
+      if (thisPoints.pointEdit._destinations[newDestination]) {
+        thisPoints.point.updateDestination(
+            thisPoints.pointEdit._destinations[newDestination]
+        );
+        thisPoints.pointEdit.updateDestination(
+            thisPoints.pointEdit._destinations[newDestination]
+        );
+      }
+
+      const description = thisPoints.pointEdit._element.querySelector(
+          `.point__destination-text`
       );
-      thisPoints.pointEdit.updateDestination(
-          thisPoints.pointEdit._destinations[newDestination]
+      description.textContent = points[this.dataset.id].pointEdit._description;
+
+      const images = thisPoints.pointEdit._element.querySelector(
+          `.point__destination-images`
       );
-    }
-
-    const description = thisPoints.pointEdit._element.querySelector(
-        `.point__destination-text`
-    );
-    description.textContent = points[this.dataset.id].pointEdit._description;
-
-    const images = thisPoints.pointEdit._element.querySelector(
-        `.point__destination-images`
-    );
-    images.innerHTML = getMarkupImages(thisPoints.pointEdit._images);
+      images.innerHTML = getMarkupImages(thisPoints.pointEdit._images);
+    });
   }
 
   _installHandlers() {

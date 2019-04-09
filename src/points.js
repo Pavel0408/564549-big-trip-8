@@ -4,23 +4,27 @@ import {PointEdit} from "./point-edit";
 
 import {api} from "./backend";
 
-let points;
+const points = [];
 
-const getPoints = () => {
-  points = [];
-  return api.getPoints().then((pointsItems) => {
-    pointsItems.forEach((date) => {
-      const pointItem = new Point(date);
-      const pointEditItem = new PointEdit(date);
-      const pointElement = {
-        point: pointItem,
-        pointEdit: pointEditItem
-      };
-      points[parseInt(pointElement.point._id, 10)] = pointElement;
+const getPoints = (server) => {
+  if (server) {
+    points.length = 0;
+    return api.getPoints().then((pointsItems) => {
+      pointsItems.forEach((date) => {
+        const pointItem = new Point(date);
+        const pointEditItem = new PointEdit(date);
+        const pointElement = {
+          point: pointItem,
+          pointEdit: pointEditItem
+        };
+        points[parseInt(pointElement.point._id, 10)] = pointElement;
+      });
+
+      return points;
     });
-
+  } else {
     return points;
-  });
+  }
 };
 
-export {points, getPoints};
+export {getPoints};

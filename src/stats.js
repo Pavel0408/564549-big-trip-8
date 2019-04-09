@@ -1,4 +1,4 @@
-import {points} from "./points";
+import {getPoints} from "./points";
 
 import {pointsIcons} from "./constants";
 
@@ -7,6 +7,8 @@ import {renderTransportStats, renderMoneyStats} from "./render-stats";
 import {PointEvents} from "./constants";
 
 import {Component} from "./component";
+
+const points = getPoints();
 
 export class Stats extends Component {
   constructor() {

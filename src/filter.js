@@ -1,8 +1,10 @@
 import {Component} from "./component";
 
-import {points} from "./points";
+import {getPoints} from "./points";
 
 import {renderPoints} from "./render-points";
+
+const points = getPoints();
 
 export class Filter extends Component {
   constructor(name) {
