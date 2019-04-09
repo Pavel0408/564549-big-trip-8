@@ -4,7 +4,7 @@ import {Stats} from "./stats";
 
 import {renderPoints} from "./render-points";
 
-import {getPoints} from "./points";
+import {getPointsFromServer} from "./points";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -52,7 +52,7 @@ renderFilters();
 const tripDayItems = document.querySelector(`.trip-day__items`);
 tripDayItems.textContent = `Loading route...`;
 
-getPoints(true)
+getPointsFromServer()
   .then(renderPoints)
   .catch(() => {
     tripDayItems.textContent = `Something went wrong while loading your route info. Check your connection or try again later`;
