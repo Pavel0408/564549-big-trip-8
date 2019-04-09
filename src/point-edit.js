@@ -267,6 +267,7 @@ export class PointEdit extends AbstractPoint {
   }
 
   _resetHandler(evt) {
+    const points = getPoints();
     const formElements = this._element.querySelectorAll(
         `form input, form select, form textarea, form button`
     );
@@ -280,9 +281,9 @@ export class PointEdit extends AbstractPoint {
     evt.preventDefault();
     api
       .deletePoint({id: this._id})
-      .then(getPoints(true))
       .then(() => {
         this._unrender();
+        points[this._id] = null;
       })
       .catch(() => {
         formElements.forEach((elem) => {
