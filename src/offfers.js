@@ -19,6 +19,8 @@ export const getOffers = () => {
       return offers;
     });
   } else {
-    return offers;
+    return Promise.resolve(true).then(() => {
+      return offers;
+    });
   }
 };

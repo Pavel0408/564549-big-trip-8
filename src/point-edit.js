@@ -297,22 +297,20 @@ export class PointEdit extends AbstractPoint {
   }
 
   _changeIconHandler() {
-    Promise.resolve(true)
-      .then(getOffers)
-      .then((offers) => {
-        const type = this._element.querySelector(
-            `.travel-way__select-input:checked`
-        );
-        const icon = this._element.querySelector(`.travel-way__label`);
+    getOffers().then((offers) => {
+      const type = this._element.querySelector(
+          `.travel-way__select-input:checked`
+      );
+      const icon = this._element.querySelector(`.travel-way__label`);
 
-        icon.textContent = pointsIcons[type.value];
-        Promise.resolve(getPoints()).then((points) => {
-          points[this._id].point.updateOffers(offers[type.value]);
-          points[this._id].pointEdit.updateOffers(offers[type.value]);
-          const offersWrap = this._element.querySelector(`.point__offers-wrap`);
-          offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
-        });
+      icon.textContent = pointsIcons[type.value];
+      Promise.resolve(getPoints()).then((points) => {
+        points[this._id].point.updateOffers(offers[type.value]);
+        points[this._id].pointEdit.updateOffers(offers[type.value]);
+        const offersWrap = this._element.querySelector(`.point__offers-wrap`);
+        offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
       });
+    });
   }
 
   _changeDestinationHandler(evt) {

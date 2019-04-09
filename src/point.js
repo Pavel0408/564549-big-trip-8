@@ -79,20 +79,20 @@ export class Point extends AbstractPoint {
 
   static parseServerData(data) {
     return {
-      'title': data.destination.name,
-      'type': data.type === `check-in` ? `check` : data.type,
-      'offers': new Set(data.offers),
-      'description': data.destination.description,
-      'time': {
-        'start': new Date(data.date_from),
-        'end': new Date(data.date_to)
+      title: data[`destination`][`name`],
+      type: data.type === `check-in` ? `check` : data[`type`],
+      offers: new Set(data[`offers`]),
+      description: data[`destination`][`description`],
+      time: {
+        start: new Date(data[`date_from`]),
+        end: new Date(data[`date_to`])
       },
-      'price': data.base_price,
-      'images': data.destination.pictures,
-      'destination': data.destination.name,
-      'id': data.id,
-      'isFavorite': data.is_favorite,
-      'destinations': data.destinations
+      price: data[`base_price`],
+      images: data[`destination`][`pictures`],
+      destination: data[`destination`][`name`],
+      id: data[`id`],
+      isFavorite: data[`is_favorite`],
+      destinations: data[`destinations`]
     };
   }
 
