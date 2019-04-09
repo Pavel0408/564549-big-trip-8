@@ -4,11 +4,11 @@ import {PointEdit} from "./point-edit";
 
 import {api} from "./backend";
 
-const points = [];
+let points = [];
 
 export const getPoints = (server) => {
   if (server) {
-    points.length = 0;
+    points = [];
 
     return api.getPoints().then((pointsItems) => {
       pointsItems.forEach((date) => {
