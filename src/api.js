@@ -1,6 +1,6 @@
 import {Point} from "./point";
 import {OffersModel} from "./offers-model";
-import {parseDestinations} from "./parse-destinations";
+import {DestinationModel} from "./destination-model";
 
 const Method = {
   GET: `GET`,
@@ -40,7 +40,7 @@ export const API = class {
       url: `destinations`
     })
       .then(toJSON)
-      .then(parseDestinations);
+      .then(DestinationModel.parseServerData);
   }
 
   getOffers() {

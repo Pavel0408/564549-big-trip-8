@@ -6,11 +6,11 @@ export const getOffers = () => {
     offers = {};
     return api.getOffers().then((offersArr) => {
       offersArr.forEach((offer) => {
-        offers[offer[`type`]] = new Set(
+        offers[offer.type] = new Set(
             offer.offers.map((element) => {
               return {
-                title: element[`name`],
-                price: element[`price`]
+                title: element.name,
+                price: element.price
               };
             })
         );
