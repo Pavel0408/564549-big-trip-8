@@ -53,6 +53,10 @@ export class Point extends Component {
   </article>`;
   }
 
+  get element() {
+    return this._element;
+  }
+
   get time() {
     return this._time;
   }

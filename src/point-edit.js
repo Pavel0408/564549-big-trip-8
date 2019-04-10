@@ -216,6 +216,10 @@ export class PointEdit extends Component {
   </article>`;
   }
 
+  get element() {
+    return this._element;
+  }
+
   get offers() {
     return this._offers;
   }
@@ -227,6 +231,10 @@ export class PointEdit extends Component {
     };
 
     this._submitHandler = handler;
+  }
+
+  get id() {
+    return this._id;
   }
 
   set id(id) {

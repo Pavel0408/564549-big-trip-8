@@ -15,13 +15,13 @@ export const renderPoints = (tripsArr) => {
       };
 
       pointsItem.pointEdit.submitHandler = () => {
-        const submitButton = pointsItem.pointEdit._element.querySelector(
+        const submitButton = pointsItem.pointEdit.element.querySelector(
             `button[type=submit]`
         );
         submitButton.textContent = `Saving...`;
-        pointsItem.pointEdit._element.style.border = `none`;
+        pointsItem.pointEdit.element.style.border = `none`;
         const formData = new FormData(
-            pointsItem.pointEdit._element.querySelector(`form`)
+            pointsItem.pointEdit.element.querySelector(`form`)
         );
         const entry = generateEntry(formData);
         entry.time = generateDate(formData);
@@ -30,7 +30,7 @@ export const renderPoints = (tripsArr) => {
         pointsItem.pointEdit.update(entry);
         pointsItem.point.offers = pointsItem.pointEdit.offers;
 
-        const formElements = pointsItem.pointEdit._element.querySelectorAll(
+        const formElements = pointsItem.pointEdit.element.querySelectorAll(
             `form input, form select, form textarea, form button`
         );
         formElements.forEach((elem) => {
@@ -39,7 +39,7 @@ export const renderPoints = (tripsArr) => {
 
         api
           .updatePoint({
-            id: pointsItem.pointEdit._id,
+            id: pointsItem.pointEdit.id,
             data: pointsItem.pointEdit.toRAW()
           })
           .then(() => {
@@ -54,8 +54,8 @@ export const renderPoints = (tripsArr) => {
             formElements.forEach((elem) => {
               elem.removeAttribute(`disabled`);
             });
-            pointsItem.pointEdit._element.querySelector(`.point`);
-            pointsItem.pointEdit._element.style.border = `1px solid red`;
+            pointsItem.pointEdit.element.querySelector(`.point`);
+            pointsItem.pointEdit.element.style.border = `1px solid red`;
             submitButton.textContent = `Save`;
             pointsItem.pointEdit.shake();
           });
