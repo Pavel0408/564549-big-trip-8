@@ -1,4 +1,6 @@
 import {Point} from "./point";
+import {parseOffers} from "./parse-offers";
+import {parseDestinations} from "./parse-destinations";
 
 const Method = {
   GET: `GET`,
@@ -36,13 +38,17 @@ export const API = class {
   getDestinations() {
     return this._load({
       url: `destinations`
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then(parseDestinations);
   }
 
   getOffers() {
     return this._load({
       url: `offers`
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then(parseOffers);
   }
 
   createPoint({point}) {
