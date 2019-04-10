@@ -27,6 +27,7 @@ export const renderPoints = (tripsArr) => {
 
         pointsItem.point.update(entry);
         pointsItem.pointEdit.update(entry);
+        pointsItem.point.offers = pointsItem.pointEdit.offers;
 
         const formElements = pointsItem.pointEdit._element.querySelectorAll(
             `form input, form select, form textarea, form button`

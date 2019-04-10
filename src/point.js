@@ -62,6 +62,10 @@ export class Point extends AbstractPoint {
     return this._price;
   }
 
+  set offers(offers) {
+    this._offers = offers;
+  }
+
   set editHandler(fn) {
     const handler = function (evt) {
       evt.preventDefault();
