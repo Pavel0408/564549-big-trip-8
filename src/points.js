@@ -7,9 +7,8 @@ import {api} from "./backend";
 let points = [];
 
 export const getPointsFromServer = () => {
-  points = [];
-
   return api.getPoints().then((pointsItems) => {
+    points = [];
     pointsItems.forEach((date) => {
       const pointItem = new Point(date);
       const pointEditItem = new PointEdit(date);
