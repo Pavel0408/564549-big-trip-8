@@ -1,12 +1,12 @@
 import {pointsIcons, pointsTexts} from "./constants";
 
+import {renderPoints} from "./render-points";
+
 import {Component} from "./component";
 
 import {addLeadingZero} from "./utilities";
 
 import {getMarkupOffersEdit} from "./get-markup-offers-edit";
-
-import {getPoints} from "./points";
 
 import {getMarkupDestinations} from "./get-markup-destinations";
 
@@ -17,6 +17,8 @@ import {getOffers} from "./offfers";
 import {api} from "./backend";
 
 import {getDestinations} from "./destinations";
+
+import {getPointsFromServer} from "./points";
 
 const flatpickr = require(`flatpickr`);
 
@@ -43,7 +45,7 @@ export class PointEdit extends Component {
     this._changeDestinationHandler = this._changeDestinationHandler.bind(this);
     this._images = data.images;
     this._destination = data.destination;
-    this._item = null;
+    this._item = 111;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
     this.update = PointEdit.update.bind(this);
@@ -227,7 +229,7 @@ export class PointEdit extends Component {
     this._submitHandler = handler;
   }
 
-  set(id) {
+  set id(id) {
     this._id = id;
   }
 
@@ -273,7 +275,6 @@ export class PointEdit extends Component {
   }
 
   _resetHandler(evt) {
-    const points = getPoints();
     const formElements = this._element.querySelectorAll(
         `form input, form select, form textarea, form button`
     );
@@ -289,7 +290,7 @@ export class PointEdit extends Component {
       .deletePoint({id: this._id})
       .then(() => {
         this._unrender();
-        points[this._id] = null;
+        getPointsFromServer().then(renderPoints);
       })
       .catch(() => {
         formElements.forEach((elem) => {

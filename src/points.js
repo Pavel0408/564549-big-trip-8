@@ -9,13 +9,10 @@ let points = [];
 export const getPointsFromServer = () => {
   return api.getPoints().then((pointsItems) => {
     points = pointsItems.map((date) => {
-      const pointItem = new Point(date);
-      const pointEditItem = new PointEdit(date);
-      const pointElement = {
-        point: pointItem,
-        pointEdit: pointEditItem
+      return {
+        point: new Point(date),
+        pointEdit: new PointEdit(date)
       };
-      return pointElement;
     });
 
     return points;

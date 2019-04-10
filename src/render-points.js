@@ -4,6 +4,7 @@ export const renderPoints = (tripsArr) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
   tripDayItems.innerHTML = ``;
   tripsArr.forEach((pointsItem) => {
+
     if (pointsItem && pointsItem.point) {
       pointsItem.point.editHandler = () => {
         pointsItem.pointEdit.render();

@@ -4,8 +4,6 @@ import {getPoints} from "./points";
 
 import {renderPoints} from "./render-points";
 
-const points = getPoints();
-
 export class Filter extends Component {
   constructor(name) {
     super();
@@ -37,6 +35,7 @@ export class Filter extends Component {
   }
 
   _filterArr() {
+    const points = getPoints();
     return points
       .filter((item) => {
         return item && item.point;
