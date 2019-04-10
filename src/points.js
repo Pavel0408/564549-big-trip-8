@@ -9,16 +9,16 @@ let points = [];
 export const getPointsFromServer = () => {
   return api.getPoints().then((pointsItems) => {
     points = [];
-    pointsItems.forEach((date) => {
+    points = pointsItems.map((date) => {
       const pointItem = new Point(date);
       const pointEditItem = new PointEdit(date);
       const pointElement = {
         point: pointItem,
         pointEdit: pointEditItem
       };
-      points[parseInt(pointElement.point._id, 10)] = pointElement;
+      return pointElement;
     });
-
+    console.log(points);
     return points;
   });
 };
