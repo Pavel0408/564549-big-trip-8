@@ -1,5 +1,5 @@
 import {Point} from "./point";
-import {parseOffers} from "./parse-offers";
+import {OffersModel} from "./offers-model";
 import {parseDestinations} from "./parse-destinations";
 
 const Method = {
@@ -48,7 +48,7 @@ export const API = class {
       url: `offers`
     })
       .then(toJSON)
-      .then(parseOffers);
+      .then(OffersModel.parseServerData);
   }
 
   createPoint({point}) {
