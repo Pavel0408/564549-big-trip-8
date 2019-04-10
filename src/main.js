@@ -6,6 +6,8 @@ import {renderPoints} from "./render-points";
 
 import {getPointsFromServer} from "./points";
 
+import {getDestinationsFromServer} from "./destinations";
+
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
   let fragment = document.createDocumentFragment();
@@ -52,7 +54,8 @@ renderFilters();
 const tripDayItems = document.querySelector(`.trip-day__items`);
 tripDayItems.textContent = `Loading route...`;
 
-getPointsFromServer()
+getDestinationsFromServer()
+  .then(getPointsFromServer)
   .then(renderPoints)
   .catch(() => {
     tripDayItems.textContent = `Something went wrong while loading your route info. Check your connection or try again later`;

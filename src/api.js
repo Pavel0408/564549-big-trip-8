@@ -30,22 +30,13 @@ export const API = class {
       url: `points`
     })
       .then(toJSON)
-      .then((data) => this.getDestinations(data))
       .then(Point.parseData);
   }
 
-  getDestinations(data) {
+  getDestinations() {
     return this._load({
       url: `destinations`
-    })
-      .then(toJSON)
-      .then((destinations) => {
-        data = data.map((it) => {
-          it.destinations = destinations;
-          return it;
-        });
-        return data;
-      });
+    }).then(toJSON);
   }
 
   getOffers() {

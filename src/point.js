@@ -95,8 +95,7 @@ export class Point extends AbstractPoint {
       images: data[`destination`][`pictures`],
       destination: data[`destination`][`name`],
       id: data[`id`],
-      isFavorite: data[`is_favorite`],
-      destinations: data[`destinations`]
+      isFavorite: data[`is_favorite`]
     };
   }
 

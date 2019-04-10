@@ -8,7 +8,6 @@ let points = [];
 
 export const getPointsFromServer = () => {
   return api.getPoints().then((pointsItems) => {
-    points = [];
     points = pointsItems.map((date) => {
       const pointItem = new Point(date);
       const pointEditItem = new PointEdit(date);
@@ -18,7 +17,7 @@ export const getPointsFromServer = () => {
       };
       return pointElement;
     });
-    console.log(points);
+
     return points;
   });
 };

@@ -16,6 +16,8 @@ import {getOffers} from "./offfers";
 
 import {api} from "./backend";
 
+import {getDestinations} from "./destinations";
+
 const flatpickr = require(`flatpickr`);
 
 const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
@@ -24,17 +26,6 @@ const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
 const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
   month: `short`
 });
-
-const parseDestinations = (data) => {
-  const destinations = {};
-
-  destinations.names = data.map((destination) => {
-    destinations[destination.name] = destination;
-    return destination.name;
-  });
-
-  return destinations;
-};
 
 export class PointEdit extends AbstractPoint {
   constructor(data) {
@@ -55,12 +46,11 @@ export class PointEdit extends AbstractPoint {
     this._item = null;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
-    this._destinations = parseDestinations(data.destinations);
   }
 
   get template() {
-    const destinationsOptions = getMarkupDestinations(this._destinations.names);
-
+    const destinations = getDestinations();
+    const destinationsOptions = getMarkupDestinations(destinations.names);
     const pictures = getMarkupImages(this._images);
 
     return `<article class="point">
@@ -316,10 +306,11 @@ export class PointEdit extends AbstractPoint {
   }
 
   _changeDestinationHandler(evt) {
+    const destinations = getDestinations();
     const newDestination = evt.target.value;
 
-    if (this._destinations[newDestination]) {
-      this.updateDestination(this._destinations[newDestination]);
+    if (destinations[newDestination]) {
+      this.updateDestination(destinations[newDestination]);
     }
 
     const description = this._element.querySelector(`.point__destination-text`);
