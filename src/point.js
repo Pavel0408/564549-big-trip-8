@@ -84,13 +84,6 @@ export class Point extends Component {
       .addEventListener(`click`, this._editHandler);
   }
 
-  update(data) {
-    this._destination = data.destination;
-    this._type = data.type;
-    this._time = data.time;
-    this._price = data.price;
-  }
-
   static parseServerData(data) {
     return {
       title: data[`destination`][`name`],

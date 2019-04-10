@@ -46,6 +46,7 @@ export class PointEdit extends Component {
     this._item = null;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
+    this.update = PointEdit.update.bind(this);
   }
 
   get template() {
@@ -230,13 +231,6 @@ export class PointEdit extends Component {
     this._id = id;
   }
 
-  static update(data) {
-    this._destination = data.destination;
-    this._type = data.type;
-    this._time = data.time;
-    this._price = data.price;
-  }
-
   shake() {
     const ANIMATION_TIMEOUT = 600;
     this._element.style.animation = `shake ${ANIMATION_TIMEOUT / 1000}s`;
@@ -383,5 +377,12 @@ export class PointEdit extends Component {
     this._element
       .querySelector(`.point__destination-input`)
       .addEventListener(`change`, this._changeDestinationHandler);
+  }
+
+  static update(data) {
+    this._destination = data.destination;
+    this._type = data.type;
+    this._time = data.time;
+    this._price = data.price;
   }
 }
