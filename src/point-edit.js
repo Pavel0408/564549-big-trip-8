@@ -1,12 +1,12 @@
 import {pointsIcons, pointsTexts} from "./constants";
 
+import {Component} from "./component";
+
 import {addLeadingZero} from "./utilities";
 
 import {getMarkupOffersEdit} from "./get-markup-offers-edit";
 
 import {getPoints} from "./points";
-
-import {AbstractPoint} from "./abstract-point";
 
 import {getMarkupDestinations} from "./get-markup-destinations";
 
@@ -27,7 +27,7 @@ const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
   month: `short`
 });
 
-export class PointEdit extends AbstractPoint {
+export class PointEdit extends Component {
   constructor(data) {
     super();
 
@@ -230,6 +230,13 @@ export class PointEdit extends AbstractPoint {
     this._id = id;
   }
 
+  static update(data) {
+    this._destination = data.destination;
+    this._type = data.type;
+    this._time = data.time;
+    this._price = data.price;
+  }
+
   shake() {
     const ANIMATION_TIMEOUT = 600;
     this._element.style.animation = `shake ${ANIMATION_TIMEOUT / 1000}s`;
@@ -237,6 +244,16 @@ export class PointEdit extends AbstractPoint {
     setTimeout(() => {
       this._element.style.animation = ``;
     }, ANIMATION_TIMEOUT);
+  }
+
+  updateDestination(data) {
+    this._destination = data.name;
+    this._description = data.description;
+    this._images = data.pictures;
+  }
+
+  updateOffers(offers) {
+    this._offers = new Set(offers);
   }
 
   toRAW() {

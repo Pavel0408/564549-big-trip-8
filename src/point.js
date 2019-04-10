@@ -4,9 +4,11 @@ import {getMarkupOffers} from "./get-markup-offers";
 
 import {addLeadingZero, calculateInterval} from "./utilities";
 
-import {AbstractPoint} from "./abstract-point";
+import {PointEdit} from "./point-edit";
 
-export class Point extends AbstractPoint {
+import {Component} from "./component";
+
+export class Point extends Component {
   constructor(data) {
     super();
 
@@ -21,6 +23,7 @@ export class Point extends AbstractPoint {
     this._id = data.id;
     this._isFavorite = data.isFavorite;
     this._destination = data.destination;
+    this.update = PointEdit.update.bind(this);
   }
 
   get template() {
@@ -79,6 +82,13 @@ export class Point extends AbstractPoint {
     this._element
       .querySelector(`.trip-point__title`)
       .addEventListener(`click`, this._editHandler);
+  }
+
+  update(data) {
+    this._destination = data.destination;
+    this._type = data.type;
+    this._time = data.time;
+    this._price = data.price;
   }
 
   static parseServerData(data) {
