@@ -1,7 +1,12 @@
 export class OffersModel {
   constructor(data) {
     this._type = data[`type`];
-    this._offers = data[`offers`];
+    this._offers = data[`offers`].map((it) => {
+      return {
+        name: it[`name`],
+        price: it[`price`]
+      };
+    });
   }
 
   get type() {
