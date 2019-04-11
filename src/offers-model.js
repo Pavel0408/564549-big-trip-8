@@ -17,7 +17,7 @@ export class OffersModel {
     return this._offers;
   }
 
-  static parseServerData(offersArr) {
+  static parseOffers(offersArr) {
     const offers = offersArr.map(OffersModel.parseOffer);
 
     return offers;

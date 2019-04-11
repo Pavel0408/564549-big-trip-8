@@ -21,7 +21,7 @@ export class DestinationModel {
     return new DestinationModel(destination);
   }
 
-  static parseServerData(destinationsArr) {
+  static parseDestinations(destinationsArr) {
     const destinations = destinationsArr.map(DestinationModel.parseDestination);
     return destinations;
   }

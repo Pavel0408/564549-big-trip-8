@@ -40,7 +40,7 @@ export const API = class {
       url: `destinations`
     })
       .then(toJSON)
-      .then(DestinationModel.parseServerData);
+      .then(DestinationModel.parseDestinations);
   }
 
   getOffers() {
@@ -48,7 +48,7 @@ export const API = class {
       url: `offers`
     })
       .then(toJSON)
-      .then(OffersModel.parseServerData);
+      .then(OffersModel.parseOffers);
   }
 
   createPoint({point}) {
