@@ -1,32 +1,27 @@
-import {
-  generatePointsArr
-} from "./mock/generate-points-array";
+import {Point} from "./point";
 
-import {
-  Point
-} from "./point";
+import {PointEdit} from "./point-edit";
 
-import {
-  PointEdit
-} from "./point-edit";
+import {api} from "./backend";
 
-const START_NUMBER_POINTS = 7;
+let points = [];
 
-const generateTripPoints = (numberTripPoints) => {
-  const pointsArr = generatePointsArr(numberTripPoints)
-    .map((mockPointDate) => {
-      const pointItem = new Point(mockPointDate);
-      const pointEditItem = new PointEdit(mockPointDate);
-      const pointElement = {
-        point: pointItem,
-        pointEdit: pointEditItem
+export const getPointsFromServer = () => {
+  return api.getPoints().then((pointsItems) => {
+    points = pointsItems.map((date, index) => {
+      const pointsElement = {
+        point: new Point(date),
+        pointEdit: new PointEdit(date)
       };
-      pointElement.pointEdit.item = pointEditItem;
+      pointsElement.pointEdit.index = index;
 
-      return pointElement;
+      return pointsElement;
     });
 
-  return pointsArr;
+    return points;
+  });
 };
 
-export const points = generateTripPoints(START_NUMBER_POINTS);
+export const getPoints = () => {
+  return points;
+};

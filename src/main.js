@@ -1,19 +1,12 @@
-import {
-  Filter,
-  filterName
-} from "./filter";
+import {Filter, filterName} from "./filter";
 
-import {
-  Stats
-} from "./stats";
+import {Stats} from "./stats";
 
-import {
-  renderPoints
-} from "./render-points";
+import {renderPoints} from "./render-points";
 
-import {
-  points
-} from "./points";
+import {getPointsFromServer} from "./points";
+
+import {getDestinationsFromServer} from "./destinations";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -30,13 +23,6 @@ const renderFilters = () => {
 
   formTripFilter.appendChild(fragment);
 };
-
-let startId = 0;
-
-points.forEach((pointItem) => {
-  pointItem.pointEdit.id = startId;
-  startId++;
-});
 
 const switchesArr = document.querySelectorAll(`.view-switch__item`);
 const [tableButton, statsButton] = switchesArr;
@@ -64,7 +50,16 @@ const statsClickHandler = (evt) => {
 };
 
 renderFilters();
-renderPoints(points);
+
+const tripDayItems = document.querySelector(`.trip-day__items`);
+tripDayItems.textContent = `Loading route...`;
+
+getDestinationsFromServer()
+  .then(getPointsFromServer)
+  .then(renderPoints)
+  .catch(() => {
+    tripDayItems.textContent = `Something went wrong while loading your route info. Check your connection or try again later`;
+  });
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 

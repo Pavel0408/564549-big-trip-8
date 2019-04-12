@@ -1,14 +1,8 @@
-import {
-  Component
-} from "./component";
+import {Component} from "./component";
 
-import {
-  points
-} from "./points";
+import {getPoints} from "./points";
 
-import {
-  renderPoints
-} from "./render-points";
+import {renderPoints} from "./render-points";
 
 export class Filter extends Component {
   constructor(name) {
@@ -22,8 +16,12 @@ export class Filter extends Component {
   }
 
   get template() {
-    return `<input type="radio" id="filter-${this._name}" name="filter" value="${this._name}">
-    <label class="trip-filter__item" for="filter-${this._name}">${this._name}</label>`;
+    return `<input type="radio" id="filter-${
+      this._name
+    }" name="filter" value="${this._name}">
+    <label class="trip-filter__item" for="filter-${this._name}">${
+  this._name
+}</label>`;
   }
 
   render() {
@@ -37,9 +35,12 @@ export class Filter extends Component {
   }
 
   _filterArr() {
-    return points.filter((item) => {
-      return item && item.point;
-    }).filter((item) => this._filterPoints(new Date(), item));
+    const points = getPoints();
+    return points
+      .filter((item) => {
+        return item && item.point;
+      })
+      .filter((item) => this._filterPoints(new Date(), item));
   }
 
   _changeHandler() {
@@ -67,5 +68,5 @@ const FilterByName = {
   },
   [filterName.PAST]: (now, item) => {
     return now > item.point.time.end;
-  },
+  }
 };

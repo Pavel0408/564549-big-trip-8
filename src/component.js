@@ -9,10 +9,6 @@ export class Component {
     throw new Error(`You have to define template.`);
   }
 
-  get element() {
-    return this._element;
-  }
-
   render() {
     const fragment = document.createElement(`div`);
     fragment.innerHTML = this.template;

@@ -1,15 +1,15 @@
-import {
-  Component
-} from "./component";
+import {Component} from "./component";
 
 export class AbstractPoint extends Component {
-  constructor() {
+  constructor(data) {
     super();
 
-    if (new.target === Component) {
-      throw new Error(`Can't instantiate Component, only concrete one.`);
-    }
+    this._destination = data.destination;
+    this._type = data.type;
+    this._time = data.time;
+    this._price = data.price;
   }
+
   update(data) {
     this._destination = data.destination;
     this._type = data.type;
