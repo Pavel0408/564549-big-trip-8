@@ -20,8 +20,6 @@ export const getOffers = () => {
       return offers;
     });
   } else {
-    return Promise.resolve(true).then(() => {
-      return offers;
-    });
+    return Promise.resolve(offers);
   }
 };
