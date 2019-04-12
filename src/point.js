@@ -4,26 +4,24 @@ import {getMarkupOffers} from "./get-markup-offers";
 
 import {addLeadingZero, calculateInterval} from "./utilities";
 
-import {PointEdit} from "./point-edit";
+import {AbstractPoint} from "./AbstractPoint";
 
-import {Component} from "./component";
-
-export class Point extends Component {
+export class Point extends AbstractPoint {
   constructor(data) {
-    super();
+    super({
+      price: data.price,
+      time: data.time,
+      type: data.type,
+      destination: data.destination
+    });
 
     this._title = data.title;
-    this._type = data.type;
     this._offers = data.offers;
     this._description = data.description;
-    this._time = data.time;
-    this._price = data.price;
     this._element = null;
     this._editHandler = null;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
-    this._destination = data.destination;
-    this.update = PointEdit.update.bind(this);
   }
 
   get template() {

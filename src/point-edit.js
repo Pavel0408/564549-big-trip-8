@@ -1,7 +1,5 @@
 import {pointsIcons, pointsTexts} from "./constants";
 
-import {Component} from "./component";
-
 import {addLeadingZero} from "./utilities";
 
 import {getMarkupOffersEdit} from "./get-markup-offers-edit";
@@ -18,6 +16,8 @@ import {getDestinations} from "./destinations";
 
 import {getPoints} from "./points";
 
+import {AbstractPoint} from "./AbstractPoint";
+
 const flatpickr = require(`flatpickr`);
 
 const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
@@ -27,26 +27,26 @@ const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
   month: `short`
 });
 
-export class PointEdit extends Component {
+export class PointEdit extends AbstractPoint {
   constructor(data) {
-    super();
+    super({
+      price: data.price,
+      time: data.time,
+      type: data.type,
+      destination: data.destination
+    });
 
     this._title = data.title;
-    this._type = data.type;
     this._offers = data.offers;
     this._description = data.description;
-    this._time = data.time;
-    this._price = data.price;
     this._element = null;
     this._submitHandler = null;
     this._resetHandler = this._resetHandler.bind(this);
     this._changeDestinationHandler = this._changeDestinationHandler.bind(this);
     this._images = data.images;
-    this._destination = data.destination;
     this._item = 111;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
-    this.update = PointEdit.update.bind(this);
     this._index = ``;
   }
 
@@ -394,12 +394,5 @@ export class PointEdit extends Component {
     this._element
       .querySelector(`.point__destination-input`)
       .addEventListener(`change`, this._changeDestinationHandler);
-  }
-
-  static update(data) {
-    this._destination = data.destination;
-    this._type = data.type;
-    this._time = data.time;
-    this._price = data.price;
   }
 }
