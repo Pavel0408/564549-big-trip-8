@@ -16,7 +16,7 @@ import {getDestinations} from "./destinations";
 
 import {getPoints} from "./points";
 
-import {AbstractPoint} from "./AbstractPoint";
+import {AbstractPoint} from "./abstract-point";
 
 const flatpickr = require(`flatpickr`);
 
