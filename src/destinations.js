@@ -1,8 +1,8 @@
-import {api} from "./backend";
+import {provider} from "./backend";
 let destinations = null;
 
 export const getDestinationsFromServer = () => {
-  return api.getDestinations().then((destinationsArr) => {
+  return provider.getDestinations().then((destinationsArr) => {
     destinations = {};
 
     destinations.names = destinationsArr.map((destination) => {

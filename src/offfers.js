@@ -1,10 +1,10 @@
-import {api} from "./backend";
+import {provider} from "./backend";
 let offers = null;
 
 export const getOffers = () => {
   if (!offers) {
     offers = {};
-    return api.getOffers().then((offersArr) => {
+    return provider.getOffers().then((offersArr) => {
       offersArr.forEach((offer) => {
         offers[offer.type] = new Set(
             offer.offers.map((element) => {

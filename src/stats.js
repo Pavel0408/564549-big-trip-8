@@ -8,16 +8,15 @@ import {PointEvents} from "./constants";
 
 import {Component} from "./component";
 
-const points = getPoints();
-
 export class Stats extends Component {
   constructor() {
     super();
 
     this._statsСontainer = document.querySelector(`#stats`);
+    this._points = getPoints();
 
     this._transportSet = new Set();
-    points
+    this._points
       .filter((item) => {
         return item && item.point;
       })
@@ -31,7 +30,7 @@ export class Stats extends Component {
 
     this._transportData = [...this._transportSet].map((type) => {
       let totalTransportEvents = 0;
-      points
+      this._points
         .filter((item) => {
           return item && item.point;
         })
@@ -44,7 +43,7 @@ export class Stats extends Component {
     });
 
     this._moneySet = new Set();
-    points
+    this._points
       .filter((item) => {
         return item && item.point;
       })
@@ -54,7 +53,7 @@ export class Stats extends Component {
 
     this._moneyData = [...this._moneySet].map((type) => {
       let eventTotalCost = 0;
-      points
+      this._points
         .filter((item) => {
           return item && item.point;
         })
@@ -86,7 +85,6 @@ export class Stats extends Component {
 
   render() {
     this._statsСontainer.innerHTML = this.template;
-
     renderMoneyStats(this._moneyLabels, this._moneyData);
     renderTransportStats(this._transportLabels, this._transportData);
   }
