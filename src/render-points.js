@@ -1,10 +1,9 @@
-import {api} from "./backend";
+import {provider} from "./backend";
 
 export const renderPoints = (tripsArr) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
   tripDayItems.innerHTML = ``;
   tripsArr.forEach((pointsItem) => {
-
     if (pointsItem && pointsItem.point) {
       pointsItem.point.editHandler = () => {
         pointsItem.pointEdit.render();
@@ -37,7 +36,7 @@ export const renderPoints = (tripsArr) => {
           elem.setAttribute(`disabled`, `disabled`);
         });
 
-        api
+        provider
           .updatePoint({
             id: pointsItem.pointEdit.id,
             data: pointsItem.pointEdit.toRAW()

@@ -32,7 +32,13 @@ export const API = class {
       url: `points`
     })
       .then(toJSON)
-      .then(Point.parseData);
+      .then((data) => {
+        const parsedData = Point.parseData(data);
+        return {
+          data,
+          parsedData
+        };
+      });
   }
 
   getDestinations() {
@@ -40,7 +46,13 @@ export const API = class {
       url: `destinations`
     })
       .then(toJSON)
-      .then(DestinationModel.parseDestinations);
+      .then((data) => {
+        const parsedData = DestinationModel.parseDestinations(data);
+        return {
+          data,
+          parsedData
+        };
+      });
   }
 
   getOffers() {
@@ -48,7 +60,11 @@ export const API = class {
       url: `offers`
     })
       .then(toJSON)
-      .then(OffersModel.parseOffers);
+      .then((data) => {
+        const parsedData = OffersModel.parseOffers(data);
+
+        return {data, parsedData};
+      });
   }
 
   createPoint({point}) {
@@ -72,7 +88,13 @@ export const API = class {
       })
     })
       .then(toJSON)
-      .then(Point.parseServerData);
+      .then((newData) => {
+        const parsedData = Point.parseServerData(data);
+        return {
+          newData,
+          parsedData
+        };
+      });
   }
 
   deletePoint({id}) {
@@ -80,6 +102,15 @@ export const API = class {
       url: `points/${id}`,
       method: Method.DELETE
     });
+  }
+
+  syncPoints({points}) {
+    return this._load({
+      url: `points/sync`,
+      method: `POST`,
+      body: JSON.stringify(points),
+      headers: new Headers({"Content-Type": `application/json`})
+    }).then(toJSON);
   }
 
   _load({url, method = Method.GET, body = null, headers = new Headers()}) {

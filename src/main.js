@@ -7,6 +7,7 @@ import {renderPoints} from "./render-points";
 import {getPointsFromServer} from "./points";
 
 import {getDestinationsFromServer} from "./destinations";
+import {provider} from "./backend";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -65,3 +66,12 @@ document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 
 tableButton.addEventListener(`click`, tableClickHandler);
 statsButton.addEventListener(`click`, statsClickHandler);
+
+window.addEventListener(
+    `offline`,
+    () => (document.title = `${document.title}[OFFLINE]`)
+);
+window.addEventListener(`online`, () => {
+  document.title = document.title.split(`[OFFLINE]`)[0];
+  provider.syncPoints();
+});

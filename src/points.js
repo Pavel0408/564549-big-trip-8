@@ -2,12 +2,12 @@ import {Point} from "./point";
 
 import {PointEdit} from "./point-edit";
 
-import {api} from "./backend";
+import {provider} from "./backend";
 
 let points = [];
 
 export const getPointsFromServer = () => {
-  return api.getPoints().then((pointsItems) => {
+  return provider.getPoints().then((pointsItems) => {
     points = pointsItems.map((date, index) => {
       const pointsElement = {
         point: new Point(date),

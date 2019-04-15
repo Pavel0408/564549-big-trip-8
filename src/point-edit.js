@@ -10,7 +10,7 @@ import {getMarkupImages} from "./get-markup-images";
 
 import {getOffers} from "./offfers";
 
-import {api} from "./backend";
+import {provider} from "./backend";
 
 import {getDestinations} from "./destinations";
 
@@ -302,7 +302,7 @@ export class PointEdit extends AbstractPoint {
       elem.setAttribute(`disabled`, `disabled`);
     });
     evt.preventDefault();
-    api
+    provider
       .deletePoint({id: this._id})
       .then(() => {
         this._unrender();
