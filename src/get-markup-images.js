@@ -9,5 +9,5 @@ export const getMarkupImages = (images) => {
     return pictures;
   }
 
-  return ``;
+  return [];
 };

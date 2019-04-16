@@ -1,12 +1,12 @@
 self.addEventListener(`install`, (evt) => {
   const openCache = caches.open(`STATIC_V1.0`).then((cache) => {
     return cache.addAll([
-      `/`,
-      `/index.html`,
-      `/bundle.js`,
-      `../css/main.css`,
-      `../css/normalize.css`,
-      `../css`
+      `./`,
+      `./index.html`,
+      `./bundle.js`,
+      `./css/main.css`,
+      `./css/normalize.css`,
+      `./css`
     ]);
   });
   evt.waitUntil(openCache);

@@ -8,6 +8,7 @@ import {getPointsFromServer} from "./points";
 
 import {getDestinationsFromServer} from "./destinations";
 import {provider} from "./backend";
+import {Sort, sortName} from "./sort";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -23,6 +24,24 @@ const renderFilters = () => {
   });
 
   formTripFilter.appendChild(fragment);
+};
+
+const renderSort = () => {
+  const formSort = document.querySelector(`.trip-sorting`);
+  const sortLabel = document.querySelector(`.trip-sorting__item`);
+  let fragment = document.createDocumentFragment();
+  new Sort(sortName.EVENT).render().forEach((elem) => {
+    fragment.appendChild(elem);
+  });
+  new Sort(sortName.TIME).render().forEach((elem) => {
+    fragment.appendChild(elem);
+  });
+
+  new Sort(sortName.PRICE).render().forEach((elem) => {
+    fragment.appendChild(elem);
+  });
+
+  formSort.insertBefore(fragment, sortLabel);
 };
 
 const switchesArr = document.querySelectorAll(`.view-switch__item`);
@@ -51,6 +70,7 @@ const statsClickHandler = (evt) => {
 };
 
 renderFilters();
+renderSort();
 
 const tripDayItems = document.querySelector(`.trip-day__items`);
 tripDayItems.textContent = `Loading route...`;
@@ -63,6 +83,8 @@ getDestinationsFromServer()
   });
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
+document.querySelector(`#sorting-event`).setAttribute(`checked`, `checked`);
+
 
 tableButton.addEventListener(`click`, tableClickHandler);
 statsButton.addEventListener(`click`, statsClickHandler);
