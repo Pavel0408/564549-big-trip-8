@@ -15,6 +15,9 @@ export const Provider = class {
   }
 
   updatePoint({id, data}) {
+    if (id === ``) {
+      return this.createPoint({data});
+    }
     if (this._isOnline()) {
       return this._api.updatePoint({id, data}).then((point) => {
         this._store.setItem({key: point.id, item: point.newData});
@@ -29,7 +32,25 @@ export const Provider = class {
     }
   }
 
+  createPoint({data}) {
+    if (this._isOnline()) {
+      return this._api.createPoint({data}).then((point) => {
+        this._store.setItem({key: point.id, item: point.newData});
+
+        return point.parsedData;
+      });
+    } else {
+      const point = data;
+      this._needSync = true;
+      this._store.setItem({key: this._generateId(), item: point});
+      return Promise.resolve(Point.parseServerData(point));
+    }
+  }
+
   deletePoint({id}) {
+    if (id === ``) {
+      return Promise.resolve(true);
+    }
     if (this._isOnline()) {
       return this._api.deletePoint({id}).then(() => {
         this._store.removeItem({key: id});

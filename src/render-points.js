@@ -1,68 +1,75 @@
 import {provider} from "./backend";
+import {state} from "./state";
 
-export const renderPoints = (tripsArr) => {
+export const submitHandlers = (pointsArr) => {
+  pointsArr.forEach(submitHandler);
+};
+
+export const submitHandler = (pointsItem) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
-  tripDayItems.innerHTML = ``;
-  tripsArr.forEach((pointsItem) => {
-    if (pointsItem && pointsItem.point) {
-      pointsItem.point.editHandler = () => {
-        pointsItem.pointEdit.render();
-        tripDayItems.replaceChild(
-            pointsItem.pointEdit.element,
-            pointsItem.point.element
-        );
-      };
+  // tripDayItems.innerHTML = ``;
 
-      pointsItem.pointEdit.submitHandler = () => {
-        const submitButton = pointsItem.pointEdit.element.querySelector(
-            `button[type=submit]`
-        );
-        submitButton.textContent = `Saving...`;
-        pointsItem.pointEdit.element.style.border = `none`;
-        const formData = new FormData(
-            pointsItem.pointEdit.element.querySelector(`form`)
-        );
-        const entry = generateEntry(formData);
-        entry.time = generateDate(formData);
+  if (pointsItem && pointsItem.point) {
+    pointsItem.point.editHandler = () => {
+      pointsItem.pointEdit.render();
+      tripDayItems.replaceChild(
+          pointsItem.pointEdit.element,
+          pointsItem.point.element
+      );
+    };
 
-        pointsItem.point.update(entry);
-        pointsItem.pointEdit.update(entry);
-        pointsItem.point.offers = pointsItem.pointEdit.offers;
+    pointsItem.pointEdit.submitHandler = () => {
+      const submitButton = pointsItem.pointEdit.element.querySelector(
+          `button[type=submit]`
+      );
+      submitButton.textContent = `Saving...`;
+      pointsItem.pointEdit.element.style.border = `none`;
+      const formData = new FormData(
+          pointsItem.pointEdit.element.querySelector(`form`)
+      );
+      const entry = generateEntry(formData);
+      entry.time = generateDate(formData);
 
-        const formElements = pointsItem.pointEdit.element.querySelectorAll(
-            `form input, form select, form textarea, form button`
-        );
-        formElements.forEach((elem) => {
-          elem.setAttribute(`disabled`, `disabled`);
-        });
+      pointsItem.point.update(entry);
+      pointsItem.pointEdit.update(entry);
+      pointsItem.point.offers = pointsItem.pointEdit.offers;
 
-        provider
-          .updatePoint({
-            id: pointsItem.pointEdit.id,
-            data: pointsItem.pointEdit.toRAW()
-          })
-          .then(() => {
-            pointsItem.point.render();
+      const formElements = pointsItem.pointEdit.element.querySelectorAll(
+          `form input, form select, form textarea, form button`
+      );
+      formElements.forEach((elem) => {
+        elem.setAttribute(`disabled`, `disabled`);
+      });
 
-            tripDayItems.replaceChild(
-                pointsItem.point.element,
-                pointsItem.pointEdit.element
-            );
-          })
-          .catch(() => {
-            formElements.forEach((elem) => {
-              elem.removeAttribute(`disabled`);
-            });
-            pointsItem.pointEdit.element.querySelector(`.point`);
-            pointsItem.pointEdit.element.style.border = `1px solid red`;
-            submitButton.textContent = `Save`;
-            pointsItem.pointEdit.shake();
+      provider
+        .updatePoint({
+          id: pointsItem.pointEdit.id,
+          data: pointsItem.pointEdit.toRAW()
+        })
+        .then((data) => {
+          console.log(111, data);
+          console.log(data.id);
+          pointsItem.pointEdit.id = data.id;
+          pointsItem.point.id = data.id;
+          pointsItem.point.render();
+
+          tripDayItems.replaceChild(
+              pointsItem.point.element,
+              pointsItem.pointEdit.element
+          );
+        })
+        .catch(() => {
+          formElements.forEach((elem) => {
+            elem.removeAttribute(`disabled`);
           });
-      };
-
-      tripDayItems.appendChild(pointsItem.point.render());
-    }
-  });
+          pointsItem.pointEdit.element.querySelector(`.point`);
+          pointsItem.pointEdit.element.style.border = `1px solid red`;
+          submitButton.textContent = `Save`;
+          pointsItem.pointEdit.shake();
+        });
+    };
+    // tripDayItems.appendChild(pointsItem.point.render());
+  }
 };
 
 const generateEntry = (formData) => {

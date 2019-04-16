@@ -67,15 +67,27 @@ export const API = class {
       });
   }
 
-  createPoint({point}) {
+  createPoint({data}) {
+    console.log(data);
     return this._load({
       url: `points`,
       method: Method.POST,
-      body: JSON.stringify(point),
+      body: JSON.stringify(data),
       headers: new Headers({
         "Content-Type": `application/json`
       })
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then((newData) => {
+        console.log(newData.id);
+        console.log(data);
+        const parsedData = Point.parseServerData(newData);
+        console.log(parsedData);
+        return {
+          newData,
+          parsedData
+        };
+      });
   }
 
   updatePoint({id, data}) {
@@ -89,7 +101,7 @@ export const API = class {
     })
       .then(toJSON)
       .then((newData) => {
-        const parsedData = Point.parseServerData(data);
+        const parsedData = Point.parseServerData(newData);
         return {
           newData,
           parsedData

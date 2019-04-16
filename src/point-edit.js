@@ -155,7 +155,7 @@ export class PointEdit extends AbstractPoint {
 }</label>
           <input list="destination-list" class="point__destination-input"  id="destination" value="${
   this._destination
-}" name="destination" data-id="${this._id}">
+}" name="destination" data-id="${this._id}" required>
           <datalist id="destination-list">
             ${destinationsOptions}
           </datalist>
@@ -184,7 +184,7 @@ export class PointEdit extends AbstractPoint {
           <span class="point__price-currency">€</span>
           <input class="point__input" type="text" value="${
   this._price
-}" name="price">
+}" name="price" required>
         </label>
         <div class="point__buttons">
           <button class="point__button point__button--save" type="submit">Save</button>
@@ -270,8 +270,9 @@ export class PointEdit extends AbstractPoint {
   toRAW() {
     return {
       "destination": {
-        name: this._destination,
-        description: this._description
+        "name": this._destination,
+        "description": this._description,
+        "pictures": this._images
       },
 
       "type": this._type === `check` ? `check-in` : this._type,
@@ -282,7 +283,6 @@ export class PointEdit extends AbstractPoint {
       "date_to": this._time.end.getTime(),
       // eslint-disable-next-line camelcase
       "base_price": this._price,
-      " pictures": this._images,
       "id": this._id,
       // eslint-disable-next-line camelcase
       "is_favorite": this._isFavorite

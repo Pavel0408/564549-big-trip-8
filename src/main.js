@@ -1,15 +1,19 @@
 import {Filter, filterName} from "./filter";
 
 import {Stats} from "./stats";
+import {state} from "./state";
+import {renderPoints, submitHandlers, submitHandler} from "./render-points";
 
-import {renderPoints} from "./render-points";
-
-import {getPointsFromServer} from "./points";
+import {getPointsFromServer, getPoints} from "./points";
 
 import {getDestinationsFromServer} from "./destinations";
 import {provider} from "./backend";
 import {Sort, sortName} from "./sort";
-import {state} from "./state";
+
+import {Point} from "./point";
+import {PointEdit} from "./point-edit";
+import {pointsTexts} from "./constants";
+import {generateNewPointData} from "./new-point";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -49,6 +53,27 @@ const renderSort = () => {
   formSort.insertBefore(fragment, sortLabel);
 };
 
+const newButtonClickHandler = () => {
+  const tripDayItems = document.querySelector(`.trip-day__items`);
+  // const newPoint = new PointNew();
+  const points = getPoints();
+  const newItem = {
+    point: new Point(generateNewPointData()),
+    pointEdit: new PointEdit(generateNewPointData())
+  };
+
+  submitHandler(newItem);
+
+  points.push(newItem);
+
+
+  console.log(points.length - 1);
+  tripDayItems.insertBefore(
+      points[points.length - 1].pointEdit.render(),
+      tripDayItems.firstChild
+  );
+};
+
 const switchesArr = document.querySelectorAll(`.view-switch__item`);
 const [tableButton, statsButton] = switchesArr;
 const pointsContainer = document.querySelector(`.trip-points`);
@@ -82,13 +107,21 @@ tripDayItems.textContent = `Loading route...`;
 
 getDestinationsFromServer()
   .then(getPointsFromServer)
-  .then(renderPoints)
-  .catch(() => {
+  .then(submitHandlers)
+  .then((points) => {
+    console.log(points);
+    state.render();
+  })
+  .catch((e) => {
+    console.log(e);
     tripDayItems.textContent = `Something went wrong while loading your route info. Check your connection or try again later`;
   });
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 document.querySelector(`#sorting-event`).setAttribute(`checked`, `checked`);
+
+const newPointButton = document.querySelector(`.new-event`);
+newPointButton.addEventListener(`click`, newButtonClickHandler);
 
 tableButton.addEventListener(`click`, tableClickHandler);
 statsButton.addEventListener(`click`, statsClickHandler);
@@ -99,5 +132,8 @@ window.addEventListener(
 );
 window.addEventListener(`online`, () => {
   document.title = document.title.split(`[OFFLINE]`)[0];
-  provider.syncPoints();
+  provider.syncPoints().then(getPointsFromServer).then(submitHandlers).then((points) => {
+    console.log(points);
+    state.render();
+  });
 });

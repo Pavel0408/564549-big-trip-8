@@ -15,10 +15,17 @@ class State {
   }
 
   render() {
+    console.log(this);
     let points = this._filter._filterArr();
     points = this._sort._sortArr(points);
 
-    renderPoints(points);
+    const tripDayItems = document.querySelector(`.trip-day__items`);
+    tripDayItems.innerHTML = ``;
+    let fragment = document.createDocumentFragment();
+    points.forEach((it) =>{
+      fragment.appendChild(it.point.render());
+    });
+    tripDayItems.appendChild(fragment);
   }
 }
 

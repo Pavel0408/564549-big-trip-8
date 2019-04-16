@@ -21,5 +21,5 @@ const store = new Store({
 export const provider = new Provider({
   api,
   store,
-  generateId: () => String(performance.now())
+  generateId: () => String(new Date().getTime())
 });
