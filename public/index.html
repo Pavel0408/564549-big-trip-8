@@ -80,6 +80,11 @@
     <canvas class="statistic__time-spend" width="900"></canvas>
   </div>
 </section>
+<script>
+  if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+};
+</script>
 <script src="bundle.js"></script>
 </body>
 </html>
