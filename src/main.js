@@ -9,11 +9,14 @@ import {getPointsFromServer} from "./points";
 import {getDestinationsFromServer} from "./destinations";
 import {provider} from "./backend";
 import {Sort, sortName} from "./sort";
+import {state} from "./state";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
   let fragment = document.createDocumentFragment();
-  new Filter(filterName.EVRYTHING).render().forEach((elem) => {
+  const filterEvtything = new Filter(filterName.EVRYTHING);
+  state.filter = filterEvtything;
+  filterEvtything.render().forEach((elem) => {
     fragment.appendChild(elem);
   });
   new Filter(filterName.FUTURE).render().forEach((elem) => {
@@ -30,7 +33,9 @@ const renderSort = () => {
   const formSort = document.querySelector(`.trip-sorting`);
   const sortLabel = document.querySelector(`.trip-sorting__item`);
   let fragment = document.createDocumentFragment();
-  new Sort(sortName.EVENT).render().forEach((elem) => {
+  const sortEvent = new Sort(sortName.EVENT);
+  state.sort = sortEvent;
+  sortEvent.render().forEach((elem) => {
     fragment.appendChild(elem);
   });
   new Sort(sortName.TIME).render().forEach((elem) => {
@@ -84,7 +89,6 @@ getDestinationsFromServer()
 
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 document.querySelector(`#sorting-event`).setAttribute(`checked`, `checked`);
-
 
 tableButton.addEventListener(`click`, tableClickHandler);
 statsButton.addEventListener(`click`, statsClickHandler);

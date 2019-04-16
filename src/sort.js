@@ -1,5 +1,4 @@
-import {getPoints} from "./points";
-import {renderPoints} from "./render-points";
+import {state} from "./state";
 
 export class Sort {
   constructor(name) {
@@ -29,17 +28,19 @@ export class Sort {
     return this._element;
   }
 
-  _sortArr() {
-    const points = getPoints();
-    return points
+  _sortArr(points) {
+    const newPoints = points
       .filter((item) => {
         return item && item.point;
       })
       .sort(this._sortPoints);
+    return newPoints;
   }
 
   _changeHandler() {
-    renderPoints(this._sortArr());
+    state.sort = this;
+    state.render();
+    // renderPoints(this._sortArr());
   }
 
   _installHandler() {

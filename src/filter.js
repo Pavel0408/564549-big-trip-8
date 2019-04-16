@@ -2,7 +2,7 @@ import {Component} from "./component";
 
 import {getPoints} from "./points";
 
-import {renderPoints} from "./render-points";
+import {state} from "./state";
 
 export class Filter extends Component {
   constructor(name) {
@@ -44,7 +44,9 @@ export class Filter extends Component {
   }
 
   _changeHandler() {
-    renderPoints(this._filterArr());
+    state.filter = this;
+    state.render();
+    // renderPoints(this._filterArr());
   }
 
   _installHandler() {
