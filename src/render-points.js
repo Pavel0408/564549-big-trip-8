@@ -1,5 +1,6 @@
 import {provider} from "./backend";
 import {state} from "./state";
+import { cost } from "./cost";
 
 export const submitHandlers = (pointsArr) => {
   pointsArr.forEach(submitHandler);
@@ -52,6 +53,7 @@ export const submitHandler = (pointsItem) => {
           pointsItem.pointEdit.id = data.id;
           pointsItem.point.id = data.id;
           pointsItem.point.render();
+          cost.render();
 
           tripDayItems.replaceChild(
               pointsItem.point.element,

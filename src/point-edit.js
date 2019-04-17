@@ -17,6 +17,7 @@ import {getDestinations} from "./destinations";
 import {getPoints} from "./points";
 
 import {AbstractPoint} from "./abstract-point";
+import { cost } from "./cost";
 
 const flatpickr = require(`flatpickr`);
 
@@ -307,6 +308,7 @@ export class PointEdit extends AbstractPoint {
       .then(() => {
         this._unrender();
         points[this._index] = null;
+        cost.render();
       })
       .catch(() => {
         formElements.forEach((elem) => {

@@ -14,6 +14,7 @@ import {Point} from "./point";
 import {PointEdit} from "./point-edit";
 import {pointsTexts} from "./constants";
 import {generateNewPointData} from "./new-point";
+import {cost} from "./cost";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -102,7 +103,7 @@ const ESC_KEY_CODE = 27;
 
 const escPressHandler = (evt) => {
   console.log(1);
-  if ((evt.keyCode === ESC_KEY_CODE)) {
+  if (evt.keyCode === ESC_KEY_CODE) {
     state.render();
   }
 };
@@ -139,7 +140,6 @@ window.addEventListener(
     `offline`,
     () => (document.title = `${document.title}[OFFLINE]`)
 );
-
 
 window.addEventListener(`online`, () => {
   document.title = document.title.split(`[OFFLINE]`)[0];

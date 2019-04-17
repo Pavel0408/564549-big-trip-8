@@ -41,8 +41,9 @@ export const Provider = class {
       });
     } else {
       const point = data;
+      point.id = this._generateId();
       this._needSync = true;
-      this._store.setItem({key: this._generateId(), item: point});
+      this._store.setItem({key: point.id, item: point});
       return Promise.resolve(Point.parseServerData(point));
     }
   }
