@@ -61,12 +61,12 @@ export const sortByName = {
   },
 
   [sortName.TIME]: (a, b) => {
-    const firstDuration = a.point._time.end - a.point._time.start;
-    const secondDuration = b.point._time.end - b.point._time.start;
+    const firstDuration = a.point.time.end - a.point.time.start;
+    const secondDuration = b.point.time.end - b.point.time.start;
     return secondDuration - firstDuration;
   },
 
   [sortName.PRICE]: (a, b) => {
-    return b.point._price - a.point._price;
+    return b.point.price - a.point.price;
   }
 };

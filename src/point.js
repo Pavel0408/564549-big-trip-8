@@ -5,7 +5,7 @@ import {getMarkupOffers} from "./get-markup-offers";
 import {addLeadingZero, calculateInterval} from "./utilities";
 
 import {AbstractPoint} from "./abstract-point";
-import { cost } from "./cost";
+import {cost} from "./cost";
 
 export class Point extends AbstractPoint {
   constructor(data) {

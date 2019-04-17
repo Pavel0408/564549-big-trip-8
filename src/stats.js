@@ -2,7 +2,11 @@ import {getPoints} from "./points";
 
 import {pointsIcons} from "./constants";
 
-import {renderTransportStats, renderMoneyStats, renderTimeStats} from "./render-stats";
+import {
+  renderTransportStats,
+  renderMoneyStats,
+  renderTimeStats
+} from "./render-stats";
 
 import {PointEvents} from "./constants";
 
@@ -75,14 +79,13 @@ export class Stats extends Component {
         })
         .forEach((pointsItem) => {
           if (pointsItem.point.type === type) {
-            eventTotalTime += pointsItem.point._time.end - pointsItem.point._time.start;
+            eventTotalTime +=
+              pointsItem.point.time.end - pointsItem.point.time.start;
           }
         });
 
       return Math.floor(eventTotalTime / MS_IN_HOUR);
     });
-
-    console.log(this._timeData);
 
     this._moneyLabels = this._generateLabelsArr(this._moneySet);
   }

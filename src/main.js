@@ -2,7 +2,7 @@ import {Filter, filterName} from "./filter";
 
 import {Stats} from "./stats";
 import {state} from "./state";
-import {renderPoints, submitHandlers, submitHandler} from "./render-points";
+import {submitHandlers, submitHandler} from "./set-handlers";
 
 import {getPointsFromServer, getPoints} from "./points";
 
@@ -12,9 +12,8 @@ import {Sort, sortName} from "./sort";
 
 import {Point} from "./point";
 import {PointEdit} from "./point-edit";
-import {pointsTexts} from "./constants";
+
 import {generateNewPointData} from "./new-point";
-import {cost} from "./cost";
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -64,10 +63,8 @@ const newButtonClickHandler = () => {
   };
 
   submitHandler(newItem);
-
   points.push(newItem);
 
-  console.log(points.length - 1);
   tripDayItems.insertBefore(
       points[points.length - 1].pointEdit.render(),
       tripDayItems.firstChild
@@ -102,7 +99,6 @@ const statsClickHandler = (evt) => {
 const ESC_KEY_CODE = 27;
 
 const escPressHandler = (evt) => {
-  console.log(1);
   if (evt.keyCode === ESC_KEY_CODE) {
     state.render();
   }
@@ -117,12 +113,10 @@ tripDayItems.textContent = `Loading route...`;
 getDestinationsFromServer()
   .then(getPointsFromServer)
   .then(submitHandlers)
-  .then((points) => {
-    console.log(points);
+  .then(() => {
     state.render();
   })
-  .catch((e) => {
-    console.log(e);
+  .catch(() => {
     tripDayItems.textContent = `Something went wrong while loading your route info. Check your connection or try again later`;
   });
 
@@ -152,8 +146,6 @@ window.addEventListener(`online`, () => {
     .then(getPointsFromServer)
     .then(submitHandlers)
     .then(() => {
-      let points = getPoints();
-      console.log(points);
       state.render();
     });
 });

@@ -1,5 +1,4 @@
-import {renderPoints} from "./render-points";
-import { cost } from "./cost";
+import {cost} from "./cost";
 
 class State {
   constructor() {
@@ -16,7 +15,6 @@ class State {
   }
 
   render() {
-    console.log(this);
     let points = this._filter._filterArr();
     points = this._sort._sortArr(points);
 

@@ -269,7 +269,11 @@ export class PointEdit extends AbstractPoint {
   }
 
   updateOffers(offers) {
-    this._offers = new Set(offers);
+    if (offers && offers.slice) {
+      this._offers = offers.slice();
+    }
+
+    this._offers = [];
   }
 
   toRAW() {
@@ -337,6 +341,9 @@ export class PointEdit extends AbstractPoint {
       const offersWrap = this._element.querySelector(`.point__offers-wrap`);
       offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
     });
+
+    const openSelectInput = this._element.querySelector(`.travel-way__toggle`);
+    openSelectInput.click();
   }
 
   _changeOffersHandler(evt) {

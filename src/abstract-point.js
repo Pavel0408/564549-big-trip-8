@@ -14,6 +14,10 @@ export class AbstractPoint extends Component {
     this._price = data.price;
   }
 
+  get time() {
+    return this._time;
+  }
+
   update(data) {
     this._destination = data.destination;
     this._type = data.type;

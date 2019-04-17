@@ -6,7 +6,7 @@ export const getOffers = () => {
     offers = {};
     return provider.getOffers().then((offersArr) => {
       offersArr.forEach((offer) => {
-        offers[offer.type] = new Set(
+        offers[offer.type] = Array.from(
             offer.offers.map((element) => {
               return {
                 title: element.name,

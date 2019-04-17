@@ -1,6 +1,5 @@
 import {provider} from "./backend";
-import {state} from "./state";
-import { cost } from "./cost";
+import {cost} from "./cost";
 
 export const submitHandlers = (pointsArr) => {
   pointsArr.forEach(submitHandler);
@@ -8,7 +7,6 @@ export const submitHandlers = (pointsArr) => {
 
 export const submitHandler = (pointsItem) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
-  // tripDayItems.innerHTML = ``;
 
   if (pointsItem && pointsItem.point) {
     pointsItem.point.editHandler = () => {
@@ -48,8 +46,6 @@ export const submitHandler = (pointsItem) => {
           data: pointsItem.pointEdit.toRAW()
         })
         .then((data) => {
-          console.log(111, data);
-          console.log(data.id);
           pointsItem.pointEdit.id = data.id;
           pointsItem.point.id = data.id;
           pointsItem.point.render();
@@ -70,7 +66,6 @@ export const submitHandler = (pointsItem) => {
           pointsItem.pointEdit.shake();
         });
     };
-    // tripDayItems.appendChild(pointsItem.point.render());
   }
 };
 
