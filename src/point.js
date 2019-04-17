@@ -80,6 +80,10 @@ export class Point extends AbstractPoint {
     this._editHandler = handler;
   }
 
+  set isFavorite(value) {
+    this._isFavorite = value;
+  }
+
   _installHandlers() {
     this._element
       .querySelector(`.trip-point__title`)

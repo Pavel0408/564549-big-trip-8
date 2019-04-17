@@ -17,7 +17,7 @@ import {getDestinations} from "./destinations";
 import {getPoints} from "./points";
 
 import {AbstractPoint} from "./abstract-point";
-import { cost } from "./cost";
+import {cost} from "./cost";
 
 const flatpickr = require(`flatpickr`);
 
@@ -49,6 +49,7 @@ export class PointEdit extends AbstractPoint {
     this._id = data.id;
     this._isFavorite = data.isFavorite;
     this._index = ``;
+    this._changeFavoritHandelr = this._changeFavoritHandelr.bind(this);
   }
 
   get template() {
@@ -192,7 +193,7 @@ export class PointEdit extends AbstractPoint {
           <button class="point__button" type="reset">Delete</button>
         </div>
         <div class="paint__favorite-wrap">
-          <input type="checkbox" class="point__favorite-input visually-hidden" id="favorite" name="favorite">
+          <input type="checkbox" class="point__favorite-input visually-hidden" id="favorite" name="favorite" ${this._isFavorite ? `checked` : ``}>
           <label class="point__favorite" for="favorite">favorite</label>
         </div>
       </header>
@@ -270,23 +271,23 @@ export class PointEdit extends AbstractPoint {
 
   toRAW() {
     return {
-      "destination": {
-        "name": this._destination,
-        "description": this._description,
-        "pictures": this._images
+      destination: {
+        name: this._destination,
+        description: this._description,
+        pictures: this._images
       },
 
-      "type": this._type === `check` ? `check-in` : this._type,
-      "offers": [...this._offers.values()],
+      type: this._type === `check` ? `check-in` : this._type,
+      offers: [...this._offers.values()],
       // eslint-disable-next-line camelcase
-      "date_from": this._time.start.getTime(),
+      date_from: this._time.start.getTime(),
       // eslint-disable-next-line camelcase
-      "date_to": this._time.end.getTime(),
+      date_to: this._time.end.getTime(),
       // eslint-disable-next-line camelcase
-      "base_price": this._price,
-      "id": this._id,
+      base_price: this._price,
+      id: this._id,
       // eslint-disable-next-line camelcase
-      "is_favorite": this._isFavorite
+      is_favorite: this._isFavorite
     };
   }
 
@@ -350,6 +351,18 @@ export class PointEdit extends AbstractPoint {
     images.innerHTML = getMarkupImages(this._images);
   }
 
+  _changeFavoritHandelr() {
+    const points = getPoints();
+
+    if (this._isFavorite) {
+      this._isFavorite = false;
+      points[this._index].point.isFavorite = false;
+    } else {
+      this._isFavorite = true;
+      points[this._index].point.isFavorite = true;
+    }
+  }
+
   _installHandlers() {
     const form = this._element.querySelector(`.point form`);
     form.addEventListener(`submit`, this._submitHandler);
@@ -390,6 +403,10 @@ export class PointEdit extends AbstractPoint {
           this._changeIconHandler();
         });
       });
+
+    this._element
+      .querySelector(`.point__favorite-input`)
+      .addEventListener(`change`, this._changeFavoritHandelr);
 
     this._element.querySelector(`.point__date`).style.display = `inline`;
 
