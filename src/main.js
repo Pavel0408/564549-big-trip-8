@@ -66,7 +66,6 @@ const newButtonClickHandler = () => {
 
   points.push(newItem);
 
-
   console.log(points.length - 1);
   tripDayItems.insertBefore(
       points[points.length - 1].pointEdit.render(),
@@ -99,6 +98,15 @@ const statsClickHandler = (evt) => {
   new Stats().render();
 };
 
+const ESC_KEY_CODE = 27;
+
+const escPressHandler = (evt) => {
+  console.log(1);
+  if ((evt.keyCode === ESC_KEY_CODE)) {
+    state.render();
+  }
+};
+
 renderFilters();
 renderSort();
 
@@ -125,15 +133,27 @@ newPointButton.addEventListener(`click`, newButtonClickHandler);
 
 tableButton.addEventListener(`click`, tableClickHandler);
 statsButton.addEventListener(`click`, statsClickHandler);
+document.addEventListener(`keydown`, escPressHandler);
 
 window.addEventListener(
     `offline`,
     () => (document.title = `${document.title}[OFFLINE]`)
 );
+
+
 window.addEventListener(`online`, () => {
   document.title = document.title.split(`[OFFLINE]`)[0];
-  provider.syncPoints().then(getPointsFromServer).then(submitHandlers).then((points) => {
-    console.log(points);
-    state.render();
-  });
+  provider
+    .syncPoints()
+    .then(() => {
+      localStorage.clear();
+    })
+    .then(getDestinationsFromServer)
+    .then(getPointsFromServer)
+    .then(submitHandlers)
+    .then(() => {
+      let points = getPoints();
+      console.log(points);
+      state.render();
+    });
 });

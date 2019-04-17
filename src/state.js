@@ -23,6 +23,10 @@ class State {
     tripDayItems.innerHTML = ``;
     let fragment = document.createDocumentFragment();
     points.forEach((it) =>{
+      if(!it.point.price || !it.point._destination) {
+        it = null;
+        return;
+      }
       fragment.appendChild(it.point.render());
     });
     tripDayItems.appendChild(fragment);
