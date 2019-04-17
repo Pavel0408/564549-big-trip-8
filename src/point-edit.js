@@ -50,6 +50,7 @@ export class PointEdit extends AbstractPoint {
     this._isFavorite = data.isFavorite;
     this._index = ``;
     this._changeFavoritHandelr = this._changeFavoritHandelr.bind(this);
+    this._changeOffersHandler = this._changeOffersHandler.bind(this);
   }
 
   get template() {
@@ -193,7 +194,9 @@ export class PointEdit extends AbstractPoint {
           <button class="point__button" type="reset">Delete</button>
         </div>
         <div class="paint__favorite-wrap">
-          <input type="checkbox" class="point__favorite-input visually-hidden" id="favorite" name="favorite" ${this._isFavorite ? `checked` : ``}>
+          <input type="checkbox" class="point__favorite-input visually-hidden" id="favorite" name="favorite" ${
+  this._isFavorite ? `checked` : ``
+}>
           <label class="point__favorite" for="favorite">favorite</label>
         </div>
       </header>
@@ -262,7 +265,7 @@ export class PointEdit extends AbstractPoint {
   updateDestination(data) {
     this._destination = data.name;
     this._description = data.description;
-    this._images = data.pictures;
+    this._images = data.pictures.slice();
   }
 
   updateOffers(offers) {
@@ -334,6 +337,20 @@ export class PointEdit extends AbstractPoint {
       const offersWrap = this._element.querySelector(`.point__offers-wrap`);
       offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
     });
+  }
+
+  _changeOffersHandler(evt) {
+    const offer = this._offers[evt.target.dataset.id];
+    const priceInput = this._element.querySelector(`input[name="price"]`);
+
+    if (!offer.accepted) {
+      offer.accepted = true;
+      this._price = parseInt(this._price, 10) + offer.price;
+    } else {
+      offer.accepted = false;
+      this._price = parseInt(this._price, 10) - offer.price;
+    }
+    priceInput.value = this._price;
   }
 
   _changeDestinationHandler(evt) {
@@ -413,5 +430,9 @@ export class PointEdit extends AbstractPoint {
     this._element
       .querySelector(`.point__destination-input`)
       .addEventListener(`change`, this._changeDestinationHandler);
+
+    this._element.querySelectorAll(`.point__offers-input`).forEach((it) => {
+      it.addEventListener(`change`, this._changeOffersHandler);
+    });
   }
 }
