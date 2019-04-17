@@ -351,6 +351,7 @@ export class PointEdit extends AbstractPoint {
       this._price = parseInt(this._price, 10) - offer.price;
     }
     priceInput.value = this._price;
+    cost.render();
   }
 
   _changeDestinationHandler(evt) {

@@ -2,11 +2,13 @@ import {getPoints} from "./points";
 
 import {pointsIcons} from "./constants";
 
-import {renderTransportStats, renderMoneyStats} from "./render-stats";
+import {renderTransportStats, renderMoneyStats, renderTimeStats} from "./render-stats";
 
 import {PointEvents} from "./constants";
 
 import {Component} from "./component";
+
+const MS_IN_HOUR = 60 * 60 * 1000;
 
 export class Stats extends Component {
   constructor() {
@@ -62,9 +64,25 @@ export class Stats extends Component {
             eventTotalCost += parseInt(pointsItem.point.price, 10);
           }
         });
-
       return eventTotalCost;
     });
+
+    this._timeData = [...this._moneySet].map((type) => {
+      let eventTotalTime = 0;
+      this._points
+        .filter((item) => {
+          return item && item.point;
+        })
+        .forEach((pointsItem) => {
+          if (pointsItem.point.type === type) {
+            eventTotalTime += pointsItem.point._time.end - pointsItem.point._time.start;
+          }
+        });
+
+      return Math.floor(eventTotalTime / MS_IN_HOUR);
+    });
+
+    console.log(this._timeData);
 
     this._moneyLabels = this._generateLabelsArr(this._moneySet);
   }
@@ -87,6 +105,7 @@ export class Stats extends Component {
     this._statsСontainer.innerHTML = this.template;
     renderMoneyStats(this._moneyLabels, this._moneyData);
     renderTransportStats(this._transportLabels, this._transportData);
+    renderTimeStats(this._moneyLabels, this._timeData);
   }
 
   _generateLabelsArr(set) {
