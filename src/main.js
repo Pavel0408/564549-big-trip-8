@@ -15,6 +15,7 @@ import PointEdit from "./point-edit";
 
 import {generateNewPointData} from "./new-point";
 import {filterName, sortName} from "./constants";
+import {getOffers} from "./offfers";
 
 const ESC_KEY_CODE = 27;
 
@@ -142,6 +143,7 @@ window.addEventListener(`online`, () => {
       localStorage.clear();
     })
     .then(getDestinationsFromServer)
+    .then(getOffers)
     .then(getPointsFromServer)
     .then(submitHandlers)
     .then(() => {
