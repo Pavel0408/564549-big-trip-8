@@ -16,7 +16,7 @@ import {getDestinations} from "./destinations";
 
 import {getPoints} from "./points";
 
-import {AbstractPoint} from "./abstract-point";
+import AbstractPoint from "./abstract-point";
 import {cost} from "./cost";
 
 const flatpickr = require(`flatpickr`);
@@ -28,7 +28,7 @@ const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
   month: `short`
 });
 
-export class PointEdit extends AbstractPoint {
+export default class PointEdit extends AbstractPoint {
   constructor(data) {
     super({
       price: data.price,
@@ -271,9 +271,9 @@ export class PointEdit extends AbstractPoint {
   updateOffers(offers) {
     if (offers && offers.slice) {
       this._offers = offers.slice();
+    } else {
+      this._offers = [];
     }
-
-    this._offers = [];
   }
 
   toRAW() {
@@ -330,6 +330,9 @@ export class PointEdit extends AbstractPoint {
   }
 
   _changeIconHandler() {
+    const destinationLabel = this._element.querySelector(
+        `.point__destination-label`
+    );
     getOffers().then((offers) => {
       const type = this._element.querySelector(
           `.travel-way__select-input:checked`
@@ -340,6 +343,7 @@ export class PointEdit extends AbstractPoint {
       this.updateOffers(offers[type.value]);
       const offersWrap = this._element.querySelector(`.point__offers-wrap`);
       offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
+      destinationLabel.textContent = pointsTexts[type.value];
     });
 
     const openSelectInput = this._element.querySelector(`.travel-way__toggle`);

@@ -4,10 +4,10 @@ import {getMarkupOffers} from "./get-markup-offers";
 
 import {addLeadingZero, calculateInterval} from "./utilities";
 
-import {AbstractPoint} from "./abstract-point";
+import AbstractPoint from "./abstract-point";
 import {cost} from "./cost";
 
-export class Point extends AbstractPoint {
+export default class Point extends AbstractPoint {
   constructor(data) {
     super({
       price: data.price,

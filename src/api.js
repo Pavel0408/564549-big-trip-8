@@ -1,6 +1,6 @@
-import {Point} from "./point";
-import {OffersModel} from "./offers-model";
-import {DestinationModel} from "./destination-model";
+import Point from "./point";
+import OffersModel from "./offers-model";
+import DestinationModel from "./destination-model";
 
 const Method = {
   GET: `GET`,
@@ -21,7 +21,7 @@ const toJSON = (response) => {
   return response.json();
 };
 
-export const API = class {
+export default class API {
   constructor({endPoint, authorization}) {
     this._endPoint = endPoint;
     this._authorization = authorization;
@@ -68,7 +68,6 @@ export const API = class {
   }
 
   createPoint({data}) {
-    console.log(data);
     return this._load({
       url: `points`,
       method: Method.POST,
@@ -79,10 +78,8 @@ export const API = class {
     })
       .then(toJSON)
       .then((newData) => {
-        console.log(newData.id);
-        console.log(data);
         const parsedData = Point.parseServerData(newData);
-        console.log(parsedData);
+
         return {
           newData,
           parsedData
@@ -133,4 +130,4 @@ export const API = class {
       headers
     }).then(checkStatus);
   }
-};
+}

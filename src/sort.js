@@ -1,7 +1,11 @@
 import {state} from "./state";
+import {sortName} from "./constants";
+import Component from "./component";
 
-export class Sort {
+export default class Sort extends Component {
   constructor(name) {
+    super();
+
     this._name = name;
     this._pointsArr = null;
     this._elment = null;
@@ -49,13 +53,7 @@ export class Sort {
   }
 }
 
-export const sortName = {
-  EVENT: `event`,
-  TIME: `time`,
-  PRICE: `price`
-};
-
-export const sortByName = {
+const sortByName = {
   [sortName.EVENT]: () => {
     return 0;
   },

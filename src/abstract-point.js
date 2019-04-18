@@ -1,6 +1,6 @@
-import {Component} from "./component";
+import Component from "./component";
 
-export class AbstractPoint extends Component {
+export default class AbstractPoint extends Component {
   constructor(data) {
     super();
 

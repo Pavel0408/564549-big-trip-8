@@ -8,9 +8,9 @@ import {
   renderTimeStats
 } from "./render-stats";
 
-import {PointEvents} from "./constants";
+import {pointEvents} from "./constants";
 
-import {Component} from "./component";
+import Component from "./component";
 
 const MS_IN_HOUR = 60 * 60 * 1000;
 
@@ -27,7 +27,7 @@ export class Stats extends Component {
         return item && item.point;
       })
       .forEach((pointsItem) => {
-        if (PointEvents.transportTypes.indexOf(pointsItem.point.type) !== -1) {
+        if (pointEvents.transportTypes.indexOf(pointsItem.point.type) !== -1) {
           this._transportSet.add(pointsItem.point.type);
         }
       });

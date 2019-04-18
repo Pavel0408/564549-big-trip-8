@@ -1,4 +1,4 @@
-export class DestinationModel {
+export default class DestinationModel {
   constructor(data) {
     this._name = data[`name`];
     this._description = data[`description`];

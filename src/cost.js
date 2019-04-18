@@ -1,4 +1,4 @@
-import {Component} from "./component";
+import Component from "./component";
 import {getPoints} from "./points";
 
 class Cost extends Component {

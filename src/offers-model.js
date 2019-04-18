@@ -1,4 +1,4 @@
-export class OffersModel {
+export default class OffersModel {
   constructor(data) {
     this._type = data[`type`];
     this._offers = data[`offers`].map((it) => {

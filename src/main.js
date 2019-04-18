@@ -1,4 +1,4 @@
-import {Filter, filterName} from "./filter";
+import Filter from "./filter";
 
 import {Stats} from "./stats";
 import {state} from "./state";
@@ -8,12 +8,22 @@ import {getPointsFromServer, getPoints} from "./points";
 
 import {getDestinationsFromServer} from "./destinations";
 import {provider} from "./backend";
-import {Sort, sortName} from "./sort";
+import Sort from "./sort";
 
-import {Point} from "./point";
-import {PointEdit} from "./point-edit";
+import Point from "./point";
+import PointEdit from "./point-edit";
 
 import {generateNewPointData} from "./new-point";
+import {filterName, sortName} from "./constants";
+
+const ESC_KEY_CODE = 27;
+
+const switchesArr = document.querySelectorAll(`.view-switch__item`);
+const [tableButton, statsButton] = switchesArr;
+const pointsContainer = document.querySelector(`.trip-points`);
+const statsContainer = document.querySelector(`.statistic`);
+const tripDayItems = document.querySelector(`.trip-day__items`);
+const newPointButton = document.querySelector(`.new-event`);
 
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
@@ -54,8 +64,6 @@ const renderSort = () => {
 };
 
 const newButtonClickHandler = () => {
-  const tripDayItems = document.querySelector(`.trip-day__items`);
-  // const newPoint = new PointNew();
   const points = getPoints();
   const newItem = {
     point: new Point(generateNewPointData()),
@@ -70,11 +78,6 @@ const newButtonClickHandler = () => {
       tripDayItems.firstChild
   );
 };
-
-const switchesArr = document.querySelectorAll(`.view-switch__item`);
-const [tableButton, statsButton] = switchesArr;
-const pointsContainer = document.querySelector(`.trip-points`);
-const statsContainer = document.querySelector(`.statistic`);
 
 const tableClickHandler = (evt) => {
   evt.preventDefault();
@@ -96,8 +99,6 @@ const statsClickHandler = (evt) => {
   new Stats().render();
 };
 
-const ESC_KEY_CODE = 27;
-
 const escPressHandler = (evt) => {
   if (evt.keyCode === ESC_KEY_CODE) {
     state.render();
@@ -107,7 +108,6 @@ const escPressHandler = (evt) => {
 renderFilters();
 renderSort();
 
-const tripDayItems = document.querySelector(`.trip-day__items`);
 tripDayItems.textContent = `Loading route...`;
 
 getDestinationsFromServer()
@@ -123,7 +123,6 @@ getDestinationsFromServer()
 document.querySelector(`#filter-everything`).setAttribute(`checked`, `checked`);
 document.querySelector(`#sorting-event`).setAttribute(`checked`, `checked`);
 
-const newPointButton = document.querySelector(`.new-event`);
 newPointButton.addEventListener(`click`, newButtonClickHandler);
 
 tableButton.addEventListener(`click`, tableClickHandler);

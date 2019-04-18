@@ -1,12 +1,12 @@
-import {Point} from "./point";
-import {OffersModel} from "./offers-model";
-import {DestinationModel} from "./destination-model";
+import Point from "./point";
+import OffersModel from "./offers-model";
+import DestinationModel from "./destination-model";
 
 const objectToArray = (object) => {
   return Object.keys(object).map((id) => object[id]);
 };
 
-export const Provider = class {
+export default class Provider {
   constructor({api, store, generateId}) {
     this._api = api;
     this._store = store;
@@ -127,4 +127,4 @@ export const Provider = class {
   _isOnline() {
     return window.navigator.onLine;
   }
-};
+}

@@ -2,7 +2,7 @@ export const generateNewPointData = () => {
   return {
     title: ``,
     type: `check`,
-    offers: new Set([]),
+    offers: [],
     description: ``,
     time: {
       start: new Date(),

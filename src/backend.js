@@ -1,6 +1,6 @@
-import {API} from "./api";
-import {Store} from "./store";
-import {Provider} from "./provider";
+import API from "./api";
+import Store from "./store";
+import Provider from "./provider";
 
 const URL = `https://es8-demo-srv.appspot.com/big-trip/`;
 const AUTHORIZATION = `Basic eo0w590ik29889aaa${String(new Date().getTime())}`;

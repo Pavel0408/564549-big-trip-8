@@ -1,10 +1,11 @@
-import {Component} from "./component";
+import Component from "./component";
 
 import {getPoints} from "./points";
 
 import {state} from "./state";
+import {filterName} from "./constants";
 
-export class Filter extends Component {
+export default class Filter extends Component {
   constructor(name) {
     super();
 
@@ -54,12 +55,6 @@ export class Filter extends Component {
     input.addEventListener(`change`, this._changeHandler);
   }
 }
-
-export const filterName = {
-  EVRYTHING: `everything`,
-  FUTURE: `future`,
-  PAST: `past`
-};
 
 const FilterByName = {
   [filterName.EVRYTHING]: () => {
