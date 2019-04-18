@@ -1,7 +1,7 @@
 export const generateNewPointData = () => {
   return {
     title: ``,
-    type: `check`,
+    type: `sightseeing`,
     offers: [],
     description: ``,
     time: {
