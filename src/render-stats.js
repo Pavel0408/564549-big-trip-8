@@ -8,7 +8,6 @@ export const renderMoneyStats = (monyLabeslArr, moneyDataArr) => {
   const moneyCtx = document.querySelector(`.statistic__money`);
   moneyCtx.height = BAR_HEIGHT * 6;
 
-  // eslint-disable-next-line no-unused-vars
   const moneyChart = new Chart(moneyCtx, {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
@@ -79,13 +78,14 @@ export const renderMoneyStats = (monyLabeslArr, moneyDataArr) => {
       }
     }
   });
+
+  return moneyChart;
 };
 
 export const renderTransportStats = (transportLabelsArr, transportDataArr) => {
   const transportCtx = document.querySelector(`.statistic__transport`);
   transportCtx.height = BAR_HEIGHT * 4;
 
-  // eslint-disable-next-line no-unused-vars
   const transportChart = new Chart(transportCtx, {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
@@ -156,12 +156,14 @@ export const renderTransportStats = (transportLabelsArr, transportDataArr) => {
       }
     }
   });
+
+  return transportChart;
 };
 
 export const renderTimeStats = (labelsArr, times) => {
   const timeSpendCtx = document.querySelector(`.statistic__time-spend`);
   timeSpendCtx.height = BAR_HEIGHT * 6;
-  // eslint-disable-next-line no-unused-vars
+
   const timeSpendChart = new Chart(timeSpendCtx, {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
@@ -232,4 +234,6 @@ export const renderTimeStats = (labelsArr, times) => {
       }
     }
   });
+
+  return timeSpendChart;
 };
