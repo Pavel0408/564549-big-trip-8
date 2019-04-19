@@ -1,10 +1,3 @@
-export const pointsTitles = [
-  `Taxi to Airport`,
-  `Flight to Geneva`,
-  `Drive to Chamonix`,
-  `Check into a hotel`
-];
-
 export const pointEvents = {
   transportTypes: [
     `taxi`,
@@ -50,13 +43,13 @@ export const pointsTexts = {
   restaurant: `go to`
 };
 
-export const filterName = {
+export const filterNames = {
   EVRYTHING: `everything`,
   FUTURE: `future`,
   PAST: `past`
 };
 
-export const sortName = {
+export const sortNames = {
   EVENT: `event`,
   TIME: `time`,
   PRICE: `price`

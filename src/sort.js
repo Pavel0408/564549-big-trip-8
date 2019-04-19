@@ -1,5 +1,5 @@
 import {state} from "./state";
-import {sortName} from "./constants";
+import {sortNames} from "./constants";
 import Component from "./component";
 
 export default class Sort extends Component {
@@ -44,7 +44,6 @@ export default class Sort extends Component {
   _changeHandler() {
     state.sort = this;
     state.render();
-    // renderPoints(this._sortArr());
   }
 
   _installHandler() {
@@ -54,17 +53,17 @@ export default class Sort extends Component {
 }
 
 const sortByName = {
-  [sortName.EVENT]: () => {
+  [sortNames.EVENT]: () => {
     return 0;
   },
 
-  [sortName.TIME]: (a, b) => {
+  [sortNames.TIME]: (a, b) => {
     const firstDuration = a.point.time.end - a.point.time.start;
     const secondDuration = b.point.time.end - b.point.time.start;
     return secondDuration - firstDuration;
   },
 
-  [sortName.PRICE]: (a, b) => {
+  [sortNames.PRICE]: (a, b) => {
     return b.point.price - a.point.price;
   }
 };

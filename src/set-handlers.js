@@ -1,11 +1,11 @@
 import {provider} from "./backend";
 import {cost} from "./cost";
 
-export const submitHandlers = (pointsArr) => {
-  pointsArr.forEach(submitHandler);
+export const setHandlers = (pointsArr) => {
+  pointsArr.forEach(setHandler);
 };
 
-export const submitHandler = (pointsItem) => {
+export const setHandler = (pointsItem) => {
   const tripDayItems = document.querySelector(`.trip-day__items`);
 
   if (pointsItem && pointsItem.point) {

@@ -2,7 +2,7 @@ import Filter from "./filter";
 
 import {Stats} from "./stats";
 import {state} from "./state";
-import {submitHandlers, submitHandler} from "./set-handlers";
+import {setHandlers, setHandler} from "./set-handlers";
 
 import {getPointsFromServer, getPoints} from "./points";
 
@@ -14,7 +14,7 @@ import Point from "./point";
 import PointEdit from "./point-edit";
 
 import {generateNewPointData} from "./new-point";
-import {filterName, sortName} from "./constants";
+import {filterNames, sortNames} from "./constants";
 import {getOffers} from "./offfers";
 
 const ESC_KEY_CODE = 27;
@@ -29,15 +29,15 @@ const newPointButton = document.querySelector(`.new-event`);
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
   let fragment = document.createDocumentFragment();
-  const filterEvtything = new Filter(filterName.EVRYTHING);
+  const filterEvtything = new Filter(filterNames.EVRYTHING);
   state.filter = filterEvtything;
   filterEvtything.render().forEach((elem) => {
     fragment.appendChild(elem);
   });
-  new Filter(filterName.FUTURE).render().forEach((elem) => {
+  new Filter(filterNames.FUTURE).render().forEach((elem) => {
     fragment.appendChild(elem);
   });
-  new Filter(filterName.PAST).render().forEach((elem) => {
+  new Filter(filterNames.PAST).render().forEach((elem) => {
     fragment.appendChild(elem);
   });
 
@@ -48,16 +48,16 @@ const renderSort = () => {
   const formSort = document.querySelector(`.trip-sorting`);
   const sortLabel = document.querySelector(`.trip-sorting__item`);
   let fragment = document.createDocumentFragment();
-  const sortEvent = new Sort(sortName.EVENT);
+  const sortEvent = new Sort(sortNames.EVENT);
   state.sort = sortEvent;
   sortEvent.render().forEach((elem) => {
     fragment.appendChild(elem);
   });
-  new Sort(sortName.TIME).render().forEach((elem) => {
+  new Sort(sortNames.TIME).render().forEach((elem) => {
     fragment.appendChild(elem);
   });
 
-  new Sort(sortName.PRICE).render().forEach((elem) => {
+  new Sort(sortNames.PRICE).render().forEach((elem) => {
     fragment.appendChild(elem);
   });
 
@@ -71,7 +71,7 @@ const newButtonClickHandler = () => {
     pointEdit: new PointEdit(generateNewPointData())
   };
 
-  submitHandler(newItem);
+  setHandler(newItem);
   points.push(newItem);
 
   tripDayItems.insertBefore(
@@ -112,8 +112,9 @@ renderSort();
 tripDayItems.textContent = `Loading route...`;
 
 getDestinationsFromServer()
+  .then(getOffers)
   .then(getPointsFromServer)
-  .then(submitHandlers)
+  .then(setHandlers)
   .then(() => {
     state.render();
   })
@@ -145,7 +146,7 @@ window.addEventListener(`online`, () => {
     .then(getDestinationsFromServer)
     .then(getOffers)
     .then(getPointsFromServer)
-    .then(submitHandlers)
+    .then(setHandlers)
     .then(() => {
       state.render();
     });
