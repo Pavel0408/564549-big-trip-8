@@ -1,11 +1,4 @@
-export const pointsTitles = [
-  `Taxi to Airport`,
-  `Flight to Geneva`,
-  `Drive to Chamonix`,
-  `Check into a hotel`
-];
-
-export const PointEvents = {
+export const pointEvents = {
   transportTypes: [
     `taxi`,
     `bus`,
@@ -20,8 +13,8 @@ export const PointEvents = {
 };
 
 export const pointsOptions = [
-  ...PointEvents.transportTypes,
-  ...PointEvents.stopTypes
+  ...pointEvents.transportTypes,
+  ...pointEvents.stopTypes
 ];
 
 export const pointsIcons = {
@@ -48,4 +41,16 @@ export const pointsTexts = {
   check: `Check into`,
   sightseeing: `go to`,
   restaurant: `go to`
+};
+
+export const filterNames = {
+  EVRYTHING: `everything`,
+  FUTURE: `future`,
+  PAST: `past`
+};
+
+export const sortNames = {
+  EVENT: `event`,
+  TIME: `time`,
+  PRICE: `price`
 };

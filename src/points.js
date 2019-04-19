@@ -1,6 +1,6 @@
-import {Point} from "./point";
+import Point from "./point";
 
-import {PointEdit} from "./point-edit";
+import PointEdit from "./point-edit";
 
 import {provider} from "./backend";
 

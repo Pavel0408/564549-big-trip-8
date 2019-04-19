@@ -1,6 +1,6 @@
-import {Point} from "./point";
-import {OffersModel} from "./offers-model";
-import {DestinationModel} from "./destination-model";
+import Point from "./point";
+import OffersModel from "./offers-model";
+import DestinationModel from "./destination-model";
 
 const Method = {
   GET: `GET`,
@@ -21,7 +21,7 @@ const toJSON = (response) => {
   return response.json();
 };
 
-export const API = class {
+export default class API {
   constructor({endPoint, authorization}) {
     this._endPoint = endPoint;
     this._authorization = authorization;
@@ -67,15 +67,24 @@ export const API = class {
       });
   }
 
-  createPoint({point}) {
+  createPoint({data}) {
     return this._load({
       url: `points`,
       method: Method.POST,
-      body: JSON.stringify(point),
+      body: JSON.stringify(data),
       headers: new Headers({
         "Content-Type": `application/json`
       })
-    }).then(toJSON);
+    })
+      .then(toJSON)
+      .then((newData) => {
+        const parsedData = Point.parseServerData(newData);
+
+        return {
+          newData,
+          parsedData
+        };
+      });
   }
 
   updatePoint({id, data}) {
@@ -89,7 +98,7 @@ export const API = class {
     })
       .then(toJSON)
       .then((newData) => {
-        const parsedData = Point.parseServerData(data);
+        const parsedData = Point.parseServerData(newData);
         return {
           newData,
           parsedData
@@ -121,4 +130,4 @@ export const API = class {
       headers
     }).then(checkStatus);
   }
-};
+}

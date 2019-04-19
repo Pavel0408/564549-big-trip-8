@@ -1,4 +1,4 @@
-export const Store = class {
+export default class Store {
   constructor({key, storage, optionsKey}) {
     this._storage = storage;
     this._storeKey = key;
@@ -53,4 +53,4 @@ export const Store = class {
       return emptyItems;
     }
   }
-};
+}

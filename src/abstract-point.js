@@ -1,6 +1,6 @@
-import {Component} from "./component";
+import Component from "./component";
 
-export class AbstractPoint extends Component {
+export default class AbstractPoint extends Component {
   constructor(data) {
     super();
 
@@ -12,6 +12,10 @@ export class AbstractPoint extends Component {
     this._type = data.type;
     this._time = data.time;
     this._price = data.price;
+  }
+
+  get time() {
+    return this._time;
   }
 
   update(data) {

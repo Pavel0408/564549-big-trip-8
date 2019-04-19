@@ -1,10 +1,11 @@
-import {Component} from "./component";
+import Component from "./component";
 
 import {getPoints} from "./points";
 
-import {renderPoints} from "./render-points";
+import {state} from "./state";
+import {filterNames} from "./constants";
 
-export class Filter extends Component {
+export default class Filter extends Component {
   constructor(name) {
     super();
 
@@ -44,7 +45,9 @@ export class Filter extends Component {
   }
 
   _changeHandler() {
-    renderPoints(this._filterArr());
+    state.filter = this;
+    state.render();
+    // renderPoints(this._filterArr());
   }
 
   _installHandler() {
@@ -53,20 +56,14 @@ export class Filter extends Component {
   }
 }
 
-export const filterName = {
-  EVRYTHING: `everything`,
-  FUTURE: `future`,
-  PAST: `past`
-};
-
 const FilterByName = {
-  [filterName.EVRYTHING]: () => {
+  [filterNames.EVRYTHING]: () => {
     return true;
   },
-  [filterName.FUTURE]: (now, item) => {
+  [filterNames.FUTURE]: (now, item) => {
     return now < item.point.time.start;
   },
-  [filterName.PAST]: (now, item) => {
+  [filterNames.PAST]: (now, item) => {
     return now > item.point.time.end;
   }
 };

@@ -4,9 +4,10 @@ import {getMarkupOffers} from "./get-markup-offers";
 
 import {addLeadingZero, calculateInterval} from "./utilities";
 
-import {AbstractPoint} from "./abstract-point";
+import AbstractPoint from "./abstract-point";
+import {cost} from "./cost";
 
-export class Point extends AbstractPoint {
+export default class Point extends AbstractPoint {
   constructor(data) {
     super({
       price: data.price,
@@ -22,6 +23,7 @@ export class Point extends AbstractPoint {
     this._editHandler = null;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
+    this._changeOffersHandler = this._changeOffersHandler.bind(this);
   }
 
   get template() {
@@ -80,17 +82,40 @@ export class Point extends AbstractPoint {
     this._editHandler = handler;
   }
 
+  set isFavorite(value) {
+    this._isFavorite = value;
+  }
+
+  _changeOffersHandler(evt) {
+    const offer = this._offers[evt.target.dataset.id];
+    const priceOutput = this._element.querySelector(`.trip-point__price`);
+
+    if (!offer.accepted) {
+      offer.accepted = true;
+      this._price = parseInt(this._price, 10) + offer.price;
+    } else {
+      offer.accepted = false;
+      this._price = parseInt(this._price, 10) - offer.price;
+    }
+    priceOutput.textContent = `€ ${this._price}`;
+    cost.render();
+  }
+
   _installHandlers() {
     this._element
       .querySelector(`.trip-point__title`)
       .addEventListener(`click`, this._editHandler);
+
+    this._element.querySelectorAll(`.trip-point__offer`).forEach((button) => {
+      button.addEventListener(`click`, this._changeOffersHandler);
+    });
   }
 
   static parseServerData(data) {
     return {
       title: data[`destination`][`name`],
       type: data.type === `check-in` ? `check` : data[`type`],
-      offers: new Set(data[`offers`]),
+      offers: Array.from(data[`offers`]),
       description: data[`destination`][`description`],
       time: {
         start: new Date(data[`date_from`]),

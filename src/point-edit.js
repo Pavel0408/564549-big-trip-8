@@ -16,7 +16,8 @@ import {getDestinations} from "./destinations";
 
 import {getPoints} from "./points";
 
-import {AbstractPoint} from "./abstract-point";
+import AbstractPoint from "./abstract-point";
+import {cost} from "./cost";
 
 const flatpickr = require(`flatpickr`);
 
@@ -27,7 +28,7 @@ const monthFormatter = new Intl.DateTimeFormat(`en-US`, {
   month: `short`
 });
 
-export class PointEdit extends AbstractPoint {
+export default class PointEdit extends AbstractPoint {
   constructor(data) {
     super({
       price: data.price,
@@ -48,6 +49,8 @@ export class PointEdit extends AbstractPoint {
     this._id = data.id;
     this._isFavorite = data.isFavorite;
     this._index = ``;
+    this._changeFavoritHandelr = this._changeFavoritHandelr.bind(this);
+    this._changeOffersHandler = this._changeOffersHandler.bind(this);
   }
 
   get template() {
@@ -155,7 +158,7 @@ export class PointEdit extends AbstractPoint {
 }</label>
           <input list="destination-list" class="point__destination-input"  id="destination" value="${
   this._destination
-}" name="destination" data-id="${this._id}">
+}" name="destination" data-id="${this._id}" required>
           <datalist id="destination-list">
             ${destinationsOptions}
           </datalist>
@@ -184,14 +187,16 @@ export class PointEdit extends AbstractPoint {
           <span class="point__price-currency">€</span>
           <input class="point__input" type="text" value="${
   this._price
-}" name="price">
+}" name="price" required>
         </label>
         <div class="point__buttons">
           <button class="point__button point__button--save" type="submit">Save</button>
           <button class="point__button" type="reset">Delete</button>
         </div>
         <div class="paint__favorite-wrap">
-          <input type="checkbox" class="point__favorite-input visually-hidden" id="favorite" name="favorite">
+          <input type="checkbox" class="point__favorite-input visually-hidden" id="favorite" name="favorite" ${
+  this._isFavorite ? `checked` : ``
+}>
           <label class="point__favorite" for="favorite">favorite</label>
         </div>
       </header>
@@ -260,32 +265,36 @@ export class PointEdit extends AbstractPoint {
   updateDestination(data) {
     this._destination = data.name;
     this._description = data.description;
-    this._images = data.pictures;
+    this._images = data.pictures.slice();
   }
 
   updateOffers(offers) {
-    this._offers = new Set(offers);
+    if (offers && offers.slice) {
+      this._offers = offers.slice();
+    } else {
+      this._offers = [];
+    }
   }
 
   toRAW() {
     return {
-      "destination": {
-        name: this._destination,
-        description: this._description
+      'destination': {
+        'name': this._destination,
+        'description': this._description,
+        'pictures': this._images
       },
 
-      "type": this._type === `check` ? `check-in` : this._type,
-      "offers": [...this._offers.values()],
+      'type': this._type === `check` ? `check-in` : this._type,
+      'offers': [...this._offers.values()],
       // eslint-disable-next-line camelcase
-      "date_from": this._time.start.getTime(),
+      'date_from': this._time.start.getTime(),
       // eslint-disable-next-line camelcase
-      "date_to": this._time.end.getTime(),
+      'date_to': this._time.end.getTime(),
       // eslint-disable-next-line camelcase
-      "base_price": this._price,
-      " pictures": this._images,
-      "id": this._id,
+      'base_price': this._price,
+      ' id': this._id,
       // eslint-disable-next-line camelcase
-      "is_favorite": this._isFavorite
+      'is_favorite': this._isFavorite
     };
   }
 
@@ -307,6 +316,7 @@ export class PointEdit extends AbstractPoint {
       .then(() => {
         this._unrender();
         points[this._index] = null;
+        cost.render();
       })
       .catch(() => {
         formElements.forEach((elem) => {
@@ -320,6 +330,9 @@ export class PointEdit extends AbstractPoint {
   }
 
   _changeIconHandler() {
+    const destinationLabel = this._element.querySelector(
+        `.point__destination-label`
+    );
     getOffers().then((offers) => {
       const type = this._element.querySelector(
           `.travel-way__select-input:checked`
@@ -330,7 +343,26 @@ export class PointEdit extends AbstractPoint {
       this.updateOffers(offers[type.value]);
       const offersWrap = this._element.querySelector(`.point__offers-wrap`);
       offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
+      destinationLabel.textContent = pointsTexts[type.value];
     });
+
+    const openSelectInput = this._element.querySelector(`.travel-way__toggle`);
+    openSelectInput.click();
+  }
+
+  _changeOffersHandler(evt) {
+    const offer = this._offers[evt.target.dataset.id];
+    const priceInput = this._element.querySelector(`input[name="price"]`);
+
+    if (!offer.accepted) {
+      offer.accepted = true;
+      this._price = parseInt(this._price, 10) + offer.price;
+    } else {
+      offer.accepted = false;
+      this._price = parseInt(this._price, 10) - offer.price;
+    }
+    priceInput.value = this._price;
+    cost.render();
   }
 
   _changeDestinationHandler(evt) {
@@ -346,6 +378,18 @@ export class PointEdit extends AbstractPoint {
 
     const images = this._element.querySelector(`.point__destination-images`);
     images.innerHTML = getMarkupImages(this._images);
+  }
+
+  _changeFavoritHandelr() {
+    const points = getPoints();
+
+    if (this._isFavorite) {
+      this._isFavorite = false;
+      points[this._index].point.isFavorite = false;
+    } else {
+      this._isFavorite = true;
+      points[this._index].point.isFavorite = true;
+    }
   }
 
   _installHandlers() {
@@ -389,10 +433,18 @@ export class PointEdit extends AbstractPoint {
         });
       });
 
+    this._element
+      .querySelector(`.point__favorite-input`)
+      .addEventListener(`change`, this._changeFavoritHandelr);
+
     this._element.querySelector(`.point__date`).style.display = `inline`;
 
     this._element
       .querySelector(`.point__destination-input`)
       .addEventListener(`change`, this._changeDestinationHandler);
+
+    this._element.querySelectorAll(`.point__offers-input`).forEach((it) => {
+      it.addEventListener(`change`, this._changeOffersHandler);
+    });
   }
 }

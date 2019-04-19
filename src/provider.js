@@ -1,12 +1,12 @@
-import {Point} from "./point";
-import {OffersModel} from "./offers-model";
-import {DestinationModel} from "./destination-model";
+import Point from "./point";
+import OffersModel from "./offers-model";
+import DestinationModel from "./destination-model";
 
 const objectToArray = (object) => {
   return Object.keys(object).map((id) => object[id]);
 };
 
-export const Provider = class {
+export default class Provider {
   constructor({api, store, generateId}) {
     this._api = api;
     this._store = store;
@@ -15,6 +15,9 @@ export const Provider = class {
   }
 
   updatePoint({id, data}) {
+    if (id === ``) {
+      return this.createPoint({data});
+    }
     if (this._isOnline()) {
       return this._api.updatePoint({id, data}).then((point) => {
         this._store.setItem({key: point.id, item: point.newData});
@@ -29,7 +32,26 @@ export const Provider = class {
     }
   }
 
+  createPoint({data}) {
+    if (this._isOnline()) {
+      return this._api.createPoint({data}).then((point) => {
+        this._store.setItem({key: point.id, item: point.newData});
+
+        return point.parsedData;
+      });
+    } else {
+      const point = data;
+      point.id = this._generateId();
+      this._needSync = true;
+      this._store.setItem({key: point.id, item: point});
+      return Promise.resolve(Point.parseServerData(point));
+    }
+  }
+
   deletePoint({id}) {
+    if (id === ``) {
+      return Promise.resolve(true);
+    }
     if (this._isOnline()) {
       return this._api.deletePoint({id}).then(() => {
         this._store.removeItem({key: id});
@@ -105,4 +127,4 @@ export const Provider = class {
   _isOnline() {
     return window.navigator.onLine;
   }
-};
+}
