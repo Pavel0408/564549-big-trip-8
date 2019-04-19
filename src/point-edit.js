@@ -404,25 +404,25 @@ export default class PointEdit extends AbstractPoint {
     });
 
     flatpickr(this._element.querySelector(`input[name=first-time]`), {
-      enableTime: true,
-      noCalendar: true,
-      altInput: true,
-      altFormat: `H:i`,
-      dateFormat: `H:i`,
+      'enableTime': true,
+      'noCalendar': true,
+      'altInput': true,
+      'altFormat': `H:i`,
+      'dateFormat': `H:i`,
       // eslint-disable-next-line camelcase
-      time_24hr: true,
-      defaultDate: this._time.start
+      'time_24hr': true,
+      'defaultDate': this._time.start
     });
 
     flatpickr(this._element.querySelector(`input[name=second-time]`), {
-      enableTime: true,
-      noCalendar: true,
-      altInput: true,
-      altFormat: `H:i`,
-      dateFormat: `H:i`,
+      'enableTime': true,
+      'noCalendar': true,
+      'altInput': true,
+      'altFormat': `H:i`,
+      ' dateFormat': `H:i`,
       // eslint-disable-next-line camelcase
-      time_24hr: true,
-      defaultDate: this._time.end
+      'time_24hr': true,
+      'defaultDate': this._time.end
     });
 
     this._element
