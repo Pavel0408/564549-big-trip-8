@@ -45,7 +45,6 @@ export default class PointEdit extends AbstractPoint {
     this._resetHandler = this._resetHandler.bind(this);
     this._changeDestinationHandler = this._changeDestinationHandler.bind(this);
     this._images = data.images;
-    this._item = 111;
     this._id = data.id;
     this._isFavorite = data.isFavorite;
     this._index = ``;
