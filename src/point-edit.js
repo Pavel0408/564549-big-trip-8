@@ -19,7 +19,7 @@ import {getPoints} from "./points";
 import AbstractPoint from "./abstract-point";
 import {cost} from "./cost";
 
-const flatpickr = require(`flatpickr`);
+import flatpickr from "flatpickr";
 
 const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
   day: `numeric`
