@@ -408,7 +408,6 @@ export default class PointEdit extends AbstractPoint {
       'altInput': true,
       'altFormat': `H:i`,
       'dateFormat': `H:i`,
-      // eslint-disable-next-line camelcase
       'time_24hr': true,
       'defaultDate': this._time.start
     });
@@ -419,7 +418,6 @@ export default class PointEdit extends AbstractPoint {
       'altInput': true,
       'altFormat': `H:i`,
       ' dateFormat': `H:i`,
-      // eslint-disable-next-line camelcase
       'time_24hr': true,
       'defaultDate': this._time.end
     });
