@@ -114,7 +114,6 @@ renderSort();
 
 tripDayItems.textContent = `Loading route...`;
 
-provider.storageClear();
 getDestinationsFromServer()
   .then(getOffers)
   .then(getPointsFromServer)
