@@ -20,6 +20,7 @@ import AbstractPoint from "./abstract-point";
 import {cost} from "./cost";
 
 import flatpickr from "flatpickr";
+import {state} from "./state";
 
 const dateFormatter = new Intl.DateTimeFormat(`en-US`, {
   day: `numeric`
@@ -269,10 +270,13 @@ export default class PointEdit extends AbstractPoint {
 
   updateOffers(offers) {
     if (offers && offers.slice) {
-      this._offers = offers.slice();
+      this._offers = JSON.parse(JSON.stringify(offers));
     } else {
       this._offers = [];
     }
+    this._element.querySelectorAll(`.point__offers-input`).forEach((it) => {
+      it.addEventListener(`change`, this._changeOffersHandler);
+    });
   }
 
   toRAW() {
@@ -285,14 +289,10 @@ export default class PointEdit extends AbstractPoint {
 
       'type': this._type === `check` ? `check-in` : this._type,
       'offers': [...this._offers.values()],
-      // eslint-disable-next-line camelcase
       'date_from': this._time.start.getTime(),
-      // eslint-disable-next-line camelcase
       'date_to': this._time.end.getTime(),
-      // eslint-disable-next-line camelcase
       'base_price': this._price,
-      ' id': this._id,
-      // eslint-disable-next-line camelcase
+      'id': this._id,
       'is_favorite': this._isFavorite
     };
   }
@@ -315,6 +315,8 @@ export default class PointEdit extends AbstractPoint {
       .then(() => {
         this._unrender();
         points[this._index] = null;
+
+        state.render();
         cost.render();
       })
       .catch(() => {
@@ -339,10 +341,10 @@ export default class PointEdit extends AbstractPoint {
       const icon = this._element.querySelector(`.travel-way__label`);
       icon.textContent = pointsIcons[type.value];
 
-      this.updateOffers(offers[type.value]);
       const offersWrap = this._element.querySelector(`.point__offers-wrap`);
       offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
       destinationLabel.textContent = pointsTexts[type.value];
+      this.updateOffers(offers[type.value]);
     });
 
     const openSelectInput = this._element.querySelector(`.travel-way__toggle`);
@@ -352,13 +354,17 @@ export default class PointEdit extends AbstractPoint {
   _changeOffersHandler(evt) {
     const offer = this._offers[evt.target.dataset.id];
     const priceInput = this._element.querySelector(`input[name="price"]`);
+    let price = 0;
+    if (this._price) {
+      price = parseInt(this._price, 10);
+    }
 
     if (!offer.accepted) {
       offer.accepted = true;
-      this._price = parseInt(this._price, 10) + offer.price;
+      this._price = price + offer.price;
     } else {
       offer.accepted = false;
-      this._price = parseInt(this._price, 10) - offer.price;
+      this._price = price - offer.price;
     }
     priceInput.value = this._price;
     cost.render();
@@ -380,14 +386,10 @@ export default class PointEdit extends AbstractPoint {
   }
 
   _changeFavoritHandelr() {
-    const points = getPoints();
-
     if (this._isFavorite) {
       this._isFavorite = false;
-      points[this._index].point.isFavorite = false;
     } else {
       this._isFavorite = true;
-      points[this._index].point.isFavorite = true;
     }
   }
 
@@ -413,13 +415,13 @@ export default class PointEdit extends AbstractPoint {
     });
 
     flatpickr(this._element.querySelector(`input[name=second-time]`), {
-      'enableTime': true,
-      'noCalendar': true,
-      'altInput': true,
-      'altFormat': `H:i`,
-      ' dateFormat': `H:i`,
-      'time_24hr': true,
-      'defaultDate': this._time.end
+      "enableTime": true,
+      "noCalendar": true,
+      "altInput": true,
+      "altFormat": `H:i`,
+      " dateFormat": `H:i`,
+      "time_24hr": true,
+      "defaultDate": this._time.end
     });
 
     this._element

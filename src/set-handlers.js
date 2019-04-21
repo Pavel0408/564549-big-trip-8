@@ -1,17 +1,18 @@
 import {provider} from "./backend";
 import {cost} from "./cost";
+import {state} from "./state";
 
-export const setHandlers = (pointsArr) => {
-  pointsArr.forEach(setHandler);
+export const setHandlers = (pointsArr, dayItem) => {
+  pointsArr.forEach((it) => {
+    setHandler(it, dayItem);
+  });
 };
 
-export const setHandler = (pointsItem) => {
-  const tripDayItems = document.querySelector(`.trip-day__items`);
-
+export const setHandler = (pointsItem, dayItem) => {
   if (pointsItem && pointsItem.point) {
     pointsItem.point.editHandler = () => {
       pointsItem.pointEdit.render();
-      tripDayItems.replaceChild(
+      dayItem.replaceChild(
           pointsItem.pointEdit.element,
           pointsItem.point.element
       );
@@ -49,12 +50,13 @@ export const setHandler = (pointsItem) => {
           pointsItem.pointEdit.id = data.id;
           pointsItem.point.id = data.id;
           pointsItem.point.render();
-          cost.render();
-
-          tripDayItems.replaceChild(
+          dayItem.replaceChild(
               pointsItem.point.element,
               pointsItem.pointEdit.element
           );
+
+          cost.render();
+          state.render();
         })
         .catch(() => {
           formElements.forEach((elem) => {
