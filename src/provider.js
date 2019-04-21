@@ -20,7 +20,7 @@ export default class Provider {
     }
     if (this._isOnline()) {
       return this._api.updatePoint({id, data}).then((point) => {
-        this._store.setItem({key: point.id, item: point.newData});
+        this._store.setItem({key: point.parsedData.id, item: point.newData});
 
         return point.parsedData;
       });
@@ -35,7 +35,7 @@ export default class Provider {
   createPoint({data}) {
     if (this._isOnline()) {
       return this._api.createPoint({data}).then((point) => {
-        this._store.setItem({key: point.id, item: point.newData});
+        this._store.setItem({key: point.parsedData.id, item: point.newData});
 
         return point.parsedData;
       });
@@ -122,6 +122,12 @@ export default class Provider {
     return this._api.syncPoints({
       points: objectToArray(this._store.getAll())
     });
+  }
+
+  storageClear() {
+    if (this._isOnline) {
+      this._store.clear();
+    }
   }
 
   _isOnline() {

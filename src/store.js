@@ -53,4 +53,8 @@ export default class Store {
       return emptyItems;
     }
   }
+
+  clear() {
+    this._storage.clear();
+  }
 }
