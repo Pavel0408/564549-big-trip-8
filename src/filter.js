@@ -47,7 +47,6 @@ export default class Filter extends Component {
   _changeHandler() {
     state.filter = this;
     state.render();
-    // renderPoints(this._filterArr());
   }
 
   _installHandler() {

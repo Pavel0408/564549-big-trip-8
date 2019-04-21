@@ -2,7 +2,7 @@ import Filter from "./filter";
 
 import {Stats} from "./stats";
 import {state} from "./state";
-import {setHandlers, setHandler} from "./set-handlers";
+import {setHandler} from "./set-handlers";
 
 import {getPointsFromServer, getPoints} from "./points";
 
@@ -65,18 +65,21 @@ const renderSort = () => {
 };
 
 const newButtonClickHandler = () => {
+  const tripDayItem = document.querySelector(`.trip-day__items`);
   const points = getPoints();
   const newItem = {
     point: new Point(generateNewPointData()),
     pointEdit: new PointEdit(generateNewPointData())
   };
 
-  setHandler(newItem);
+  setHandler(newItem, tripDayItem);
   points.push(newItem);
 
-  tripDayItems.insertBefore(
+  points[points.length - 1].pointEdit.index = points.length - 1;
+
+  tripDayItem.insertBefore(
       points[points.length - 1].pointEdit.render(),
-      tripDayItems.firstChild
+      tripDayItem.firstChild
   );
 };
 
@@ -111,10 +114,10 @@ renderSort();
 
 tripDayItems.textContent = `Loading route...`;
 
+provider.storageClear();
 getDestinationsFromServer()
   .then(getOffers)
   .then(getPointsFromServer)
-  .then(setHandlers)
   .then(() => {
     state.render();
   })
@@ -141,12 +144,11 @@ window.addEventListener(`online`, () => {
   provider
     .syncPoints()
     .then(() => {
-      localStorage.clear();
+      provider.storageClear();
     })
     .then(getDestinationsFromServer)
     .then(getOffers)
     .then(getPointsFromServer)
-    .then(setHandlers)
     .then(() => {
       state.render();
     });

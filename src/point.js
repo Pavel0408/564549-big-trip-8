@@ -22,7 +22,6 @@ export default class Point extends AbstractPoint {
     this._element = null;
     this._editHandler = null;
     this._id = data.id;
-    this._isFavorite = data.isFavorite;
     this._changeOffersHandler = this._changeOffersHandler.bind(this);
   }
 
@@ -69,6 +68,14 @@ export default class Point extends AbstractPoint {
     return this._price;
   }
 
+  get id() {
+    return this._id;
+  }
+
+  set id(id) {
+    this._id = id;
+  }
+
   set offers(offers) {
     this._offers = offers;
   }
@@ -76,6 +83,7 @@ export default class Point extends AbstractPoint {
   set editHandler(fn) {
     const handler = function (evt) {
       evt.preventDefault();
+
       fn();
     };
 
@@ -102,9 +110,9 @@ export default class Point extends AbstractPoint {
   }
 
   _installHandlers() {
-    this._element
-      .querySelector(`.trip-point__title`)
-      .addEventListener(`click`, this._editHandler);
+    this._element.querySelectorAll(`i, h3, p`).forEach((it) => {
+      it.addEventListener(`click`, this._editHandler);
+    });
 
     this._element.querySelectorAll(`.trip-point__offer`).forEach((button) => {
       button.addEventListener(`click`, this._changeOffersHandler);
