@@ -1,6 +1,6 @@
 import {getPoints} from "./points";
 
-import {pointsIcons} from "./constants";
+import {PointsIcons} from "./constants";
 
 import {
   renderTransportStats,
@@ -8,7 +8,7 @@ import {
   renderTimeStats
 } from "./render-stats";
 
-import {pointEvents} from "./constants";
+import {PointEvents} from "./constants";
 
 import Component from "./component";
 
@@ -27,7 +27,7 @@ export class Stats extends Component {
         return item && item.point;
       })
       .forEach((pointsItem) => {
-        if (pointEvents.transportTypes.indexOf(pointsItem.point.type) !== -1) {
+        if (PointEvents.transportTypes.indexOf(pointsItem.point.type) !== -1) {
           this._transportSet.add(pointsItem.point.type);
         }
       });
@@ -113,7 +113,7 @@ export class Stats extends Component {
 
   _generateLabels(set) {
     const labels = [...set].map((type) => {
-      return `${pointsIcons[type]} ${type.toUpperCase()}`;
+      return `${PointsIcons[type]} ${type.toUpperCase()}`;
     });
 
     return labels;

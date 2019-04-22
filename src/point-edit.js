@@ -1,4 +1,4 @@
-import {pointsIcons, pointsTexts} from "./constants";
+import {PointsIcons, PointsTexts} from "./constants";
 
 import {addLeadingZero} from "./utilities";
 
@@ -73,7 +73,7 @@ export default class PointEdit extends AbstractPoint {
         </label>
         <div class="travel-way">
           <label class="travel-way__label" for="travel-way__toggle">${
-  pointsIcons[this._type]
+  PointsIcons[this._type]
 }</label>
           <input type="checkbox" class="travel-way__toggle visually-hidden" id="travel-way__toggle">
           <div class="travel-way__select">
@@ -82,49 +82,49 @@ export default class PointEdit extends AbstractPoint {
   this._type === `taxi` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-taxi">${
-  pointsIcons.taxi
+  PointsIcons.taxi
 } taxi</label>
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-bus" name="travel-way" value="bus"  ${
   this._type === `bus` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-bus">${
-  pointsIcons.bus
+  PointsIcons.bus
 } bus</label>
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-train" name="travel-way" value="train" ${
   this._type === `train` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-train">${
-  pointsIcons.train
+  PointsIcons.train
 } train</label>
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-flight" name="travel-way" value="flight" ${
   this._type === `flight` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-flight">${
-  pointsIcons.flight
+  PointsIcons.flight
 } flight</label>
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-transport" name="travel-way" value="transport" ${
   this._type === `transport` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-transport">${
-  pointsIcons.transport
+  PointsIcons.transport
 }  transport</label>
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-drive" name="travel-way" value="drive" ${
   this._type === `drive` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-drive">${
-  pointsIcons.drive
+  PointsIcons.drive
 } drive</label>
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-ship" name="travel-way" value="ship" ${
   this._type === `ship` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-ship">${
-  pointsIcons.ship
+  PointsIcons.ship
 } ship</label>
             </div>
 
@@ -133,28 +133,28 @@ export default class PointEdit extends AbstractPoint {
   this._type === `check` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-check-in">${
-  pointsIcons.check
+  PointsIcons.check
 } check-in</label>
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-sightseeing" name="travel-way" value="sightseeing" ${
   this._type === `sightseeing` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-sightseeing">${
-  pointsIcons.sightseeing
+  PointsIcons.sightseeing
 } sightseeing</label>
 
               <input class="travel-way__select-input visually-hidden" type="radio" id="travel-way-restaurant" name="travel-way" value="restaurant" ${
   this._type === `restaurant` ? `checked` : ``
 }>
               <label class="travel-way__select-label" for="travel-way-restaurant">${
-  pointsIcons.restaurant
+  PointsIcons.restaurant
 } restaurant</label>
             </div>
           </div>
         </div>
         <div class="point__destination-wrap">
           <label class="point__destination-label" for="destination">${
-  pointsTexts[this._type]
+  PointsTexts[this._type]
 }</label>
           <input list="destination-list" class="point__destination-input"  id="destination" value="${
   this._destination
@@ -339,11 +339,11 @@ export default class PointEdit extends AbstractPoint {
           `.travel-way__select-input:checked`
       );
       const icon = this._element.querySelector(`.travel-way__label`);
-      icon.textContent = pointsIcons[type.value];
+      icon.textContent = PointsIcons[type.value];
 
       const offersWrap = this._element.querySelector(`.point__offers-wrap`);
       offersWrap.innerHTML = getMarkupOffersEdit(offers[type.value]);
-      destinationLabel.textContent = pointsTexts[type.value];
+      destinationLabel.textContent = PointsTexts[type.value];
       this.updateOffers(offers[type.value]);
     });
 

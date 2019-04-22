@@ -14,7 +14,7 @@ import Point from "./point";
 import PointEdit from "./point-edit";
 
 import {generateNewPointData} from "./new-point";
-import {filterNames, sortNames} from "./constants";
+import {FilterNames, SortNames} from "./constants";
 import {getOffers} from "./offers";
 
 const ESC_KEY_CODE = 27;
@@ -29,15 +29,15 @@ const newPointButton = document.querySelector(`.new-event`);
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
   let fragment = document.createDocumentFragment();
-  const filterEverything = new Filter(filterNames.EVERYTHING);
+  const filterEverything = new Filter(FilterNames.EVERYTHING);
   state.filter = filterEverything;
   filterEverything.render().forEach((element) => {
     fragment.appendChild(element);
   });
-  new Filter(filterNames.FUTURE).render().forEach((element) => {
+  new Filter(FilterNames.FUTURE).render().forEach((element) => {
     fragment.appendChild(element);
   });
-  new Filter(filterNames.PAST).render().forEach((element) => {
+  new Filter(FilterNames.PAST).render().forEach((element) => {
     fragment.appendChild(element);
   });
 
@@ -48,16 +48,16 @@ const renderSort = () => {
   const formSort = document.querySelector(`.trip-sorting`);
   const sortLabel = document.querySelector(`.trip-sorting__item`);
   let fragment = document.createDocumentFragment();
-  const sortEvent = new Sort(sortNames.EVENT);
+  const sortEvent = new Sort(SortNames.EVENT);
   state.sort = sortEvent;
   sortEvent.render().forEach((element) => {
     fragment.appendChild(element);
   });
-  new Sort(sortNames.TIME).render().forEach((element) => {
+  new Sort(SortNames.TIME).render().forEach((element) => {
     fragment.appendChild(element);
   });
 
-  new Sort(sortNames.PRICE).render().forEach((element) => {
+  new Sort(SortNames.PRICE).render().forEach((element) => {
     fragment.appendChild(element);
   });
 
