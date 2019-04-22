@@ -11,7 +11,6 @@ export default class Provider {
     this._api = api;
     this._store = store;
     this._generateId = generateId;
-    this._needSync = false;
   }
 
   updatePoint({id, data}) {
@@ -26,7 +25,7 @@ export default class Provider {
       });
     } else {
       const point = data;
-      this._needSync = true;
+
       this._store.setItem({key: point.id, item: point});
       return Promise.resolve(Point.parseServerData(point));
     }
@@ -42,7 +41,7 @@ export default class Provider {
     } else {
       const point = data;
       point.id = this._generateId();
-      this._needSync = true;
+
       this._store.setItem({key: point.id, item: point});
       return Promise.resolve(Point.parseServerData(point));
     }
@@ -57,7 +56,6 @@ export default class Provider {
         this._store.removeItem({key: id});
       });
     } else {
-      this._needSync = true;
       this._store.removeItem({key: id});
       return Promise.resolve(true);
     }

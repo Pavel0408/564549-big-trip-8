@@ -1,7 +1,7 @@
 import {provider} from "./backend";
 let destinations = null;
 
-export const getDestinationsFromServer = () => {
+export const loadDestinations = () => {
   return provider.getDestinations().then((destinationsItems) => {
     destinations = {};
 

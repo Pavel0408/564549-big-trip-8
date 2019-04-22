@@ -12,11 +12,6 @@ export const PointEvents = {
   stopTypes: [`check`, `sightseeing`, `restaurant`]
 };
 
-export const PointsOptions = [
-  ...PointEvents.transportTypes,
-  ...PointEvents.stopTypes
-];
-
 export const PointsIcons = {
   taxi: `🚕`,
   bus: `🚌`,

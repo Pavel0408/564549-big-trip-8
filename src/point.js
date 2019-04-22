@@ -16,7 +16,6 @@ export default class Point extends AbstractPoint {
       destination: data.destination
     });
 
-    this._title = data.title;
     this._offers = data.offers;
     this._description = data.description;
     this._element = null;
@@ -88,10 +87,6 @@ export default class Point extends AbstractPoint {
     };
 
     this._editHandler = handler;
-  }
-
-  set isFavorite(value) {
-    this._isFavorite = value;
   }
 
   _changeOffersHandler(evt) {

@@ -4,9 +4,9 @@ import {Stats} from "./stats";
 import {state} from "./state";
 import {setHandler} from "./set-handlers";
 
-import {getPointsFromServer, getPoints} from "./points";
+import {loadPoints, getPoints} from "./points";
 
-import {getDestinationsFromServer} from "./destinations";
+import {loadDestinations} from "./destinations";
 import {provider} from "./backend";
 import Sort from "./sort";
 
@@ -15,7 +15,7 @@ import PointEdit from "./point-edit";
 
 import {generateNewPointData} from "./new-point";
 import {FilterNames, SortNames} from "./constants";
-import {getOffers} from "./offers";
+import {loadOffers} from "./offers";
 
 const ESC_KEY_CODE = 27;
 
@@ -114,9 +114,9 @@ renderSort();
 
 tripDayItems.textContent = `Loading route...`;
 
-getDestinationsFromServer()
-  .then(getOffers)
-  .then(getPointsFromServer)
+loadDestinations()
+  .then(loadOffers)
+  .then(loadPoints)
   .then(() => {
     state.render();
   })
@@ -145,9 +145,9 @@ window.addEventListener(`online`, () => {
     .then(() => {
       provider.storageClear();
     })
-    .then(getDestinationsFromServer)
-    .then(getOffers)
-    .then(getPointsFromServer)
+    .then(loadDestinations)
+    .then(loadOffers)
+    .then(loadPoints)
     .then(() => {
       state.render();
     });

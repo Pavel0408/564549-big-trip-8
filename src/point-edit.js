@@ -8,7 +8,7 @@ import {getMarkupDestinations} from "./get-markup-destinations";
 
 import {getMarkupImages} from "./get-markup-images";
 
-import {getOffers} from "./offers";
+import {loadOffers} from "./offers";
 
 import {provider} from "./backend";
 
@@ -38,7 +38,6 @@ export default class PointEdit extends AbstractPoint {
       destination: data.destination
     });
 
-    this._title = data.title;
     this._offers = data.offers;
     this._description = data.description;
     this._element = null;
@@ -334,7 +333,7 @@ export default class PointEdit extends AbstractPoint {
     const destinationLabel = this._element.querySelector(
         `.point__destination-label`
     );
-    getOffers().then((offers) => {
+    loadOffers().then((offers) => {
       const type = this._element.querySelector(
           `.travel-way__select-input:checked`
       );

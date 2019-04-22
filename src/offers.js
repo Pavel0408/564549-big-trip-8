@@ -1,7 +1,7 @@
 import {provider} from "./backend";
 let offers = null;
 
-export const getOffers = () => {
+export const loadOffers = () => {
   if (!offers) {
     offers = {};
     return provider.getOffers().then((offersItems) => {
