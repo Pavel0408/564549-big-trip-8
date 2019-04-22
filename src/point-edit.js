@@ -385,11 +385,7 @@ export default class PointEdit extends AbstractPoint {
   }
 
   _changeFavoriteHandler() {
-    if (this._isFavorite) {
-      this._isFavorite = false;
-    } else {
-      this._isFavorite = true;
-    }
+    this._isFavorite = this._isFavorite ? false : true;
   }
 
   _installHandlers() {
@@ -418,7 +414,7 @@ export default class PointEdit extends AbstractPoint {
       "noCalendar": true,
       "altInput": true,
       "altFormat": `H:i`,
-      " dateFormat": `H:i`,
+      "dateFormat": `H:i`,
       "time_24hr": true,
       "defaultDate": this._time.end
     });
