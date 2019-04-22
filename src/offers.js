@@ -4,8 +4,8 @@ let offers = null;
 export const getOffers = () => {
   if (!offers) {
     offers = {};
-    return provider.getOffers().then((offersArr) => {
-      offersArr.forEach((offer) => {
+    return provider.getOffers().then((offersItems) => {
+      offersItems.forEach((offer) => {
         offers[offer.type] = Array.from(
             offer.offers.map((element) => {
               return {

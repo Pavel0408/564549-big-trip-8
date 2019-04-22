@@ -49,7 +49,7 @@ export default class PointEdit extends AbstractPoint {
     this._id = data.id;
     this._isFavorite = data.isFavorite;
     this._index = ``;
-    this._changeFavoritHandelr = this._changeFavoritHandelr.bind(this);
+    this._changeFavoriteHandler = this._changeFavoriteHandler.bind(this);
     this._changeOffersHandler = this._changeOffersHandler.bind(this);
   }
 
@@ -320,8 +320,8 @@ export default class PointEdit extends AbstractPoint {
         cost.render();
       })
       .catch(() => {
-        formElements.forEach((elem) => {
-          elem.removeAttribute(`disabled`);
+        formElements.forEach((element) => {
+          element.removeAttribute(`disabled`);
         });
 
         this._element.style.border = `1px solid red`;
@@ -385,7 +385,7 @@ export default class PointEdit extends AbstractPoint {
     images.innerHTML = getMarkupImages(this._images);
   }
 
-  _changeFavoritHandelr() {
+  _changeFavoriteHandler() {
     if (this._isFavorite) {
       this._isFavorite = false;
     } else {
@@ -434,7 +434,7 @@ export default class PointEdit extends AbstractPoint {
 
     this._element
       .querySelector(`.point__favorite-input`)
-      .addEventListener(`change`, this._changeFavoritHandelr);
+      .addEventListener(`change`, this._changeFavoriteHandler);
 
     this._element.querySelector(`.point__date`).style.display = `inline`;
 

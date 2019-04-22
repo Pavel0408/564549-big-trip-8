@@ -19,8 +19,8 @@ import {getOffers} from "./offers";
 
 const ESC_KEY_CODE = 27;
 
-const switchesArr = document.querySelectorAll(`.view-switch__item`);
-const [tableButton, statsButton] = switchesArr;
+const switches = document.querySelectorAll(`.view-switch__item`);
+const [tableButton, statsButton] = switches;
 const pointsContainer = document.querySelector(`.trip-points`);
 const statsContainer = document.querySelector(`.statistic`);
 const tripDayItems = document.querySelector(`.trip-day__items`);
@@ -50,15 +50,15 @@ const renderSort = () => {
   let fragment = document.createDocumentFragment();
   const sortEvent = new Sort(sortNames.EVENT);
   state.sort = sortEvent;
-  sortEvent.render().forEach((elem) => {
-    fragment.appendChild(elem);
+  sortEvent.render().forEach((element) => {
+    fragment.appendChild(element);
   });
-  new Sort(sortNames.TIME).render().forEach((elem) => {
-    fragment.appendChild(elem);
+  new Sort(sortNames.TIME).render().forEach((element) => {
+    fragment.appendChild(element);
   });
 
-  new Sort(sortNames.PRICE).render().forEach((elem) => {
-    fragment.appendChild(elem);
+  new Sort(sortNames.PRICE).render().forEach((element) => {
+    fragment.appendChild(element);
   });
 
   formSort.insertBefore(fragment, sortLabel);

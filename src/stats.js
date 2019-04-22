@@ -32,7 +32,7 @@ export class Stats extends Component {
         }
       });
 
-    this._transportLabels = this._generateLabelsArr(this._transportSet);
+    this._transportLabels = this._generateLabels(this._transportSet);
 
     this._transportData = [...this._transportSet].map((type) => {
       let totalTransportEvents = 0;
@@ -87,7 +87,7 @@ export class Stats extends Component {
       return Math.floor(eventTotalTime / MS_IN_HOUR);
     });
 
-    this._moneyLabels = this._generateLabelsArr(this._moneySet);
+    this._moneyLabels = this._generateLabels(this._moneySet);
   }
 
   get template() {
@@ -111,11 +111,11 @@ export class Stats extends Component {
     renderTimeStats(this._moneyLabels, this._timeData);
   }
 
-  _generateLabelsArr(set) {
-    const labelsArr = [...set].map((type) => {
+  _generateLabels(set) {
+    const labels = [...set].map((type) => {
       return `${pointsIcons[type]} ${type.toUpperCase()}`;
     });
 
-    return labelsArr;
+    return labels;
   }
 }

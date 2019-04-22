@@ -2,8 +2,8 @@ import {provider} from "./backend";
 import {cost} from "./cost";
 import {state} from "./state";
 
-export const setHandlers = (pointsArr, dayItem) => {
-  pointsArr.forEach((it) => {
+export const setHandlers = (points, dayItem) => {
+  points.forEach((it) => {
     setHandler(it, dayItem);
   });
 };
@@ -113,10 +113,10 @@ const generateDate = (formData) => {
 };
 
 const parseTimeValue = (value) => {
-  const valueArr = value.split(`:`).map((timeString) => {
+  const values = value.split(`:`).map((timeString) => {
     return parseInt(timeString, 10);
   });
-  const [hours, minutes] = valueArr;
+  const [hours, minutes] = values;
 
   return {
     hours,

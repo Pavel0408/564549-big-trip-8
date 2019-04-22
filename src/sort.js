@@ -7,7 +7,6 @@ export default class Sort extends Component {
     super();
 
     this._name = name;
-    this._pointsArr = null;
     this._elment = null;
     this._sortPoints = sortByName[name];
     this._changeHandler = this._changeHandler.bind(this);

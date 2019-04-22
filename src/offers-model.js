@@ -17,8 +17,8 @@ export default class OffersModel {
     return this._offers;
   }
 
-  static parseOffers(offersArr) {
-    const offers = offersArr.map(OffersModel.parseOffer);
+  static parseOffers(offersItems) {
+    const offers = offersItems.map(OffersModel.parseOffer);
 
     return offers;
   }
