@@ -18,7 +18,7 @@ export class Stats extends Component {
   constructor() {
     super();
 
-    this._statsСontainer = document.querySelector(`#stats`);
+    this._statsContainer = document.querySelector(`#stats`);
     this._points = getPoints();
 
     this._transportSet = new Set();
@@ -105,7 +105,7 @@ export class Stats extends Component {
   }
 
   render() {
-    this._statsСontainer.innerHTML = this.template;
+    this._statsContainer.innerHTML = this.template;
     renderMoneyStats(this._moneyLabels, this._moneyData);
     renderTransportStats(this._transportLabels, this._transportData);
     renderTimeStats(this._moneyLabels, this._timeData);

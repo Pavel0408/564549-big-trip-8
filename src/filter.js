@@ -56,7 +56,7 @@ export default class Filter extends Component {
 }
 
 const FilterByName = {
-  [filterNames.EVRYTHING]: () => {
+  [filterNames.EVERYTHING]: () => {
     return true;
   },
   [filterNames.FUTURE]: (now, item) => {

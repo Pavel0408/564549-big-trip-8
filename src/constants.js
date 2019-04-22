@@ -44,7 +44,7 @@ export const pointsTexts = {
 };
 
 export const filterNames = {
-  EVRYTHING: `everything`,
+  EVERYTHING: `everything`,
   FUTURE: `future`,
   PAST: `past`
 };

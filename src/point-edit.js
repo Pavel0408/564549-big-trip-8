@@ -8,7 +8,7 @@ import {getMarkupDestinations} from "./get-markup-destinations";
 
 import {getMarkupImages} from "./get-markup-images";
 
-import {getOffers} from "./offfers";
+import {getOffers} from "./offers";
 
 import {provider} from "./backend";
 
@@ -313,7 +313,7 @@ export default class PointEdit extends AbstractPoint {
     provider
       .deletePoint({id: this._id})
       .then(() => {
-        this._unrender();
+        this._elementRemove();
         points[this._index] = null;
 
         state.render();

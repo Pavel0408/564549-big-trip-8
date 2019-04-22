@@ -15,7 +15,7 @@ import PointEdit from "./point-edit";
 
 import {generateNewPointData} from "./new-point";
 import {filterNames, sortNames} from "./constants";
-import {getOffers} from "./offfers";
+import {getOffers} from "./offers";
 
 const ESC_KEY_CODE = 27;
 
@@ -29,16 +29,16 @@ const newPointButton = document.querySelector(`.new-event`);
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
   let fragment = document.createDocumentFragment();
-  const filterEvtything = new Filter(filterNames.EVRYTHING);
-  state.filter = filterEvtything;
-  filterEvtything.render().forEach((elem) => {
-    fragment.appendChild(elem);
+  const filterEverything = new Filter(filterNames.EVERYTHING);
+  state.filter = filterEverything;
+  filterEverything.render().forEach((element) => {
+    fragment.appendChild(element);
   });
-  new Filter(filterNames.FUTURE).render().forEach((elem) => {
-    fragment.appendChild(elem);
+  new Filter(filterNames.FUTURE).render().forEach((element) => {
+    fragment.appendChild(element);
   });
-  new Filter(filterNames.PAST).render().forEach((elem) => {
-    fragment.appendChild(elem);
+  new Filter(filterNames.PAST).render().forEach((element) => {
+    fragment.appendChild(element);
   });
 
   formTripFilter.appendChild(fragment);
