@@ -6,7 +6,7 @@ import {provider} from "./backend";
 
 let points = [];
 
-export const getPointsFromServer = () => {
+export const loadPoints = () => {
   return provider.getPoints().then((pointsItems) => {
     points = pointsItems.map((date, index) => {
       const pointsElement = {

@@ -4,9 +4,9 @@ import {Stats} from "./stats";
 import {state} from "./state";
 import {setHandler} from "./set-handlers";
 
-import {getPointsFromServer, getPoints} from "./points";
+import {loadPoints, getPoints} from "./points";
 
-import {getDestinationsFromServer} from "./destinations";
+import {loadDestinations} from "./destinations";
 import {provider} from "./backend";
 import Sort from "./sort";
 
@@ -14,13 +14,13 @@ import Point from "./point";
 import PointEdit from "./point-edit";
 
 import {generateNewPointData} from "./new-point";
-import {filterNames, sortNames} from "./constants";
-import {getOffers} from "./offfers";
+import {FilterNames, SortNames} from "./constants";
+import {loadOffers} from "./offers";
 
 const ESC_KEY_CODE = 27;
 
-const switchesArr = document.querySelectorAll(`.view-switch__item`);
-const [tableButton, statsButton] = switchesArr;
+const switches = document.querySelectorAll(`.view-switch__item`);
+const [tableButton, statsButton] = switches;
 const pointsContainer = document.querySelector(`.trip-points`);
 const statsContainer = document.querySelector(`.statistic`);
 const tripDayItems = document.querySelector(`.trip-day__items`);
@@ -29,16 +29,16 @@ const newPointButton = document.querySelector(`.new-event`);
 const renderFilters = () => {
   const formTripFilter = document.querySelector(`.trip-filter`);
   let fragment = document.createDocumentFragment();
-  const filterEvtything = new Filter(filterNames.EVRYTHING);
-  state.filter = filterEvtything;
-  filterEvtything.render().forEach((elem) => {
-    fragment.appendChild(elem);
+  const filterEverything = new Filter(FilterNames.EVERYTHING);
+  state.filter = filterEverything;
+  filterEverything.render().forEach((element) => {
+    fragment.appendChild(element);
   });
-  new Filter(filterNames.FUTURE).render().forEach((elem) => {
-    fragment.appendChild(elem);
+  new Filter(FilterNames.FUTURE).render().forEach((element) => {
+    fragment.appendChild(element);
   });
-  new Filter(filterNames.PAST).render().forEach((elem) => {
-    fragment.appendChild(elem);
+  new Filter(FilterNames.PAST).render().forEach((element) => {
+    fragment.appendChild(element);
   });
 
   formTripFilter.appendChild(fragment);
@@ -48,17 +48,17 @@ const renderSort = () => {
   const formSort = document.querySelector(`.trip-sorting`);
   const sortLabel = document.querySelector(`.trip-sorting__item`);
   let fragment = document.createDocumentFragment();
-  const sortEvent = new Sort(sortNames.EVENT);
+  const sortEvent = new Sort(SortNames.EVENT);
   state.sort = sortEvent;
-  sortEvent.render().forEach((elem) => {
-    fragment.appendChild(elem);
+  sortEvent.render().forEach((element) => {
+    fragment.appendChild(element);
   });
-  new Sort(sortNames.TIME).render().forEach((elem) => {
-    fragment.appendChild(elem);
+  new Sort(SortNames.TIME).render().forEach((element) => {
+    fragment.appendChild(element);
   });
 
-  new Sort(sortNames.PRICE).render().forEach((elem) => {
-    fragment.appendChild(elem);
+  new Sort(SortNames.PRICE).render().forEach((element) => {
+    fragment.appendChild(element);
   });
 
   formSort.insertBefore(fragment, sortLabel);
@@ -114,9 +114,9 @@ renderSort();
 
 tripDayItems.textContent = `Loading route...`;
 
-getDestinationsFromServer()
-  .then(getOffers)
-  .then(getPointsFromServer)
+loadDestinations()
+  .then(loadOffers)
+  .then(loadPoints)
   .then(() => {
     state.render();
   })
@@ -145,9 +145,9 @@ window.addEventListener(`online`, () => {
     .then(() => {
       provider.storageClear();
     })
-    .then(getDestinationsFromServer)
-    .then(getOffers)
-    .then(getPointsFromServer)
+    .then(loadDestinations)
+    .then(loadOffers)
+    .then(loadPoints)
     .then(() => {
       state.render();
     });

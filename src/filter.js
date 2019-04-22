@@ -3,14 +3,13 @@ import Component from "./component";
 import {getPoints} from "./points";
 
 import {state} from "./state";
-import {filterNames} from "./constants";
+import {FilterNames} from "./constants";
 
 export default class Filter extends Component {
   constructor(name) {
     super();
 
     this._name = name;
-    this._pointsArr = null;
     this._filterPoints = FilterByName[name];
     this._elment = null;
     this._changeHandler = this._changeHandler.bind(this);
@@ -56,13 +55,13 @@ export default class Filter extends Component {
 }
 
 const FilterByName = {
-  [filterNames.EVRYTHING]: () => {
+  [FilterNames.EVERYTHING]: () => {
     return true;
   },
-  [filterNames.FUTURE]: (now, item) => {
+  [FilterNames.FUTURE]: (now, item) => {
     return now < item.point.time.start;
   },
-  [filterNames.PAST]: (now, item) => {
+  [FilterNames.PAST]: (now, item) => {
     return now > item.point.time.end;
   }
 };

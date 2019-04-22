@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 // Рассчитаем высоту канваса в зависимости от того, сколько данных в него будет передаваться
 const BAR_HEIGHT = 55;
 
-export const renderMoneyStats = (monyLabeslArr, moneyDataArr) => {
+export const renderMoneyStats = (moneyLabels, moneyData) => {
   const moneyCtx = document.querySelector(`.statistic__money`);
   moneyCtx.height = BAR_HEIGHT * 6;
 
@@ -12,10 +12,10 @@ export const renderMoneyStats = (monyLabeslArr, moneyDataArr) => {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
     data: {
-      labels: monyLabeslArr,
+      labels: moneyLabels,
       datasets: [
         {
-          data: moneyDataArr,
+          data: moneyData,
           backgroundColor: `#ffffff`,
           hoverBackgroundColor: `#ffffff`,
           anchor: `start`
@@ -82,7 +82,7 @@ export const renderMoneyStats = (monyLabeslArr, moneyDataArr) => {
   return moneyChart;
 };
 
-export const renderTransportStats = (transportLabelsArr, transportDataArr) => {
+export const renderTransportStats = (transportLabels, transportData) => {
   const transportCtx = document.querySelector(`.statistic__transport`);
   transportCtx.height = BAR_HEIGHT * 4;
 
@@ -90,10 +90,10 @@ export const renderTransportStats = (transportLabelsArr, transportDataArr) => {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
     data: {
-      labels: transportLabelsArr,
+      labels: transportLabels,
       datasets: [
         {
-          data: transportDataArr,
+          data: transportData,
           backgroundColor: `#ffffff`,
           hoverBackgroundColor: `#ffffff`,
           anchor: `start`
@@ -160,7 +160,7 @@ export const renderTransportStats = (transportLabelsArr, transportDataArr) => {
   return transportChart;
 };
 
-export const renderTimeStats = (labelsArr, times) => {
+export const renderTimeStats = (labels, times) => {
   const timeSpendCtx = document.querySelector(`.statistic__time-spend`);
   timeSpendCtx.height = BAR_HEIGHT * 6;
 
@@ -168,7 +168,7 @@ export const renderTimeStats = (labelsArr, times) => {
     plugins: [ChartDataLabels],
     type: `horizontalBar`,
     data: {
-      labels: labelsArr,
+      labels,
       datasets: [
         {
           data: times,

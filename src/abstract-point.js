@@ -5,7 +5,7 @@ export default class AbstractPoint extends Component {
     super();
 
     if (new.target === AbstractPoint) {
-      throw new Error(`Can't instantiate AbstractPoint, only concrete one.`);
+      throw new Error(`Can't instantiate AbstractPoint, only create one.`);
     }
 
     this._destination = data.destination;

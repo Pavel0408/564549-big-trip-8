@@ -1,4 +1,4 @@
-import {pointsIcons, pointsTexts} from "./constants";
+import {PointsIcons, PointsTexts} from "./constants";
 
 import {getMarkupOffers} from "./get-markup-offers";
 
@@ -16,7 +16,6 @@ export default class Point extends AbstractPoint {
       destination: data.destination
     });
 
-    this._title = data.title;
     this._offers = data.offers;
     this._description = data.description;
     this._element = null;
@@ -29,8 +28,8 @@ export default class Point extends AbstractPoint {
     const interval = calculateInterval(this._time.start, this._time.end);
 
     return `<article class="trip-point">
-    <i class="trip-icon">${pointsIcons[this._type]}</i>
-    <h3 class="trip-point__title">${pointsTexts[this._type]} ${
+    <i class="trip-icon">${PointsIcons[this._type]}</i>
+    <h3 class="trip-point__title">${PointsTexts[this._type]} ${
   this._destination
 }</h3>
     <p class="trip-point__schedule">
@@ -88,10 +87,6 @@ export default class Point extends AbstractPoint {
     };
 
     this._editHandler = handler;
-  }
-
-  set isFavorite(value) {
-    this._isFavorite = value;
   }
 
   _changeOffersHandler(evt) {

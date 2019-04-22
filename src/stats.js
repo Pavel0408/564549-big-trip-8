@@ -1,6 +1,6 @@
 import {getPoints} from "./points";
 
-import {pointsIcons} from "./constants";
+import {PointsIcons} from "./constants";
 
 import {
   renderTransportStats,
@@ -8,7 +8,7 @@ import {
   renderTimeStats
 } from "./render-stats";
 
-import {pointEvents} from "./constants";
+import {PointEvents} from "./constants";
 
 import Component from "./component";
 
@@ -18,7 +18,7 @@ export class Stats extends Component {
   constructor() {
     super();
 
-    this._statsСontainer = document.querySelector(`#stats`);
+    this._statsContainer = document.querySelector(`#stats`);
     this._points = getPoints();
 
     this._transportSet = new Set();
@@ -27,12 +27,12 @@ export class Stats extends Component {
         return item && item.point;
       })
       .forEach((pointsItem) => {
-        if (pointEvents.transportTypes.indexOf(pointsItem.point.type) !== -1) {
+        if (PointEvents.transportTypes.indexOf(pointsItem.point.type) !== -1) {
           this._transportSet.add(pointsItem.point.type);
         }
       });
 
-    this._transportLabels = this._generateLabelsArr(this._transportSet);
+    this._transportLabels = this._generateLabels(this._transportSet);
 
     this._transportData = [...this._transportSet].map((type) => {
       let totalTransportEvents = 0;
@@ -87,7 +87,7 @@ export class Stats extends Component {
       return Math.floor(eventTotalTime / MS_IN_HOUR);
     });
 
-    this._moneyLabels = this._generateLabelsArr(this._moneySet);
+    this._moneyLabels = this._generateLabels(this._moneySet);
   }
 
   get template() {
@@ -105,17 +105,17 @@ export class Stats extends Component {
   }
 
   render() {
-    this._statsСontainer.innerHTML = this.template;
+    this._statsContainer.innerHTML = this.template;
     renderMoneyStats(this._moneyLabels, this._moneyData);
     renderTransportStats(this._transportLabels, this._transportData);
     renderTimeStats(this._moneyLabels, this._timeData);
   }
 
-  _generateLabelsArr(set) {
-    const labelsArr = [...set].map((type) => {
-      return `${pointsIcons[type]} ${type.toUpperCase()}`;
+  _generateLabels(set) {
+    const labels = [...set].map((type) => {
+      return `${PointsIcons[type]} ${type.toUpperCase()}`;
     });
 
-    return labelsArr;
+    return labels;
   }
 }

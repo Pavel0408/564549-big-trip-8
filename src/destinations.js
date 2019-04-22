@@ -1,11 +1,11 @@
 import {provider} from "./backend";
 let destinations = null;
 
-export const getDestinationsFromServer = () => {
-  return provider.getDestinations().then((destinationsArr) => {
+export const loadDestinations = () => {
+  return provider.getDestinations().then((destinationsItems) => {
     destinations = {};
 
-    destinations.names = destinationsArr.map((destination) => {
+    destinations.names = destinationsItems.map((destination) => {
       destinations[destination.name] = destination;
       return destination.name;
     });

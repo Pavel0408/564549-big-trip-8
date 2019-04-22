@@ -2,8 +2,6 @@ import Day from "./day";
 
 export const generateDays = (points) => {
   const daysNames = new Set();
-  const daysMap = new Map();
-  let days = [];
 
   points.forEach((it) => {
     const day = new Date(it.point.time.start);
@@ -13,28 +11,21 @@ export const generateDays = (points) => {
     daysNames.add(day.getTime());
   });
 
-  daysNames.forEach((day) => {
-    daysMap.set(
-        new Date(day),
-        points.filter((it) => {
-          return filterDays({daysItem: day, point: it.point});
-        })
-    );
-  });
+  return [...daysNames]
+    .map((day) => {
+      day = new Date(day);
+      const pointsItems = points.filter((it) => {
+        return filterDays({daysItem: day, point: it.point});
+      });
 
-  daysMap.forEach((pointsItems, day) => {
-    days.push(new Day(day, pointsItems));
-  });
-
-  days = days.sort((a, b) => {
-    return a.day - b.day;
-  });
-
-  days.forEach((it, index) => {
-    it.number = index + 1;
-  });
-
-  return days;
+      return new Day(day, pointsItems);
+    })
+    .sort((a, b) => {
+      return a.day - b.day;
+    })
+    .forEach((it, index) => {
+      it.number = index + 1;
+    });
 };
 
 const filterDays = ({daysItem, point}) => {
