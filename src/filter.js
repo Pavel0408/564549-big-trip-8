@@ -11,7 +11,7 @@ export default class Filter extends Component {
 
     this._name = name;
     this._filterPoints = FilterByName[name];
-    this._elment = null;
+    this._element = null;
     this._changeHandler = this._changeHandler.bind(this);
   }
 
